@@ -1,0 +1,6 @@
+- name: Deploy pfsense
+  import_tasks: Deploy_pfsense.yaml
+- name: Wait for VMware tools
+  import_tasks: wait_for_vmware_tools_pfsense.yaml
+- name: Assiggn pFsense IP
+  import_tasks: Assign_Pfsense_IP.yaml

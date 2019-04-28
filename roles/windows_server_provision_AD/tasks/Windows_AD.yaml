@@ -1,0 +1,2 @@
+  - name: Install AD and Promote to Domain Controller
+    script: files/Install-AD.ps1 "{{ domain_name }}" "{{ netbios_name }}" "{{ ad_backuppass }}"

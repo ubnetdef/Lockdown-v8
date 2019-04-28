@@ -1,0 +1,23 @@
+    - name:  START STUDENT VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        state: poweredon
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        name: "{{ vm_name }}-{{ item }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: "{{ vmnet }}"
+            ip: "{{ ip | ipmath(idx) }}"
+            netmask: "{{ netmask }}"
+            gateway: "{{ gateway | ipmath(idx) }}"
+            dns_servers: "{{ dns_list }}"
+        wait_for_ip_address: True
+        wait_for_customization: True
+        customization:
+          dns_servers: "{{ dns_list }}"
+      delegate_to: localhost

@@ -1,0 +1,39 @@
+    - name:  Clone Pfsense form the template, and assign interfaces
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        force: yes
+        state: poweredon
+        validate_certs: no
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        folder:  "Lockdown/v6/{{ cloud_folder }}"
+        template: "{{ pfsense_template }}"
+        name: "{{ 'Team%02d_Router'|format(item|int) }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: "team{{ item }}-net"
+          - name: "team{{ item }}-net"
+          - name: "team{{ item }}-net"
+        customization:
+            hostname: Pfsense
+      delegate_to: localhost
+      with_sequence: start={{start_team}} end={{total_teams}}
+      ignore_errors: yes
+#      async: 30000
+#      poll: 0
+
+
+    - name: Set the state of a virtual machine to poweron
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        folder: "Lockdown/v6/{{ cloud_folder }}"
+        name: "{{ 'Team%02d_Router'|format(item|int) }}"
+        state: powered-on
+        force: yes
+      delegate_to: localhost
+      with_sequence: start={{start_team}} end={{total_teams}}

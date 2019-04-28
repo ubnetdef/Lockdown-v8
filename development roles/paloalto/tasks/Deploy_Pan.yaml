@@ -1,0 +1,153 @@
+    - name:  Clone Palo Alto form the template
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: present
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        template: "{{ pan_template }}"
+        name: "PaloAltoFW-{{ item }}"
+        cluster: "{{ cluster }}"
+      delegate_to: localhost
+
+    - name:  Provision the template
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredon
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        template: "{{ pan_template }}"
+        name: "PaloAltoFW-{{ item }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: core-red-net
+            start_connected: True
+          - name: core-red-net
+            start_connected: True
+          - name: generic-net
+            start_connected: True
+      delegate_to: localhost
+
+    - name: wait for reboot
+      panos_check:
+        ip_address: "{{ pan_ip }}"
+        password: "{{ pan_password }}"
+      register: result
+      until: not result|failed
+      retries: 4000
+      delay: 10
+
+    - name: HTTPS management profile
+      panos_management_profile:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        name: 'https_access'
+        ping: true
+        https: true
+        ssh: true
+        state: present
+
+    - name: create outside zone on a firewall
+      panos_zone:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        zone: 'outside'
+        mode: 'layer3'
+        state: present
+
+
+    - name: ethernet1/1 as static in zone outside
+      panos_interface:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        if_name: "ethernet1/1"
+        mode: "layer3"
+        ip: ["{{ pan_outside_ip | ipmath(idx) }}/20"]
+        enable_dhcp: false
+        zone_name: "outside"
+        state: present
+
+    - name: create inside zone on a firewall
+      panos_zone:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        zone: 'inside'
+        mode: 'layer3'
+        state: present
+
+    - name: ethernet1/2 as static in zone outside
+      panos_interface:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        if_name: "ethernet1/2"
+        mode: "layer3"
+        ip: ["{{ gateway | ipmath(idx) }}/24"]
+        enable_dhcp: false
+        zone_name: "inside"
+        management_profile: 'https_access'
+        state: present
+
+    - name: Create Default route
+      panos_static_route:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        name: Default-route
+        destination: '0.0.0.0/0'
+        nexthop: "{{ gretzky }}"
+        interface: "ethernet1/1"
+
+    - name: commit candidate config on firewall
+      panos_commit:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+
+    - name: Create NAT rule for inside-to-outside
+      panos_nat_rule:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        rule_name: "inside-to-outside-NAT"
+        source_zone: ["inside"]
+        destination_zone: "outside"
+        snat_type: "dynamic-ip-and-port"
+        snat_address_type: "interface-address"
+        snat_interface: "ethernet1/1"
+        snat_interface_address: "{{ pan_outside_ip | ipmath(idx) }}/20"
+        state: present
+
+    - name: Allow All Rule
+      panos_security_rule:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        rule_name: 'Allow All'
+        action: 'allow'
+        state: present
+
+    - name: Request Shutdown
+      panos_op:
+        ip_address: "{{ pan_ip }}"
+        username: "{{ pan_username }}"
+        password: "{{ pan_password }}"
+        cmd: 'request shutdown system'
+      ignore_errors: yes
+
+
+
+
+
+

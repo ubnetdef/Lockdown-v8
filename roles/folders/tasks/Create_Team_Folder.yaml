@@ -1,0 +1,15 @@
+    -
+      name: Create a VM folder for a team
+      vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: "{{ datacenter }}"
+        folder_name: "{{ 'Team%02d'|format(item|int) }}"
+        parent_folder: "{{ parent_folder }}"
+        folder_type: vm
+        state: present
+        validate_certs: no
+      register: sub_folder_creation_result
+      delegate_to: localhost
+      with_sequence: start={{start_team}} end={{total_teams}}

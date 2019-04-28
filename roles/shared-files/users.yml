@@ -1,0 +1,159 @@
+accounts:
+
+  - username: Admin
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Angler
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Puffer
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Catfish
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+ 
+  - username: Herring
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Sandfish
+    password: Changeme2019!
+    groups:
+      - Domain Admins   
+
+  - username: Mackerel
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+    
+  - username: Goldfish
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Minnow
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Trout
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Goby
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Halibut
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+  
+  - username: Perch
+    password: Changeme2019!
+    groups:
+      - Domain Admins  
+  
+  - username: Carp
+    password: Changeme2019!
+    groups:
+      - Domain Admins 
+
+  - username: Stingray
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Bream
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Chub
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Flounder
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Cod
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Tuna
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Shad
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Swordfish
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Koi
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Pike
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Dace
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Mahi
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Salmon
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+
+  - username: Nemo
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+
+  - username: Minnow
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+
+  - username: Loach
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Piranha
+    password: Changeme2019!
+    groups:
+      - Domain Admins

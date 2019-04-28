@@ -1,0 +1,57 @@
+---
+
+- name: Clear folder
+  file:
+    state: absent
+    path: /var/www/html
+- name: Create folder
+  file:
+    state: directory
+    path: /var/www/html
+
+- name: Installing magento repo
+  git: 
+    repo: https://github.com/magento/magento2.git
+    dest: /var/www/html/
+
+- name: Initiate composer 
+  command: composer install
+  args:
+    chdir: /var/www/html
+
+- name: Change line in apache config
+  replace:
+    path: /etc/apache2/apache2.conf
+    regexp: 'AllowOverride None'
+    replace: 'AllowOverride All'
+
+- name: Install Magento
+  command: >
+      bin/magento setup:install 
+      --admin-firstname=admin 
+      --admin-lastname=admin 
+      --admin-email=admin@oldegg.com 
+      --admin-user=admin
+      --admin-password=Changeme2018! 
+      --base-url="{{ magento_host }}" 
+      --db-host="{{ magento_db_host }}" 
+      --db-name=magento 
+      --db-user=magento 
+      --db-password=changeme 
+      --backend-frontname=admin
+  args:
+    chdir: /var/www/html
+
+- name: Change ownership
+  file:
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    recurse: yes
+    mode: '0777' 
+
+
+- name: Restart apache
+  service:
+    name: apache2
+    state: restarted

@@ -1,0 +1,31 @@
+  - name: Wait For Windows Clients connection
+    wait_for_connection:
+      timeout: 30000
+      sleep: 5
+
+  - win_ping:
+
+  - win_domain_membership:
+      dns_domain_name: "{{ dns_domain_name }}"
+      hostname: "{{ AD_Name }}"
+      domain_admin_user: '{{dns_domain_name}}\{{ domain_admin_user }}'
+      domain_admin_password: "{{ domain_admin_password }}"
+      state: domain
+    register: domain_state
+  - win_reboot:
+    when: domain_state.reboot_required
+
+#  - name: Include the user YAML
+#    include_vars: ../shared-files/users.yml
+#
+#  - name: Add Local Users
+#    win_domain_user:
+#      name: "{{ item.username }}"
+#      password: "{{ item.password }}"
+#      state: present
+#      groups: Administrator
+#    with_items: "{{ accounts }}"
+#    register: task_result
+#    retries: 200
+#    delay: 15
+#    until: task_result.changed == True

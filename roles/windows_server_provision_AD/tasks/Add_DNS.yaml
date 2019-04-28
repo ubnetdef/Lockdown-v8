@@ -1,0 +1,13 @@
+- name: Copy over DNS Record CSV
+  win_copy:
+    src: files/data.csv
+    dest: C:\DNSRecords.csv
+
+- name: Run DNS Records Script
+  script: files/Add-DnsRecords.ps1 C:\DNSRecords.csv {{ team_number }} -CreatePtrs
+  ignore_errors: yes
+#ONLY PTR CREATED, LOOK MORE INTO MODIFYING THE POWERSHELL SCRIPT, OR USE AN ANSIBLE MODULE INSTEAD
+- name: Cleanup DNS Record CSV
+  win_file:
+    path: C:\DNSRecords.csv
+    state: absent

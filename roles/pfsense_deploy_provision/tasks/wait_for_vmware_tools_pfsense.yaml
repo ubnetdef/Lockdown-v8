@@ -1,0 +1,10 @@
+- name: Wait for VMware tools to become available by name (pfsense)
+  vmware_guest_tools_wait:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    name: "{{ 'Team%02d_Router'|format(item|int) }}"
+    folder: "{{ datacenter }}/Lockdown/v6/{{ cloud_folder }}"
+  delegate_to: localhost
+  with_sequence: start={{start_team}} end={{total_teams}}

@@ -1,0 +1,9 @@
+
+
+- name:  Check Connection over a group
+  include_tasks: nested_checker.yaml
+  vars:
+    host: host
+  loop: "{{ groups[name] }}"
+  loop_control:
+    loop_var: host

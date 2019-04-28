@@ -1,0 +1,16 @@
+- name: Include the user YAML
+  include_vars: ../shared-files/users.yml
+
+# USERS FOR AD
+- name: Add Users
+  win_domain_user:
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
+    state: present
+    groups: "{{ item.groups | default(omit) }}"
+    upn: "{{ item.username }}@{{ domain_name }}"
+  with_items: "{{ accounts }}"
+  register: task_result
+  retries: 200
+  delay: 15
+  until: task_result.changed == True

@@ -1,0 +1,36 @@
+- name: Deploy Palo Alto Firewall
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - include: tasks/Create_folders.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+
+    - include: tasks/Clome_Linux.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+
+    - include: tasks/Deploy_Pan.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+    - pause:
+        minutes: 2
+
+    - include: tasks/Start_PaloAlto.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+
+    - include: tasks/Power_On_Linux.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+
+    - include: tasks/Assign_Permissions.yaml
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+

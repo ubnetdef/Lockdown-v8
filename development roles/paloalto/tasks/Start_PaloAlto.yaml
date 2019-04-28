@@ -1,0 +1,10 @@
+    - name:  Provision the template
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredon
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        name: "PaloAltoFW-{{ item }}"
+      delegate_to: localhost

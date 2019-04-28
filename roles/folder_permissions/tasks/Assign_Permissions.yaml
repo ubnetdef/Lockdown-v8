@@ -1,0 +1,13 @@
+    -
+      name: Assign a user to VM folder
+      vmware_object_role_permission:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        principal: "{{ 'lockdown-team%01d@vsphere.local'|format(item|int) }}"
+        object_name: "{{ 'Team%02d'|format(item|int) }}"
+        state: present
+        role: "Lockdown"
+        validate_certs: no
+      delegate_to: localhost
+      with_sequence: start={{start_team}} end={{total_teams}}

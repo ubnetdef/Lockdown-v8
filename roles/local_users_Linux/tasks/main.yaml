@@ -1,0 +1,37 @@
+#- name: Wait For Linux connection
+#  wait_for_connection:
+#    timeout: 30000
+#    sleep: 5
+
+- name: Set Debian sudo group
+  set_fact:
+    sudo_group: sudo
+  when: ansible_os_family == "Debian"
+
+- name: Set RHEL sudo group
+  set_fact:
+    sudo_group: wheel
+  when: ansible_os_family == "RedHat"
+
+- name: Include the user YAML
+  include_vars: ../shared-files/users.yml
+
+- name: Add local users for linux based systems
+  become: yes
+  become_method: sudo
+  user:
+    name: "{{ item.username }}"
+    shell: /bin/bash
+    password: "{{ item.password | password_hash() }}"
+    state: present
+  with_items: "{{ accounts }}"
+  when: ansible_system == "Linux"
+
+- name: sudo on all the users
+  become: yes
+  user:
+    name: "{{ item.username }}"
+    groups: "{{ sudo_group }}"
+    append: yes
+  with_items: "{{ accounts }}"
+  when: ansible_system == "Linux"

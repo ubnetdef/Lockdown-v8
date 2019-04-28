@@ -1,0 +1,21 @@
+- name: Wait For Linux connection
+  wait_for_connection:
+    timeout: 30000
+    sleep: 5
+
+- name: Disable firewall if debain
+  service:
+    name: ufw
+    state: stopped
+    enabled: no
+  when: ansible_os_family == "Debian"
+
+- name: Disable firewall if rhel
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+  when: ansible_os_family == "RedHat"
+
+
+

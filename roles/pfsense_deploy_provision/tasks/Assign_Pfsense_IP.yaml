@@ -1,0 +1,41 @@
+  - name: pfSense Network Provision
+    vmware_vm_shell:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      datacenter: "{{ datacenter }}"
+      validate_certs: False
+      folder: "Lockdown/{{ parent_folder }}/{{ cloud_folder }}"
+      vm_id: "{{ 'Team%02d_Router'|format(item|int) }}"
+      vm_username: admin
+      vm_password: changeme
+      vm_shell: /usr/local/sbin/pfSsh.php
+      vm_shell_args: playback provision {{ Upstream_gateway_start_address | ipmath((item|int - 1)*4) }} {{ WAN_start_address | ipmath((item|int - 1)*4) }}/30 10.{{ item }}.1.1/24 10.{{ item }}.2.1/24
+      vm_shell_cwd: "/tmp"
+    delegate_to: localhost
+    with_sequence: start={{start_team}} end={{total_teams}}
+
+#
+#
+#first_wan_start_address + (team_number-1) * wan_difference
+
+#  - name: pfSense Network Provision
+#    vmware_vm_shell:
+#      hostname: "{{ vcenter_host }}"
+#      username: "{{ vcenter_user }}"
+#      password: "{{ vcenter_pass }}"
+#      datacenter: "{{ vcenter_dc }}"
+#      validate_certs: False
+#      folder: "{{ vm_folder }}"
+#      vm_id: "{{ vm_id }}"
+#      vm_id_type: "inventory_path"
+#      vm_username: "{{ vm_user }}"
+#      vm_password: "{{ vm_pass }}"
+#      vm_shell: /usr/local/sbin/pfSsh.php
+#      vm_shell_args: playback provision {{ cfg_gw }} {{ cfg_wan }} {{ cfg_lan }} {{ cfg_opt }}
+#      vm_shell_cwd: "/tmp"
+#    delegate_to: localhost
+#
+#  - name: Wait 90s for pfSense to reboot
+#    wait_for: timeout=90
+#    delegate_to: localhost

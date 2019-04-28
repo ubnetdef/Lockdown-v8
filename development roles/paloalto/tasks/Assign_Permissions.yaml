@@ -1,0 +1,12 @@
+    -
+      name: Assign a user to VM folder
+      vmware_object_role_permission:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        principal: 'ad\{{ item }}'
+        object_name: "{{ idx + 1 }}: PA - {{ item }}"
+        state: present
+        role: "Systems Security"
+        validate_certs: no
+      delegate_to: localhost

@@ -1,0 +1,2 @@
+Shut Down Mac Duplocation Alarm
+Shut Down "A newer version of VMware Tools is available for this virtual machine."

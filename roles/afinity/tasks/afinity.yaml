@@ -1,0 +1,21 @@
+    - name: Create DRS Affinity Rule for VM-VM
+      vmware_vm_vm_drs_rule:
+        hostname: "cdr-vcenter1.cse.buffalo.edu"
+        username: cse365_deploy@vsphere.local
+        password: "67K7~A(Dxj2npF,xANq;"
+        cluster_name: MAIN
+        validate_certs: no
+        vms:
+            - "{{ 'Team%02d_AD'|format(item|int) }}"
+            - "{{ 'Team%02d_Client1'|format(item|int) }}"
+            - "{{ 'Team%02d_Client2'|format(item|int) }}"
+            - "{{ 'Team%02d_Client3'|format(item|int) }}"
+            - "{{ 'Team%02d_Client4'|format(item|int) }}"
+            - "{{ 'Team%02d_DB'|format(item|int) }}"
+            - "{{ 'Team%02d_WEB'|format(item|int) }}"
+            - "{{ 'Team%02d_FTP'|format(item|int) }}"
+            - "{{ 'Team%02d_Router'|format(item|int) }}"
+        drs_rule_name: "TEAM{{item}}-affinity-rule-LDHS1"
+        enabled: True
+        affinity_rule: {{ afinity_enable }}
+        mandatory: True

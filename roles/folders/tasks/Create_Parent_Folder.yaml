@@ -1,0 +1,28 @@
+    -
+      name: Create a Parent Folder
+      vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: "{{ datacenter }}"
+        folder_name: "{{ parent_folder }}"
+        parent_folder: Lockdown
+        folder_type: vm
+        state: present
+        validate_certs: no
+      register: sub_folder_creation_result
+      delegate_to: localhost
+
+    - name: Create a cloud folder
+      vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: "{{ datacenter }}"
+        folder_name: "{{ cloud_folder }}"
+        parent_folder: "{{ parent_folder }}"
+        folder_type: vm
+        state: present
+        validate_certs: no
+      register: sub_folder_creation_result
+      delegate_to: localhost

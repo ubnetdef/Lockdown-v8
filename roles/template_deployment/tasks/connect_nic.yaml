@@ -1,0 +1,10 @@
+
+    - name: Connect all Nics
+      connect_nic:
+        vcenter_ip: "{{ vcenter_hostname }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_user: "{{ vcenter_username }}"
+        vm_name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+      loop: "{{ groups[name] }}"
+      loop_control:
+        loop_var: host

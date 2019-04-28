@@ -1,0 +1,2 @@
+- name: Assiggn Permissions
+  import_tasks: Assign_Permissions.yaml

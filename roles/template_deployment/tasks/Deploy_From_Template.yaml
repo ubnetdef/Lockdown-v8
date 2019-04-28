@@ -1,0 +1,82 @@
+    - name:  Clone a virtual machine from {{ name }} template and customize the addresses to {{ host }}
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        state: poweredon
+        folder:  "{{ hostvars[host]['folder'] }}"
+        template: "{{ hostvars[host]['template'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+        cluster: "{{ cluster }}"
+      delegate_to: localhost
+      loop: "{{ groups[name] }}"
+      loop_control:
+        loop_var: host
+        pause: 20
+      register: deployment_vm
+      async: 30000
+      poll: 0
+
+    - name: Check sync status
+      async_status:
+        jid: "{{ deployment_vm_item.ansible_job_id }}"
+      loop: "{{ deployment_vm.results }}"
+      loop_control:
+        loop_var: "deployment_vm_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 30000
+
+    - pause:
+        minutes: 3
+
+    - name:  Power OFF VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredoff
+        folder:  "{{ hostvars[host]['folder'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+      delegate_to: localhost
+      loop: "{{ groups[name] }}"
+      loop_control:
+        loop_var: host
+#
+    - name:  Customize VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        cluster: "{{ cluster }}"
+        validate_certs: no
+        state: present
+        folder:  "{{ hostvars[host]['folder'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+        networks: "{{ hostvars[host]['networks'] }}"
+        customization: "{{ hostvars[host]['customization'] }}"
+      delegate_to: localhost
+      loop: "{{ groups[name] }}"
+      loop_control:
+        loop_var: host
+
+
+    - name:  Power ON VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredon
+        folder:  "{{ hostvars[host]['folder'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+      delegate_to: localhost
+      loop: "{{ groups[name] }}"
+      loop_control:
+        loop_var: host

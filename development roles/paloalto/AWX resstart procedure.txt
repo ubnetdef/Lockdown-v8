@@ -1,0 +1,18 @@
+docker exec -it awx_task
+/etc/python/cert-verification.cfg verify=disable
+export PYTHONHTTPSVERIFY=0
+
+pip install pan-python
+pip install pandevice
+/var/lib/awx/venv/
+
+ansible.cfg:
+
+[defaults]
+host_key_checking = False
+
+[paramiko_connection]
+record_host_keys = False
+
+[ssh_connection]
+ssh_args = -o ControlMaster=auto -o ControlPersist=60s -o UserKnownHostsFile=/dev/null
