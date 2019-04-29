@@ -60,7 +60,6 @@ class Inventory(object):
         #####################################################################################################
 
         #####################################################################################################
-
         Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Linux_clients_A = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Linux_clients_B = ['10.X.1.20'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
