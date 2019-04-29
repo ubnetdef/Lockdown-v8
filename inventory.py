@@ -13,19 +13,19 @@ class Inventory(object):
 ############################################################################
 ################# DON'T CHANGE THIS ########################################
 ############################################################################
-    def __init__(self):  ######
-        self.inventory = {}  ######
-        self.read_cli_args()  ######
-        if self.args.list:  ######
-            self.inventory = self.inventory_generator()  ######
-        elif self.args.host:  ######
-            # Not implemented, since we return _meta info `--list`.   ######
-            self.inventory = self.empty_inventory()  ######
-        else:  ######
-            self.inventory = self.empty_inventory()  ######
-        print(json.dumps(self.inventory))  ######
-        with open("temp", 'w') as f:  ######
-            f.write(json.dumps(self.inventory))  ######
+    def __init__(self):
+        self.inventory = {}
+        self.read_cli_args()
+        if self.args.list:
+            self.inventory = self.inventory_generator()
+        elif self.args.host:
+            # Not implemented, since we return _meta info `--list`.
+            self.inventory = self.empty_inventory()
+        else:
+            self.inventory = self.empty_inventory()
+        print(json.dumps(self.inventory))
+        with open("temp", 'w') as f:
+            f.write(json.dumps(self.inventory))
 
 
 ############################################################################
@@ -275,7 +275,6 @@ class Inventory(object):
     # Empty inventory for testing.
     def empty_inventory(self):
         return {'_meta': {'hostvars': {}}}
-
     # Read the command line args passed to the script.
     def read_cli_args(self):
         parser = argparse.ArgumentParser()
