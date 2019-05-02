@@ -19,12 +19,14 @@ class Inventory(object):
         if self.args.list:
             self.inventory = self.inventory_generator()
         elif self.args.host:
+            # Not implemented, since we return _meta info `--list`.
             self.inventory = self.empty_inventory()
         else:
             self.inventory = self.empty_inventory()
         print(json.dumps(self.inventory))
         with open("temp", 'w') as f:
             f.write(json.dumps(self.inventory))
+
 
 ############################################################################
 ################# DON'T CHANGE THIS ########################################
@@ -48,7 +50,7 @@ class Inventory(object):
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
-        all_vars['total_teams'] = 1
+        all_vars['total_teams'] = 15
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v6'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
@@ -58,7 +60,6 @@ class Inventory(object):
         #####################################################################################################
 
         #####################################################################################################
-
         Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Linux_clients_A = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Linux_clients_B = ['10.X.1.20'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
@@ -274,7 +275,6 @@ class Inventory(object):
     # Empty inventory for testing.
     def empty_inventory(self):
         return {'_meta': {'hostvars': {}}}
-
     # Read the command line args passed to the script.
     def read_cli_args(self):
         parser = argparse.ArgumentParser()

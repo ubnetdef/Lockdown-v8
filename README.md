@@ -37,3 +37,5 @@ https://docs.ansible.com/ansible/latest/modules/vmware_guest_powerstate_module.h
 https://docs.ansible.com/ansible/latest/modules/vmware_vm_shell_module.html
 
 https://paloaltonetworks.github.io/ansible-pan/
+
+NOTE: vm ova(s) could be requested thru issues section of this repo
