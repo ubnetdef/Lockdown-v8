@@ -10,23 +10,21 @@ except ImportError:
 
 
 class Inventory(object):
-    ############################################################################
-    ################# DON'T CHANGE THIS ########################################
-    ############################################################################
-    def __init__(self):  ######
-        self.inventory = {}  ######
-        self.read_cli_args()  ######
-        if self.args.list:  ######
-            self.inventory = self.inventory_generator()  ######
-        elif self.args.host:  ######
-            # Not implemented, since we return _meta info `--list`.   ######
-            self.inventory = self.empty_inventory()  ######
-        else:  ######
-            self.inventory = self.empty_inventory()  ######
-        print(json.dumps(self.inventory))  ######
-        with open("temp", 'w') as f:  ######
-            f.write(json.dumps(self.inventory))  ######
-
+############################################################################
+################# DON'T CHANGE THIS ########################################
+############################################################################
+    def __init__(self):
+        self.inventory = {}
+        self.read_cli_args()
+        if self.args.list:
+            self.inventory = self.inventory_generator()
+        elif self.args.host:
+            self.inventory = self.empty_inventory()
+        else:
+            self.inventory = self.empty_inventory()
+        print(json.dumps(self.inventory))
+        with open("temp", 'w') as f:
+            f.write(json.dumps(self.inventory))
 
 ############################################################################
 ################# DON'T CHANGE THIS ########################################
