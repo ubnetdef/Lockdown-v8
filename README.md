@@ -3,14 +3,14 @@ Lockdown v6 Deplotment
 This is a Lockdown v6 Deployment Repo. The whole deployment and VM configuration procedure is carried out by ansible.
 
 Where to start?
-
+=========
 Main playbook: deploy.yaml
 
 Requirements
 ------------
-python >=2.6
-pyshere
-pyVmomi
+- python >=2.6
+- pyshere
+- pyVmomi
 
 Role Variables
 --------------
@@ -20,7 +20,6 @@ Variables are generated using dynamic inventory, please check out inventory.py
 Notes
 --------------
 Vm OVA(s) could be requested thru issues section of this repo. Generally we just install vmware tools and ssh/winrm depending on if it is Linux or Windows.
-
 
 
 Some Useful Links
