@@ -17,6 +17,8 @@
       vm_shell_cwd: "/tmp"
     delegate_to: localhost
     with_sequence: start={{start_team}} end={{total_teams}}
+    loop_control:
+      pause: 20
 
 #
 #
