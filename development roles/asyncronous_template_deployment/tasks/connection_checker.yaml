@@ -1,0 +1,41 @@
+- name: Initialize an empty list for our strings
+  set_fact:
+    total_confirmed: []
+
+- name:  Check Connection over a group
+  include_tasks: connection_checker.yaml
+  vars:
+    host: host
+  loop: "{{ groups[name] }}"
+  loop_control:
+    loop_var: host
+
+- debug:
+    msg: "{{total_confirmed|length}} and {{groups[name]|length}}"
+  until: total_confirmed|length==groups[name]|length
+  retries: 30000
+  no_log: True
+
+
+#- name: Reset the list
+#  set_fact:
+#    total_confirmed: "{{ total_confirmed | difference([ host ]) }}"
+#  loop: "{{ groups[name] }}"
+#  loop_control:
+#    loop_var: host
+
+
+
+#- name: Check sync status
+#  async_status:
+#    jid: "{{ confirm_vm_item.ansible_job_id }}"  Can't just do this because ansible...
+#  loop: "{{ confirm_vm.results }}"
+#  loop_control:
+#    loop_var: "confirm_vm_item"
+#  register: async_poll_results
+#  until: async_poll_results.finished
+#  retries: 30000
+
+
+#  when: hostvars[host]['OS'] == "Windows"
+#  register: WINRM_Result

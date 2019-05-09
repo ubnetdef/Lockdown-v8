@@ -1,0 +1,90 @@
+#####
+#### Description:
+#### This task was created due to the fact that vmware acts funky when you deploy a lot of vms at the same time.
+#### nested_cheker makes sure that VMs are deployed proprly by checking SSH port for Linux, and WINRM ports for Windows once they are deployed.
+#### In case a VM fails the check, the VM is removed and redeployed, after which nested_checker calls itself, and checks the redeployed VM again.
+#### The procedure is following:
+#### Once a vm fails the check, it gets deleted -> cloned -> poweredon -> poweredoff -> customized -> poweredon. 
+#### You may ask, why not just clone -> customize -> poweron?
+#### Because vmware... or https://community.netapp.com/t5/VMware-Solutions-Discussions/VMware-Guest-Customization-failing-to-apply-when-deploying-Rapid-Clones-to-VMFS/td-p/5352
+#####
+- name: Check Block
+  block:
+    - name: Wait for SSH to open
+      wait_for:
+        port: 22
+        host: "{{ host }}"
+        connect_timeout: 2
+        sleep: 2
+        timeout: 100
+      when: hostvars[host]['OS'] == "Linux"
+      register: confirm_vm # SSH_Result
+
+    - name: Wait for WINRM to open
+      wait_for:
+        port: 5986
+        host: "{{ host }}"
+        connect_timeout: 2
+        sleep: 2
+      when: hostvars[host]['OS'] == "Windows"
+      register: confirm_vm # WINRM_Result
+
+    - name: Append host to list
+      set_fact:
+        total_confirmed: "{{ total_confirmed + [ host ] }}"
+
+  rescue:
+
+    - name:  Power OFF VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredoff
+        folder:  "{{ hostvars[host]['folder'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+      delegate_to: localhost
+
+    - name:  Remove Bad VM
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        state: absent
+        folder:  "{{ hostvars[host]['folder'] }}"
+        template: "{{ hostvars[host]['template'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+        cluster: "{{ cluster }}"
+      delegate_to: localhost
+
+    - name:  Customize {{ host }}
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        template: "{{ hostvars[host]['template'] }}"
+        datastore: "{{ datastore }}"
+        cluster: "{{ cluster }}"
+        validate_certs: no
+        state: poweredon
+        folder:  "{{ hostvars[host]['folder'] }}"
+        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+        networks: "{{ hostvars[host]['networks'] }}"
+        customization: "{{ hostvars[host]['customization'] }}"
+      delegate_to: localhost
+
+    - pause:
+        minutes: 5
+      when: hostvars[host]['OS'] == "Windows"
+
+    - pause:
+        minutes: 1
+      when: hostvars[host]['OS'] == "Linux"
+
+    - name:  Nested check
+      include_tasks: nested_checker.yaml

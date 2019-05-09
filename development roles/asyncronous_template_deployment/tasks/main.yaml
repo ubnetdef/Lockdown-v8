@@ -1,0 +1,13 @@
+#- name: "Deploy VMs"
+#  include_tasks: Deploy_From_Template.yaml
+#  vars:
+#    name: "{{ item }}"
+#  with_items: "{{ groups }}"
+#  when: (item != 'all') and (item != 'ungrouped')
+
+- name: Check Connection and fix bad VMS
+  include_tasks: connection_checker.yaml
+  vars:
+    name: "{{ item }}"
+  with_items: "{{ groups }}"
+  when: (item != 'all') and (item != 'ungrouped')
