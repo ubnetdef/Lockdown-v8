@@ -21,7 +21,7 @@ Notes
 --------------
 VM OVA(s) could be requested thru issues section of this repo. Generally we just install vmware tools and ssh/winrm depending on if it is Linux or Windows.
 
-Some modules were imported from ansible 2.8 (as of 5/2/2019 2.8 is still in development)
+Some modules were imported from ansible 2.8 (as of 5/2/2019 Ansible 2.8 is still in development)
 
 If you don't have problems with mass cloning and configuration in your vcenter, you can adjust role 'template_deployment' to make the deployment faster
 
