@@ -1,6 +1,6 @@
     - name: Create DRS Affinity Rule for VM-VM
       vmware_vm_vm_drs_rule:
-        hostname: "cdr-vcenter1.cse.buffalo.edu"
+        hostname: "cdr-vcenter.cse.buffalo.edu"
         username: cse365_deploy@vsphere.local
         password: "67K7~A(Dxj2npF,xANq;"
         cluster_name: MAIN

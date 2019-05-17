@@ -1,7 +1,7 @@
 #!/usr/bin/env python
+import argparse
 import os
 import sys
-import argparse
 
 try:
     import json
@@ -38,7 +38,7 @@ class Inventory(object):
 #####################################################################################################
         all = {}
         all_vars = {}
-        all_vars['vcenter_hostname'] = 'cdr-vcenter1.cse.buffalo.edu'
+        all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
         all_vars['datastore'] = 'cdr-iscsi2'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
