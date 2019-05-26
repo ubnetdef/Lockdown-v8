@@ -52,7 +52,7 @@ class Inventory(object):
         all_vars['start_team'] = 1
         all_vars['total_teams'] = 15
         all_vars['afinity_enable'] = True
-        all_vars['pfsense_template'] = 'Router-v6'
+        all_vars['pfsense_template'] = 'AWX-Router'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
         all_vars['domain'] = 'sharkattack.fish'
         all_vars['netbios'] = 'SHARK'
@@ -88,54 +88,54 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "Windows-Server-2019-v6"
+                    hostvars[host]['template'] = "AWX-Windows-Server-2019"
                     hostvars[host]['AD_Name'] = 'AD'
 
                 if host in Linux_client_Secret:
                     hostvars[host]['ansible_user'] = 'student'
-                    hostvars[host]['ansible_password'] = 'wnqvxpcr5aqwf7pg'
-                    hostvars[host]['template'] = 'student_machine_lockdown'
+                    hostvars[host]['ansible_password'] = 'changeme'
+                    hostvars[host]['template'] = 'student_machine'
                     hostvars[host]['AD_Name'] = 'Linux-Secret'
 
                 if host in Linux_clients_A:
-                    hostvars[host]['template'] = 'Desktop-XUbuntu-16.04-v6'
+                    hostvars[host]['template'] = 'AWX-Desktop-XUbuntu-16.04'
                     hostvars[host]['AD_Name'] = 'Linux-A'
 
                 if host in Linux_clients_B:
-                    hostvars[host]['template'] = 'Desktop-CentOS-7-v6'
+                    hostvars[host]['template'] = 'AWX-Desktop-CentOS-7'
                     hostvars[host]['AD_Name'] = 'Linux-B'
 
                 if host in Linux_clients_C:
-                    hostvars[host]['template'] = 'Desktop-LUbuntu-16.04-v6'
+                    hostvars[host]['template'] = 'AWX-Desktop-LUbuntu-16.04'
                     hostvars[host]['AD_Name'] = 'Linux-C'
 
                 if host in Windows_clients_A:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v6'
+                    hostvars[host]['template'] = 'AWX-Desktop-Windows-10'
                     hostvars[host]['AD_Name'] = 'Windows-A'
 
                 if host in Windows_clients_B:
-                    hostvars[host]['template'] = 'Desktop-Windows-7-v6'
+                    hostvars[host]['template'] = 'AWX-Desktop-Windows-7'
                     hostvars[host]['AD_Name'] = 'Windows-B'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'Windows-Server-2016-FTP-v6'
+                    hostvars[host]['template'] = 'AWX-Windows-Server-2016-FTP'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in GitLab:
-                    hostvars[host]['template'] = 'Server-CentOS-7-GIT-v6'
+                    hostvars[host]['template'] = 'AWX-Server-CentOS-7-GIT'
                     hostvars[host]['AD_Name'] = 'GitLab'
                     hostvars[host][
                         'gitlab_external_url'] = "http://gitlab.{}".format(all_vars['domain'])
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'Server-Ubuntu-16.04-v6'
+                    hostvars[host]['template'] = 'AWX-Server-Ubuntu-16.04'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['magento_host'] = "http://10.{}.2.2/".format(team_number)
                     hostvars[host]['magento_db_host'] = "10.{}.2.3".format(team_number)
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'Server-Ubuntu-16.04-v6'
+                    hostvars[host]['template'] = 'AWX-Server-Ubuntu-16.04'
                     hostvars[host]['AD_Name'] = 'DB'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
