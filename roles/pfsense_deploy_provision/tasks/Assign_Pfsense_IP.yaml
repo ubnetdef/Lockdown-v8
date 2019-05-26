@@ -1,6 +1,3 @@
-  - pause:
-      minutes: 2
-
   - name: pfSense Network Provision
     vmware_vm_shell:
       hostname: "{{ vcenter_hostname }}"

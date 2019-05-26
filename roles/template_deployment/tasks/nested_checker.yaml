@@ -30,7 +30,6 @@
       register: WINRM_Result
 
   rescue:
-
     - name:  Power OFF VM
       vmware_guest:
         hostname: "{{ vcenter_hostname }}"

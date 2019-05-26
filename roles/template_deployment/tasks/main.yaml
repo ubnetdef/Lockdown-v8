@@ -12,10 +12,6 @@
   with_items: "{{ groups }}"
   when: (item != 'all') and (item != 'ungrouped')
 
-- pause:
-    minutes: 2
-
-
 - name: Check Connection and fix bad VMS
   include_tasks: connection_checker.yaml
   vars:

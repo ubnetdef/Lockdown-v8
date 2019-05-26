@@ -18,19 +18,32 @@
           - name: "team{{ item }}-net"
       delegate_to: localhost
       with_sequence: start={{start_team}} end={{total_teams}}
-#      async: 30000
-#      poll: 0
+      register: deployment_pf
+      async: 30000
+      poll: 0
+
+    - name: Check sync status
+      async_status:
+        jid: "{{ deployment_pf_item.ansible_job_id }}"
+      loop: "{{ deployment_pf.results }}"
+      loop_control:
+        loop_var: "deployment_pf_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 30000
 
 
-    - name: Set the state of a virtual machine to poweron
-      vmware_guest_powerstate:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: no
-        folder: "Lockdown/v6/{{ cloud_folder }}"
-        name: "{{ 'Team%02d_Router'|format(item|int) }}"
-        state: powered-on
-        force: yes
-      delegate_to: localhost
-      with_sequence: start={{start_team}} end={{total_teams}}
+
+
+#    - name: Set the state of a virtual machine to poweron
+#      vmware_guest_powerstate:
+#        hostname: "{{ vcenter_hostname }}"
+#        username: "{{ vcenter_username }}"
+#        password: "{{ vcenter_password }}"
+#        validate_certs: no
+#        folder: "Lockdown/v6/{{ cloud_folder }}"
+#        name: "{{ 'Team%02d_Router'|format(item|int) }}"
+#        state: powered-on
+#        force: yes
+#      delegate_to: localhost
+#      with_sequence: start={{start_team}} end={{total_teams}}
