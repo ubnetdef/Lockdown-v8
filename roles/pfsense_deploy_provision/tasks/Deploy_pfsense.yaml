@@ -16,11 +16,8 @@
           - name: "team{{ item }}-net"
           - name: "team{{ item }}-net"
           - name: "team{{ item }}-net"
-        customization:
-            hostname: Pfsense
       delegate_to: localhost
       with_sequence: start={{start_team}} end={{total_teams}}
-      ignore_errors: yes
 #      async: 30000
 #      poll: 0
 
