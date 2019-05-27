@@ -8,3 +8,17 @@
       loop: "{{ groups[name] }}"
       loop_control:
         loop_var: host
+      async: 30000
+      poll: 0
+      register: connection_vm
+
+
+    - name: Check sync status
+      async_status:
+        jid: "{{ connection_vm_item.ansible_job_id }}"
+      loop: "{{ connection_vm.results }}"
+      loop_control:
+        loop_var: "connection_vm_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 30000

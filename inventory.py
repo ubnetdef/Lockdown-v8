@@ -224,7 +224,7 @@ class Inventory(object):
                 hostvars[host]['networks'] = [network]
                 hostvars[host]['team_number'] = team_number
                 hostvars[host]['team_number'] = team_number
-                hostvars[host]['customization']['existing_vm'] = True
+                # hostvars[host]['customization']['existing_vm'] = True
                 hostvars[host]['networks'] = [network]
                 hostvars[host]['customization']['hostname'] = hostvars[host]['AD_Name']
 
