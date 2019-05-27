@@ -9,10 +9,12 @@
 
 - hosts: AD
   gather_facts: no
+  strategy: free
   roles:
     - windows_server_provision_AD
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+  strategy: free
   gather_facts: no
   tasks:
     - name: Wait For AD connection
@@ -21,21 +23,25 @@
         sleep: 5
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+  strategy: free
   roles:
     - local_users_Linux
 
 - hosts: Windows-A, Windows-B, FTP
+  strategy: free
   gather_facts: no
   roles:
     - Windows_Client_Provision
 
 - hosts: GIT, WEB, DB
+  strategy: free
   become: yes
   roles:
     - disable_firewall
 
 - hosts: GIT
   gather_facts: no
+  strategy: free
   become: yes
   roles:
     - gitlab
@@ -43,6 +49,7 @@
 
 - hosts: DB
   gather_facts: no
+  strategy: free
   become: true
   roles:
     - ansible-role-mysql-master
@@ -50,6 +57,7 @@
 
 - hosts: WEB
   become: true
+  strategy: free
   roles:
     - install_php
     - ansible-role-apache-master
@@ -58,5 +66,6 @@
 
 - hosts: WEB, DB
   become: true
+  strategy: free
   roles:
     - ansible-docker-master
