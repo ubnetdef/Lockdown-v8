@@ -94,7 +94,7 @@ class Inventory(object):
                 if host in Linux_client_Secret:
                     hostvars[host]['ansible_user'] = 'student'
                     hostvars[host]['ansible_password'] = 'changeme'
-                    hostvars[host]['template'] = 'student_machine'
+                    hostvars[host]['template'] = 'AWX-Secret'
                     hostvars[host]['AD_Name'] = 'Linux-Secret'
 
                 if host in Linux_clients_A:
