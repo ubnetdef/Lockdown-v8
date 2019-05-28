@@ -14,9 +14,7 @@
       wait_for:
         port: 22
         host: "{{ host }}"
-        connect_timeout: 2
-        sleep: 2
-        timeout: 100
+        timeout: 60
       when: hostvars[host]['OS'] == "Linux"
       register: SSH_Result
 
@@ -24,8 +22,7 @@
       wait_for:
         port: 5986
         host: "{{ host }}"
-        connect_timeout: 2
-        sleep: 2
+        timeout: 60
       when: hostvars[host]['OS'] == "Windows"
       register: WINRM_Result
 
@@ -84,7 +81,7 @@
         vm_name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
 
     - pause:
-        minutes: 5
+        minutes: 3
       when: hostvars[host]['OS'] == "Windows"
 
     - pause:

@@ -9,7 +9,6 @@
 
 - hosts: AD
   gather_facts: no
-  strategy: free
   roles:
     - windows_server_provision_AD
 
