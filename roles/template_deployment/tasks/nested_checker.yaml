@@ -71,48 +71,9 @@
         folder:  "{{ hostvars[host]['folder'] }}"
         template: "{{ hostvars[host]['template'] }}"
         name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
-        cluster: "{{ cluster }}"
-      delegate_to: localhost
-
-    - pause:
-        minutes: 1
-
-    - name:  Power OFF VM
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: no
-        state: poweredoff
-        folder:  "{{ hostvars[host]['folder'] }}"
-        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
-      delegate_to: localhost
-
-    - name:  Customize {{ host }}
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        datacenter: "{{ datacenter }}"
-        datastore: "{{ datastore }}"
-        cluster: "{{ cluster }}"
-        validate_certs: no
-        state: present
-        folder:  "{{ hostvars[host]['folder'] }}"
-        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
         networks: "{{ hostvars[host]['networks'] }}"
         customization: "{{ hostvars[host]['customization'] }}"
-      delegate_to: localhost
-
-    - name:  Power ON VM
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: no
-        state: poweredon
-        folder:  "{{ hostvars[host]['folder'] }}"
-        name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
+        cluster: "{{ cluster }}"
       delegate_to: localhost
 
     - name: Connect all Nics
