@@ -136,7 +136,7 @@ class Inventory(object):
 
                 if host in DB:
                     hostvars[host]['template'] = 'AWX-Server-Ubuntu-16.04'
-                    hostvars[host]['AD_Name'] = 'DB'
+                    hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
                         'name':
