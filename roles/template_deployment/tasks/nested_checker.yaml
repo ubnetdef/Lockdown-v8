@@ -14,7 +14,7 @@
       wait_for:
         port: 22
         host: "{{ host }}"
-        timeout: 60
+        timeout: 120
       when: hostvars[host]['OS'] == "Linux"
       register: SSH_Result
 
@@ -22,7 +22,7 @@
       wait_for:
         port: 5986
         host: "{{ host }}"
-        timeout: 60
+        timeout: 520
       when: hostvars[host]['OS'] == "Windows"
       register: WINRM_Result
 
@@ -79,14 +79,6 @@
         vcenter_password: "{{ vcenter_password }}"
         vcenter_user: "{{ vcenter_username }}"
         vm_name: "{{ 'Team%02d-'|format(hostvars[host]['team_number']) }}{{ name }}"
-
-    - pause:
-        minutes: 3
-      when: hostvars[host]['OS'] == "Windows"
-
-    - pause:
-        minutes: 1
-      when: hostvars[host]['OS'] == "Linux"
 
     - name:  Nested check
       include_tasks: nested_checker.yaml
