@@ -44,3 +44,5 @@ https://docs.ansible.com/ansible/latest/modules/vmware_guest_powerstate_module.h
 https://docs.ansible.com/ansible/latest/modules/vmware_vm_shell_module.html
 
 https://paloaltonetworks.github.io/ansible-pan/
+
+As per https://github.com/PaloAltoNetworks/ansible-pan/pull/394 it is now possible to insert cmd commands in palo alto firewall
