@@ -2,8 +2,8 @@ docker exec -it awx_task bash
 /etc/python/cert-verification.cfg verify=disable
 export PYTHONHTTPSVERIFY=0
 
-pip install pan-python
-pip install pandevice
+pip install pan-python requests_toolbelt pandevice
+
 /var/lib/awx/venv/
 
 ansible.cfg:
