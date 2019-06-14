@@ -13,7 +13,7 @@
       loop: "{{ ubit }}"
       loop_control:
         index_var: idx
-    pause:
+    - pause:
       minutes: 1
     - include: tasks/Configure_Pan.yaml
     - include: tasks/Power_On_Linux.yaml
