@@ -21,5 +21,19 @@
         customization:
           dns_servers: "{{ dns_list }}"
       delegate_to: localhost
-      async: 600
+      register: deployment_linux
+      async: 3000
       poll: 0
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+
+    - name: Check sync status
+      async_status:
+        jid: "{{ deployment_linux_item.ansible_job_id }}"
+      loop: "{{ deployment_linux.results }}"
+      loop_control:
+        loop_var: "deployment_linux_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 30000

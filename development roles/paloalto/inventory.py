@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import argparse
-import os
-import sys
 
 try:
     import json
@@ -51,10 +49,12 @@ class Inventory(object):
         all_vars['netmask'] = '255.255.255.0'
         all_vars['gateway'] = '10.42.25.1'
         all_vars['pan_template'] = 'PaloAlto_SysSec_Class'
-        all_vars['pan_ip'] = '192.168.1.1'
+        all_vars['pan_default_ip'] = '192.168.1.1'
         all_vars['pan_username'] = 'admin'
         all_vars['pan_password'] = 'admin'
         all_vars['pan_outside_ip'] = '192.168.8.101'
+        all_vars['pan_final_management_ip'] = '192.168.8.131'
+        all_vars['config_name'] = 'temp_xml_config.xml'
         all_vars['gretzky'] = '192.168.0.1'
 
 

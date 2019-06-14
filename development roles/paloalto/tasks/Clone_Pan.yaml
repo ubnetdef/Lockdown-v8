@@ -1,0 +1,43 @@
+    - name:  Clone Palo Alto form the template
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: present
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        template: "{{ pan_template }}"
+        name: "PaloAltoFW-{{ item }}"
+        cluster: "{{ cluster }}"
+      delegate_to: localhost
+      register: deployment_pan
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
+      async: 30000
+      poll: 0
+
+    - name: Check sync status
+      async_status:
+        jid: "{{ deployment_pan_item.ansible_job_id }}"
+      loop: "{{ deployment_pan.results }}"
+      loop_control:
+        loop_var: "deployment_pan_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 30000
+
+
+
+
+
+
+
+
+
+
+
+
+

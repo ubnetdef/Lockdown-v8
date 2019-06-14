@@ -7,30 +7,24 @@
       loop_control:
         index_var: idx
 
-    - include: tasks/Clome_Linux.yaml
+    - include: tasks/Clone_Linux.yaml
+
+    - include: tasks/Clone_Pan.yaml
+
+    - include: tasks/Configure_Management_Pan.yaml
       loop: "{{ ubit }}"
       loop_control:
         index_var: idx
 
-    - include: tasks/Deploy_Pan.yaml
-      loop: "{{ ubit }}"
-      loop_control:
-        index_var: idx
-    - pause:
-        minutes: 2
 
-    - include: tasks/Start_PaloAlto.yaml
-      loop: "{{ ubit }}"
-      loop_control:
-        index_var: idx
+#    - include: tasks/Configure_Pan.yaml
+#
+#
+#    - include: tasks/Start_PaloAlto.yaml
 
-    - include: tasks/Power_On_Linux.yaml
-      loop: "{{ ubit }}"
-      loop_control:
-        index_var: idx
+#
+#    - include: tasks/Power_On_Linux.yaml
 
-    - include: tasks/Assign_Permissions.yaml
-      loop: "{{ ubit }}"
-      loop_control:
-        index_var: idx
+#
+#    - include: tasks/Assign_Permissions.yaml
 

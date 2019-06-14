@@ -1,0 +1,48 @@
+    - name:  Provision the template
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        state: poweredon
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
+        template: "{{ pan_template }}"
+        name: "PaloAltoFW-{{ item }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: core-red-net
+            start_connected: True
+          - name: core-red-net
+            start_connected: True
+          - name: generic-net
+            start_connected: True
+      delegate_to: localhost
+
+    - name: wait for reboot
+      panos_check:
+        ip_address: "{{ pan_default_ip }}"
+        password: "{{ pan_password }}"
+      register: result
+      until: not result|failed
+      retries: 4000
+      delay: 10
+
+    - name: Generate a cew config
+      panos_management_ip_changer:
+        new_ip_address: "{{ pan_final_management_ip | ipmath(idx) }}"
+        config_name: "{{config_name}}"
+
+    - name: Upload file on PAN
+      panos_import:
+        ip_address: "{{ pan_default_ip }}"
+        password: "{{ pan_password }}"
+        file: "{{config_name}}"
+        category: configuration
+
+    - name: Load Config
+      panos_loadcfg:
+        ip_address: "{{ pan_default_ip }}"
+        password: "{{ pan_password }}"
+        file: "{{config_name}}"

@@ -1,48 +1,6 @@
-    - name:  Clone Palo Alto form the template
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: no
-        state: present
-        datacenter: "{{ datacenter }}"
-        datastore: "{{ datastore }}"
-        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
-        template: "{{ pan_template }}"
-        name: "PaloAltoFW-{{ item }}"
-        cluster: "{{ cluster }}"
-      delegate_to: localhost
 
-    - name:  Provision the template
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: no
-        state: poweredon
-        datacenter: "{{ datacenter }}"
-        datastore: "{{ datastore }}"
-        folder:  'Lab/PaloAltoLab/{{ idx + 1 }}: PA - {{ item }}'
-        template: "{{ pan_template }}"
-        name: "PaloAltoFW-{{ item }}"
-        cluster: "{{ cluster }}"
-        networks:
-          - name: core-red-net
-            start_connected: True
-          - name: core-red-net
-            start_connected: True
-          - name: generic-net
-            start_connected: True
-      delegate_to: localhost
 
-    - name: wait for reboot
-      panos_check:
-        ip_address: "{{ pan_ip }}"
-        password: "{{ pan_password }}"
-      register: result
-      until: not result|failed
-      retries: 4000
-      delay: 10
+
 
     - name: HTTPS management profile
       panos_management_profile:
@@ -145,6 +103,8 @@
         password: "{{ pan_password }}"
         cmd: 'request shutdown system'
       ignore_errors: yes
+
+
 
 
 
