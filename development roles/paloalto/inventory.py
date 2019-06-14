@@ -40,8 +40,6 @@ class Inventory(object):
         all_vars['datastore'] = 'cdr-iscsi2'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
-        all_vars['vcenter_username'] = 'cse365_deploy@vsphere.local'
-        all_vars['vcenter_username'] = '67K7~A(Dxj2npF,xANq;'
         all_vars['template'] = 'student_machine'
         all_vars['vm_name'] = 'student_vm'
         all_vars['vmnet'] = 'generic-net'
@@ -56,9 +54,6 @@ class Inventory(object):
         all_vars['pan_final_management_ip'] = '192.168.8.131'
         all_vars['config_name'] = 'temp_xml_config.xml'
         all_vars['gretzky'] = '192.168.0.1'
-
-
-
         all_vars['dns_list'] = ['8.8.8.8', '8.8.4.4']
         all_vars['ubit'] = ['jasleena','sennaals','brbarric','dabielli','derekcau','afeedaiy','ohadkatz','ddelanne','scottdep','dgibson4','morshedu','edwardly','grmarcus','rubenoca','aritrapa','jprue','jmromero','ethansac','ashi','zatenenb','cantopra','erictrav']
 
