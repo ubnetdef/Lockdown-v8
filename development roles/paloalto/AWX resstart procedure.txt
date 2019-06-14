@@ -1,4 +1,4 @@
-docker exec -it awx_task
+docker exec -it awx_task bash
 /etc/python/cert-verification.cfg verify=disable
 export PYTHONHTTPSVERIFY=0
 
