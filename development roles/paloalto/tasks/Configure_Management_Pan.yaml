@@ -46,3 +46,14 @@
         ip_address: "{{ pan_default_ip }}"
         password: "{{ pan_password }}"
         file: "{{config_name}}"
+      async: 30000
+      poll: 0
+
+    - name: Check New Management IP Connection
+      panos_check:
+        ip_address: "{{ pan_final_management_ip | ipmath(idx) }}"
+        password: "{{ pan_password }}"
+      register: result
+      until: not result|failed
+      retries: 4000
+      delay: 10
