@@ -5,9 +5,40 @@
         username: '{{ vcenter_username }}'
         password: '{{ vcenter_password }}'
         datacenter: "{{ datacenter }}"
+        folder_name: Lab
+        parent_folder: vm
+        folder_type: vm
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+
+    -
+      name: Create a VM folder for a student
+      vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: "{{ datacenter }}"
+        folder_name: PaloAltoLab
+        parent_folder: Lab
+        folder_type: vm
+        state: present
+        validate_certs: no
+      delegate_to: localhost
+
+    -
+      name: Create a VM folder for a student
+      vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: "{{ datacenter }}"
         folder_name: "{{ idx + 1}}: PA - {{ item }}"
         parent_folder: PaloAltoLab
         folder_type: vm
         state: present
         validate_certs: no
       delegate_to: localhost
+      loop: "{{ ubit }}"
+      loop_control:
+        index_var: idx
