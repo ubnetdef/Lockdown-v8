@@ -8,7 +8,7 @@
         validate_certs: no
         datacenter: "{{ datacenter }}"
         datastore: "{{ datastore }}"
-        folder:  "Lockdown/v6/{{ cloud_folder }}"
+        folder:  "Lockdown/{{ parent_folder }}/{{ cloud_folder }}"
         template: "{{ pfsense_template }}"
         name: "{{ 'Team%02d_Router'|format(item|int) }}"
         cluster: "{{ cluster }}"
