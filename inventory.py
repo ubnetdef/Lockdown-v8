@@ -45,17 +45,17 @@ class Inventory(object):
         all_vars['datastore'] = 'THE-VAULT'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
-        all_vars['parent_folder'] = 'v6'
+        all_vars['parent_folder'] = 'Internal-v0'
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
-        all_vars['total_teams'] = 15
+        all_vars['total_teams'] = 2
         all_vars['afinity_enable'] = True
-        all_vars['pfsense_template'] = 'AWX-Router'
+        all_vars['pfsense_template'] = 'Router-Internal-v0'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'sharkattack.fish'
-        all_vars['netbios'] = 'SHARK'
+        all_vars['domain'] = 'star.wars'
+        all_vars['netbios'] = 'STARWARS'
         all['vars'] = all_vars
         #####################################################################################################
 
@@ -66,17 +66,15 @@ class Inventory(object):
         Linux_clients_C = ['10.X.1.30'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Windows_clients_A = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Windows_clients_B = ['10.X.1.50'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        Linux_client_Secret = ['10.X.1.150'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         WEB = ['10.X.2.2'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         DB = ['10.X.2.3'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         FTP = ['10.X.2.4'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         GitLab = ['10.X.2.5'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        cloud = WEB + DB + FTP + GitLab + Linux_client_Secret
-
+        cloud = WEB + DB + FTP + GitLab
         for host_list in [
                 Active_Directory, Linux_clients_A, Linux_clients_B,
                 Linux_clients_C, Windows_clients_A, Windows_clients_B,
-                Linux_client_Secret, WEB, DB, FTP, GitLab, Linux_client_Secret
+                WEB, DB, FTP, GitLab
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -88,54 +86,48 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "AWX-Windows-Server-2019"
+                    hostvars[host]['template'] = "Windows-Server-AD-Internal-v0"
                     hostvars[host]['AD_Name'] = 'AD'
 
-                if host in Linux_client_Secret:
-                    hostvars[host]['ansible_user'] = 'student'
-                    hostvars[host]['ansible_password'] = 'changeme'
-                    hostvars[host]['template'] = 'AWX-Secret'
-                    hostvars[host]['AD_Name'] = 'Linux-Secret'
-
                 if host in Linux_clients_A:
-                    hostvars[host]['template'] = 'AWX-Desktop-XUbuntu-16.04'
+                    hostvars[host]['template'] = 'Desktop-XUbuntu-16.04-Internal-v0'
                     hostvars[host]['AD_Name'] = 'Linux-A'
 
                 if host in Linux_clients_B:
-                    hostvars[host]['template'] = 'AWX-Desktop-CentOS-7'
+                    hostvars[host]['template'] = 'Desktop-CentOS-7-Internal-v0'
                     hostvars[host]['AD_Name'] = 'Linux-B'
 
                 if host in Linux_clients_C:
-                    hostvars[host]['template'] = 'AWX-Desktop-LUbuntu-16.04'
+                    hostvars[host]['template'] = 'Desktop-LUbuntu-16.04-Internal-v0'
                     hostvars[host]['AD_Name'] = 'Linux-C'
 
                 if host in Windows_clients_A:
-                    hostvars[host]['template'] = 'AWX-Desktop-Windows-10'
+                    hostvars[host]['template'] = 'Desktop-Windows-10-Internal-v0'
                     hostvars[host]['AD_Name'] = 'Windows-A'
 
                 if host in Windows_clients_B:
-                    hostvars[host]['template'] = 'AWX-Desktop-Windows-7'
+                    hostvars[host]['template'] = 'Desktop-Windows-7-Internal-v0'
                     hostvars[host]['AD_Name'] = 'Windows-B'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'AWX-Windows-Server-2016-FTP'
+                    hostvars[host]['template'] = 'Windows-Server-FTP-Internal-v0'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in GitLab:
-                    hostvars[host]['template'] = 'AWX-Server-CentOS-7-GIT'
+                    hostvars[host]['template'] = 'Server-CentOS-7-GIT-Internal-v0'
                     hostvars[host]['AD_Name'] = 'GitLab'
                     hostvars[host][
                         'gitlab_external_url'] = "http://gitlab.{}".format(all_vars['domain'])
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'AWX-Server-Ubuntu-16.04'
+                    hostvars[host]['template'] = 'Server-Ubuntu-16.04-Internal-v0'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['magento_host'] = "http://10.{}.2.2/".format(team_number)
                     hostvars[host]['magento_db_host'] = "10.{}.2.3".format(team_number)
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'AWX-Server-Ubuntu-16.04'
+                    hostvars[host]['template'] = 'Server-Ubuntu-16.04-Internal-v0'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
@@ -183,7 +175,7 @@ class Inventory(object):
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
 
-                if host in Linux_clients_A + Linux_clients_B + Linux_clients_C + Linux_client_Secret + GitLab + WEB + DB:
+                if host in Linux_clients_A + Linux_clients_B + Linux_clients_C + GitLab + WEB + DB:
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
@@ -240,8 +232,6 @@ class Inventory(object):
         Windows_A['hosts'] = Windows_clients_A
         Windows_B = {}
         Windows_B['hosts'] = Windows_clients_B
-        Linux_Secret = {}
-        Linux_Secret['hosts'] = Linux_client_Secret
         WEB_Servers = {}
         WEB_Servers['hosts'] = WEB
         DB_Servers = {}
@@ -263,7 +253,6 @@ class Inventory(object):
         inventory['DB'] = DB_Servers
         inventory['FTP'] = FTP_Servers
         inventory['GIT'] = GIT_Servers
-        inventory['Linux-Secret'] = Linux_Secret
 
         #################################################################################################
 

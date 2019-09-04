@@ -5,155 +5,155 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Angler
+  - username: DarthVader
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Puffer
+  - username: LukeSkywalker
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Catfish
+  - username: Leia
     password: Changeme2019!
     groups:
       - Domain Admins
  
-  - username: Herring
+  - username: Chewbacca
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Sandfish
+  - username: ObiWan
     password: Changeme2019!
     groups:
       - Domain Admins   
 
-  - username: Mackerel
+  - username: Han-Solo
     password: Changeme2019!
     groups:
       - Domain Admins
     
-  - username: Goldfish
+  - username: Rey
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Minnow
+  - username: R2-D2
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Trout
+  - username: Kylo-Ren
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Goby
+  - username: Yoda
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Halibut
+  - username: C3PO
     password: Changeme2019!
     groups:
       - Domain Admins
   
-  - username: Perch
+  - username: Jabba
     password: Changeme2019!
     groups:
       - Domain Admins  
   
-  - username: Carp
+  - username: JarJarBinks
     password: Changeme2019!
     groups:
       - Domain Admins 
 
-  - username: Stingray
+  - username: BB8
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Bream
+  - username: CountDooku
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Chub
+  - username: MaceWindu
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Flounder
+  - username: Finn
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Cod
+  - username: Greedo
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Tuna
+  - username: Watto
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Shad
+  - username: IG88
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Swordfish
+  - username: Lobot
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Koi
+  - username: MisterBones
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Pike
+  - username: Bossk
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Dace
+  - username: Dapp
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Mahi
+  - username: Dogma
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Salmon
-    password: Changeme2019!
-    groups:
-      - Domain Admins
-
-
-  - username: Nemo
+  - username: Embo
     password: Changeme2019!
     groups:
       - Domain Admins
 
 
-  - username: Minnow
+  - username: Feral
     password: Changeme2019!
     groups:
       - Domain Admins
 
 
-  - username: Loach
+  - username: Greedo
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Piranha
+
+  - username: Grievous
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: Jaxxon
     password: Changeme2019!
     groups:
       - Domain Admins
