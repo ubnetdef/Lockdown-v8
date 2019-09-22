@@ -2,9 +2,9 @@
   gather_facts: no
   connection: local
   roles:
-     - folders
-     - folder_permissions
-     - pfsense_deploy_provision
+#     - folders
+#     - folder_permissions
+#     - pfsense_deploy_provision
      - template_deployment
 
 - hosts: AD
