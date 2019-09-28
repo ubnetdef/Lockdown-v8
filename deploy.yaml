@@ -1,33 +1,33 @@
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  roles:
+#- hosts: localhost
+#  gather_facts: no
+#  connection: local
+#  roles:
 #     - folders
 #     - folder_permissions
 #     - pfsense_deploy_provision
-     - template_deployment
+#     - template_deployment
 
-- hosts: AD
-  gather_facts: no
-  roles:
-    - windows_server_provision_AD
+#- hosts: AD
+#  gather_facts: no
+#  roles:
+#    - windows_server_provision_AD
 
-- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
-  gather_facts: no
-  tasks:
-    - name: Wait For AD connection
-      wait_for_connection:
-        timeout: 30000
-        sleep: 5
+#- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+#  gather_facts: no
+#  tasks:
+#    - name: Wait For AD connection
+#      wait_for_connection:
+#        timeout: 30000
+#        sleep: 5
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
   roles:
     - local_users_Linux
 
-- hosts: Windows-A, Windows-B, FTP
-  gather_facts: no
-  roles:
-    - Windows_Client_Provision
+#- hosts: Windows-A, Windows-B, FTP
+#  gather_facts: no
+#  roles:
+#    - Windows_Client_Provision
 
 - hosts: GIT, WEB, DB
   become: yes
