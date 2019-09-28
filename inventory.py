@@ -49,8 +49,8 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 1
-        all_vars['total_teams'] = 14
+        all_vars['start_team'] = 2
+        all_vars['total_teams'] = 1
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-Internal-v0'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
@@ -244,13 +244,13 @@ class Inventory(object):
         ################################################################################################
         inventory['all'] = all
         # inventory['AD'] = AD
-        inventory['Linux-A'] = Linux_A
-        inventory['Linux-B'] = Linux_B
-        inventory['Linux-C'] = Linux_C
+        # inventory['Linux-A'] = Linux_A
+        # inventory['Linux-B'] = Linux_B
+        # inventory['Linux-C'] = Linux_C
         # inventory['Windows-A'] = Windows_A
         # inventory['Windows-B'] = Windows_B
-        inventory['WEB'] = WEB_Servers
-        inventory['DB'] = DB_Servers
+        # inventory['WEB'] = WEB_Servers
+        # inventory['DB'] = DB_Servers
         # inventory['FTP'] = FTP_Servers
         inventory['GIT'] = GIT_Servers
 
