@@ -1,6 +1,6 @@
-Internal UB Lockdown v7
+UB Lockdown v7
 =========
-This is a Internal UB Lockdown v7 Deployment Repo. The whole deployment and VM configuration procedure is carried out by ansible.
+This is a UB Lockdown v7 Deployment Repo. The whole deployment and VM configuration procedure is carried out by ansible.
 
 Where to start?
 =========
