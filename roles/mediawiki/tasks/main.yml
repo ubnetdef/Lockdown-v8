@@ -1,0 +1,98 @@
+- name: Enable 7.3
+  command: yum install yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+- name: Install dependencies
+  yum:
+    name: ['epel-release']
+    state: present
+    update_cache: yes
+
+- name: Disabled 5.4
+  command: yum-config-manager --disable remi-php54
+
+- name: Enable 7.3
+  command: yum-config-manager --enable remi-php73
+
+- name: Install dependencies 2.0
+  yum:
+    name: ['httpd', 'mariadb', 'php', 'php-pear', 'php-xml', 'php-mysql', 'php-intl', 'php-gd', 'php-mbstring','ImageMagick-perl','wget']
+    state: present
+    update_cache: yes
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: Set SELinux in permissive mode until the machine is rebooted
+  command: setenforce 0
+
+- name: Download MediaWiki
+  get_url:
+    url: http://releases.wikimedia.org/mediawiki/1.31/mediawiki-1.31.4.tar.gz
+    dest: /tmp/mediawiki.tgz
+
+- name: Unarchive MediaWiki
+  unarchive:
+    src: /tmp/mediawiki.tgz
+    remote_src: yes
+    dest: /tmp
+    owner: apache
+    group: apache
+
+- name: Remove File
+  file:
+    path: /var/www/html
+    state: absent
+
+- name: Copying MediaWiki to web directory
+  command: cp -r /tmp/mediawiki-1.31.4 /var/www/html
+
+- name: Remove File
+  file:
+    path: /tmp/mediawiki-1.31.4
+    state: absent
+
+- name: Updating permissions on MediaWiki installation parent directory
+  file:
+    path: "/var/www/html/.."
+    state: directory
+    owner: apache
+    group: apache
+    mode: 0775
+
+- name: Updating permissions on MediaWiki installation
+  file:
+    path: "/var/www/html/"
+    state: directory
+    recurse: yes
+    owner: apache
+    group: apache
+    mode: 0775
+
+- name: enable and start service httpd
+  systemd:
+    name: httpd
+    enabled: yes
+    state: started
+
+- name: Make sure file doens't exist
+  file:
+    path: /var/www/html/LocalSettings.php
+    state: absent
+
+- name: Install php
+  command: php /var/www/html/maintenance/install.php {{wiki.Name}} {{wiki.user}} --dbuser {{wiki.dbuser}} --dbpass {{wiki.dbpass}} --dbname {{wiki.dbname}} --dbserver {{wiki.dbserver}} --pass {{wiki.pass}} --server {{wiki.server}} --scriptpath ""
+
+- name: Copy file with owner and permissions
+  copy:
+    src: "{{wiki.crypto_path}}"
+    dest: /var/www/html/resources/assets/wiki.png
+    owner: apache
+    group: apache
+    mode: '0775'
+
+- name: enable service httpd and ensure it is not masked
+  systemd:
+    name: httpd
+    enabled: yes
+    state: restarted

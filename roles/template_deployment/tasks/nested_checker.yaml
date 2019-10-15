@@ -25,7 +25,7 @@
         timeout: 520
       when: hostvars[host]['OS'] == "Windows"
       register: WINRM_Result
-
+  when: hostvars[host]['skip_deployment_check'] is not defined
   rescue:
     - name:  Power OFF VM
       vmware_guest:
