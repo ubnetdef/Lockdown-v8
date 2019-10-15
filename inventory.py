@@ -262,7 +262,7 @@ class Inventory(object):
         FTP_Servers['hosts'] = FTP
         GIT_Servers = {}
         GIT_Servers['hosts'] = GitLab
-
+        #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
         inventory['AD'] = AD
