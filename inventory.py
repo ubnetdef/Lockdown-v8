@@ -74,7 +74,7 @@ class Inventory(object):
         Security_Onion = ['10.X.1.250'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
 
 
-        cloud = WEB + DB + FTP + GitLab
+        cloud = WEB + DB + FTP + GitLab + Security_Onion
         for host_list in [
                 Active_Directory, Linux_clients_A, Linux_clients_B,
                 Linux_clients_C, Linux_clients_D,
@@ -235,7 +235,7 @@ class Inventory(object):
 
                 if host in Security_Onion:
                     hostvars[host]['networks'] = []
-                    for net_instance in ['13.33.33.37', '13.33.33.38', '13.33.33.39']:
+                    for net_instance in ['13.33.33.37', '13.33.33.37', '13.33.33.37']:
                         hostvars[host]['networks'].append(networking(net_instance))
 
         AD = {}
