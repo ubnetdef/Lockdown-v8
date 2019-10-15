@@ -99,15 +99,15 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'Linux-A'
 
                 if host in Linux_clients_B:
-                    hostvars[host]['template'] = 'Desktop-CentOS-7-v7'
+                    hostvars[host]['template'] = 'Desktop-LUbuntu-16.04-v7'
                     hostvars[host]['AD_Name'] = 'Linux-B'
 
                 if host in Linux_clients_C:
-                    hostvars[host]['template'] = 'Desktop-Mint-19.2-v7'
+                    hostvars[host]['template'] = 'Desktop-CentOS-7-v7'
                     hostvars[host]['AD_Name'] = 'Linux-C'
 
                 if host in Linux_clients_D:
-                    hostvars[host]['template'] = 'Desktop-Fedora-30-v7'
+                    hostvars[host]['template'] = 'Desktop-Mint-19.2-v7'
                     hostvars[host]['AD_Name'] = 'Linux-D'
 
                 if host in Security_Onion:
@@ -265,18 +265,18 @@ class Inventory(object):
 
         ################################################################################################
         inventory['all'] = all
-        # inventory['AD'] = AD
-        # inventory['Linux-A'] = Linux_A
-        # inventory['Linux-B'] = Linux_B
-        # inventory['Linux-C'] = Linux_C
+        inventory['AD'] = AD
+        inventory['Linux-A'] = Linux_A
+        inventory['Linux-B'] = Linux_B
+        inventory['Linux-C'] = Linux_C
         inventory['Linux-D'] = Linux_D
-        # inventory['Security-Onion'] = Sec_Onion
-        # inventory['Windows-A'] = Windows_A
-        # inventory['Windows-B'] = Windows_B
-        # inventory['WEB'] = WEB_Servers
-        # inventory['DB'] = DB_Servers
-        # inventory['FTP'] = FTP_Servers
-        # inventory['GIT'] = GIT_Servers
+        inventory['Security-Onion'] = Sec_Onion
+        inventory['Windows-A'] = Windows_A
+        inventory['Windows-B'] = Windows_B
+        inventory['WEB'] = WEB_Servers
+        inventory['DB'] = DB_Servers
+        inventory['FTP'] = FTP_Servers
+        inventory['GIT'] = GIT_Servers
 
         #################################################################################################
 
