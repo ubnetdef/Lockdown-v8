@@ -151,20 +151,20 @@ class Inventory(object):
                 if host in DB:
                     hostvars[host]['template'] = 'Web-Server-CentOS-7-v7'
                     hostvars[host]['AD_Name'] = 'DATABASE'
-                    hostvars[host]['mysql_users'] = []
+                    hostvars[host]['mariadb_group_users'] = []
                     hostvars[host]['mariadb_group_users'].append({
                         'name': 'wiki',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
-                    hostvars[host]['mysql_users'].append({
+                    hostvars[host]['mariadb_group_users'].append({
                         'name': 'admin',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
-                    hostvars[host]['mysql_databases'] = []
+                    hostvars[host]['mariadb_host_databases'] = []
                     hostvars[host]['mariadb_host_databases'].append({
                         'name': 'mediawiki',
                         'collation': 'utf8_general_ci',
