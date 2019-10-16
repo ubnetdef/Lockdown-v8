@@ -2,59 +2,79 @@
   gather_facts: no
   connection: local
   roles:
-#     - folders
-#     - folder_permissions
-#     - pfsense_deploy_provision
+     - folders
+     - folder_permissions
+     - pfsense_deploy_provision
      - template_deployment
 
-#- hosts: AD
-#  gather_facts: no
-#  roles:
-#    - windows_server_provision_AD
-#
-#- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
-#  gather_facts: no
-#  tasks:
-#    - name: Wait For connection up
-#      wait_for_connection:
-#        timeout: 30000
-#        sleep: 5
-#
-#- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
-#  roles:
-#    - local_users_Linux
-#
-#- hosts: Windows-A, Windows-B, FTP
-#  gather_facts: no
-#  roles:
-#    - Windows_Client_Provision
-#
-#- hosts: GIT, WEB, DB
-#  become: yes
-#  roles:
-#    - disable_firewall
-#
-#- hosts: GIT
-#  gather_facts: no
-#  become: yes
-#  roles:
-#    - gitlab
-#
-#- hosts: DB
-#  gather_facts: no
-#  become: true
-#  pre_tasks:
-#    - name: install python2
-#      raw: apt-get -y install python
-#  roles:
-#    - ansible-role-mariadb
-#
-#- hosts: WEB
-#  become: true
-#  roles:
-#    - mediawiki
-#
-#- hosts: WEB, DB
-#  become: true
-#  roles:
-#    - ansible-docker-master
+- hosts: AD
+  gather_facts: no
+  roles:
+    - windows_server_provision_AD
+
+- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+  gather_facts: no
+  tasks:
+    - name: Wait For connection up
+      wait_for_connection:
+        timeout: 30000
+        sleep: 5
+
+- hosts: Linux-A
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on elementary
+      copy:
+        src: roles/shared-files/elementary-lsb-release
+        dest: /etc/lsb-release
+
+- hosts: Linux-d
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on mint
+      copy:
+        src: roles/shared-files/mint-lsb-release
+        dest: /etc/lsb-release
+
+- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+  roles:
+    - local_users_Linux
+
+- hosts: Windows-A, Windows-B, FTP
+  gather_facts: no
+  roles:
+    - Windows_Client_Provision
+
+- hosts: GIT, WEB, DB
+  become: yes
+  roles:
+    - disable_firewall
+
+- hosts: GIT
+  gather_facts: no
+  become: yes
+  roles:
+    - gitlab
+
+- hosts: DB
+  gather_facts: no
+  become: true
+  pre_tasks:
+    - name: install python2
+      raw: apt-get -y install python
+  roles:
+    - ansible-role-mariadb
+
+- hosts: WEB
+  become: true
+  roles:
+    - mediawiki
+
+- hosts: WEB, DB
+  become: true
+  roles:
+    - ansible-docker-master
