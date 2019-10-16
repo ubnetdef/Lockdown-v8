@@ -149,7 +149,7 @@ class Inventory(object):
                     }
 
                 if host in DB:
-                    hostvars[host]['template'] = 'Web-Server-CentOS-7-v7'
+                    hostvars[host]['template'] = 'Database-Server-Ubuntu-18.04-v7'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mariadb_group_users'] = []
                     hostvars[host]['mariadb_group_users'].append({
@@ -274,7 +274,7 @@ class Inventory(object):
         # inventory['Windows-A'] = Windows_A
         # inventory['Windows-B'] = Windows_B
         # inventory['WEB'] = WEB_Servers
-        # inventory['DB'] = DB_Servers
+        inventory['DB'] = DB_Servers
         # inventory['FTP'] = FTP_Servers
         # inventory['GIT'] = GIT_Servers
 
