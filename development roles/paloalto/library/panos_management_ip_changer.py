@@ -27,8 +27,10 @@ def main():
                     for system in deviceconfig.findall('system'):
                         for ip_address in system.findall('ip-address'):
                             ip_address.text = module.params['new_ip_address']
-
-    xmlstr = ET.tostring(root, encoding='unicode', method='xml') #encoding might be utf-8
+    try:
+        xmlstr = ET.tostring(root, encoding='unicode', method='xml') #encoding might be utf-8
+    except LookupError:
+        xmlstr = ET.tostring(root, encoding='utf-8', method='xml')  # encoding might be utf-8
     xmlstr.replace(' /', '/')
     with open(module.params['config_name'], 'w') as file:
         file.write(xmlstr)
