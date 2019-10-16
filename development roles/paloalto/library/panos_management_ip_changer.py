@@ -10,7 +10,7 @@ def main():
         "ip_address": {"default": '192.168.1.1', "type": "str"},
         "new_ip_address": {"required": True, "type": "str"},
         "username": {"default": 'admin', "type": "str"},
-        "password": {"default": 'admin', "type": "str", "no_log": True},
+        "password": {"required": True, "type": "str", "no_log": True},
         "config_name": {"required": True, "type": "str"},
     }
 
@@ -28,7 +28,7 @@ def main():
                         for ip_address in system.findall('ip-address'):
                             ip_address.text = module.params['new_ip_address']
 
-    xmlstr = ET.tostring(root, encoding='utf8', method='xml')
+    xmlstr = ET.tostring(root, encoding='unicode', method='xml') #encoding might be utf-8
     xmlstr.replace(' /', '/')
     with open(module.params['config_name'], 'w') as file:
         file.write(xmlstr)

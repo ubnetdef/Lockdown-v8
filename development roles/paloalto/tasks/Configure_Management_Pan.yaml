@@ -32,6 +32,7 @@
     - name: Generate a cew config
       panos_management_ip_changer:
         new_ip_address: "{{ pan_final_management_ip | ipmath(idx) }}"
+        password: "{{ pan_password }}"
         config_name: "{{config_name}}"
 
     - name: Upload file on PAN
