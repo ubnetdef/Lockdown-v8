@@ -7,7 +7,7 @@
         principal: 'ad\{{ item }}'
         object_name: "{{ idx + 1 }}: PA - {{ item }}"
         state: present
-        role: "Systems Security"
+        role: "SysSec"
         validate_certs: no
       delegate_to: localhost
       loop: "{{ ubit }}"

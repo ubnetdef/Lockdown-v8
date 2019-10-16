@@ -19,6 +19,8 @@ Variables are generated using dynamic inventory, please check out inventory.py
 
 Notes
 --------------
+This will make your life easy: https://wiki.ubnetdef.org/guides/lockdown_black_team
+
 VM OVA(s) could be requested thru issues section of this repo. Generally we just install vmware tools and ssh/winrm depending on if it is Linux or Windows.
 
 Some modules were imported from ansible 2.8 (as of 5/2/2019 Ansible 2.8 is still in development)
