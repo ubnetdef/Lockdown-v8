@@ -29,15 +29,13 @@ class Inventory(object):
 
 
     def enventory_generator(self):
-        PREFERED_DNS = '8.8.8.8'
-
         inventory = {}
         _meta = {}
 #####################################################################################################
         all = {}
         all_vars = {}
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'cdr-iscsi2'
+        all_vars['datastore'] = 'THE-VAULT'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
         all_vars['template'] = 'student_machine'
@@ -49,13 +47,13 @@ class Inventory(object):
         all_vars['pan_template'] = 'PaloAlto_SysSec_Class'
         all_vars['pan_default_ip'] = '192.168.1.1'
         all_vars['pan_username'] = 'admin'
-        all_vars['pan_password'] = 'admin'
+        all_vars['pan_password'] = 'Change.me!'
         all_vars['pan_outside_ip'] = '192.168.8.101'
         all_vars['pan_final_management_ip'] = '192.168.8.131'
         all_vars['config_name'] = 'temp_xml_config.xml'
         all_vars['gretzky'] = '192.168.0.1'
         all_vars['dns_list'] = ['8.8.8.8', '8.8.4.4']
-        all_vars['ubit'] = ['jasleena','sennaals','brbarric','dabielli','derekcau','afeedaiy','ohadkatz','ddelanne','scottdep','dgibson4','morshedu','edwardly','grmarcus','rubenoca','aritrapa','jprue','jmromero','ethansac','ashi','zatenenb','cantopra','erictrav']
+        all_vars['ubit'] = ['aritrapa', 'jmromero', 'ashi']
 
         all['vars'] = all_vars
         inventory['all'] = all
