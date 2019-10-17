@@ -5,155 +5,155 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: DarthVader
+  - username: Litecoin
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: LukeSkywalker
+  - username: Ethereum
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Leia
+  - username: Zcash
     password: Changeme2019!
     groups:
       - Domain Admins
  
-  - username: Chewbacca
+  - username: Dash
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: ObiWan
+  - username: Ripple
     password: Changeme2019!
     groups:
       - Domain Admins   
 
-  - username: Han-Solo
+  - username: Bitcoin
     password: Changeme2019!
     groups:
       - Domain Admins
     
-  - username: Rey
+  - username: NEO
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: R2-D2
+  - username: Cardano
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Kylo-Ren
+  - username: EOS
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Yoda
+  - username: Satoshi
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: C3PO
+  - username: McAfee
     password: Changeme2019!
     groups:
       - Domain Admins
   
-  - username: Jabba
+  - username: JnaanPel
     password: Changeme2019!
     groups:
       - Domain Admins  
   
-  - username: JarJarBinks
+  - username: Auroracoin
     password: Changeme2019!
     groups:
       - Domain Admins 
 
-  - username: BB8
+  - username: Stux
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: CountDooku
+  - username: Petya
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: MaceWindu
+  - username: Locky
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Finn
+  - username: Conficker
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Greedo
+  - username: Zeus
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Watto
+  - username: Mydoom
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: IG88
+  - username: Mirai
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Lobot
+  - username: IOTA
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: MisterBones
+  - username: TRON
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Bossk
+  - username: Creeper
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Dapp
+  - username: Mines
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Dogma
+  - username: WindowsDefender
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Embo
-    password: Changeme2019!
-    groups:
-      - Domain Admins
-
-
-  - username: Feral
+  - username: Clam
     password: Changeme2019!
     groups:
       - Domain Admins
 
 
-  - username: Greedo
+  - username: TotallyNotRedTeam
     password: Changeme2019!
     groups:
       - Domain Admins
 
 
-  - username: Grievous
+  - username: DONTDELETE
     password: Changeme2019!
     groups:
       - Domain Admins
 
-  - username: Jaxxon
+
+  - username: ServiceUser
+    password: Changeme2019!
+    groups:
+      - Domain Admins
+
+  - username: CrucialUser
     password: Changeme2019!
     groups:
       - Domain Admins
