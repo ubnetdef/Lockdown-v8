@@ -48,7 +48,7 @@
     - name: Restore original lsb file on fedora
       copy:
         src: roles/shared-files/fedora-redhat-release
-        dest: /etc/lsb-release
+        dest: /etc/redhat-release
 
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
