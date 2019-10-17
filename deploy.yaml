@@ -30,7 +30,7 @@
         src: roles/shared-files/elementary-lsb-release
         dest: /etc/lsb-release
 
-- hosts: Linux-d
+- hosts: Linux-D
   gather_facts: no
   become: yes
   become_method: sudo
@@ -39,6 +39,17 @@
       copy:
         src: roles/shared-files/mint-lsb-release
         dest: /etc/lsb-release
+
+- hosts: Linux-B
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on fedora
+      copy:
+        src: roles/shared-files/fedora-redhat-release
+        dest: /etc/lsb-release
+
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
   roles:

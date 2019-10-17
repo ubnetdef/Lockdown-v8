@@ -99,7 +99,7 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'Linux-A'
 
                 if host in Linux_clients_B:
-                    hostvars[host]['template'] = 'Desktop-LUbuntu-16.04-v7'
+                    hostvars[host]['template'] = 'Desktop-Fedora-30-v7'
                     hostvars[host]['AD_Name'] = 'Linux-B'
 
                 if host in Linux_clients_C:
