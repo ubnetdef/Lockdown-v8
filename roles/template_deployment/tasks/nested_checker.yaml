@@ -14,7 +14,7 @@
       wait_for:
         port: 22
         host: "{{ host }}"
-        timeout: 120
+        timeout: 520                              #fedora things
       when: hostvars[host]['OS'] == "Linux"
       register: SSH_Result
 
