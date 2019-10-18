@@ -6,15 +6,12 @@
 - name: Set Debian sudo group
   set_fact:
     sudo_group: sudo
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian" or ansible_of_family == "elementary OS"
 
 - name: Set RHEL sudo group
   set_fact:
     sudo_group: wheel
   when: ansible_os_family == "RedHat"
-
-- debug:
-    msg: "{{ ansible_os_family }}"
 
 - name: Include the user YAML
   include_vars: ../shared-files/users.yml
