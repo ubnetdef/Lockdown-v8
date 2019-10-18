@@ -41,7 +41,6 @@
         dest: /etc/lsb-release
 
 - hosts: Linux-B
-  gather_facts: no
   become: yes
   become_method: sudo
   tasks:
