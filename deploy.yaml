@@ -7,10 +7,10 @@
 #     - pfsense_deploy_provision
 #     - template_deployment
 
-- hosts: AD
-  gather_facts: no
-  roles:
-    - windows_server_provision_AD
+#- hosts: AD
+#  gather_facts: no
+#  roles:
+#    - windows_server_provision_AD
 
 - hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   gather_facts: no
