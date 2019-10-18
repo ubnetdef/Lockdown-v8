@@ -51,8 +51,8 @@
 #
 
 - hosts: DB
-  become: yes
-  gather_factos: no
+  become: true
+  gather_facts: no
   become_method: sudo
   tasks:
     - name: install python2 on Ubuntu 18
