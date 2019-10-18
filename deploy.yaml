@@ -76,6 +76,8 @@
   pre_tasks:
     - name: install python2
       raw: apt -y install python python-pip python3-pip
+    - name: Gathering facts
+      setup:
   roles:
     - ansible-role-mariadb
 
