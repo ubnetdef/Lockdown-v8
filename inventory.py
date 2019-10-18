@@ -181,9 +181,6 @@ class Inventory(object):
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
 
-                if host in DB:
-                    hostvars[host]['ansible_python_interpreter'] = '/usr/bin/python3'
-
                 if host in Linux_clients_A + Linux_clients_B + Linux_clients_C + Linux_clients_D + Security_Onion + GitLab + WEB + DB:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
