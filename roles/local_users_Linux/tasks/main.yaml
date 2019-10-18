@@ -13,6 +13,9 @@
     sudo_group: wheel
   when: ansible_os_family == "RedHat"
 
+  debug:
+    msg: {{ansible_os_family}}
+
 - name: Include the user YAML
   include_vars: ../shared-files/users.yml
 
