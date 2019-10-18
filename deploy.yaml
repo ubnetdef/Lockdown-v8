@@ -12,14 +12,13 @@
 #  roles:
 #    - windows_server_provision_AD
 
-- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
-
-  gather_facts: no
-  strategy: free
-  tasks:
-    - name: Wait For connection up
-      wait_for_connection:
-        timeout: 30000
+#- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
+#  gather_facts: no
+#  strategy: free
+#  tasks:
+#    - name: Wait For connection up
+#      wait_for_connection:
+#        timeout: 30000
 
 - hosts: Linux-A
   gather_facts: no
