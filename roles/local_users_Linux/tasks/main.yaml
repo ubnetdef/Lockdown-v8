@@ -6,7 +6,7 @@
 - name: Set Debian sudo group
   set_fact:
     sudo_group: sudo
-  when: ansible_os_family == "Debian" or ansible_of_family == "elementary OS"
+  when: ansible_os_family == "Debian" or ansible_os_family == "elementary OS"
 
 - name: Set RHEL sudo group
   set_fact:
