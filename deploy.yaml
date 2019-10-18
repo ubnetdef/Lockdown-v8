@@ -12,7 +12,7 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
+- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   gather_facts: no
   tasks:
     - name: Wait For connection up
