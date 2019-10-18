@@ -1,0 +1,73 @@
+---
+
+- name: Ensure critical variables are set
+  assert:
+    that:
+      - mariadb_replication_master != ''
+      - mariadb_replication_username != ''
+      - mariadb_replication_password != ''
+
+- name: Ensure critical variables are set
+  assert:
+    that:
+      - mariadb_replication_master != ''
+  when: mariadb_replication_role != 'slave'
+
+- name: Replication user must exist on master server
+  mysql_user:
+    name: '{{ mariadb_replication_username }}'
+    host: "{{ mariadb_replication_host | default('%') }}"
+    password: '{{ mariadb_replication_password }}'
+    priv: "{{ mariadb_replication_priv | default('*.*:REPLICATION SLAVE') }}"
+    state: present
+  delegate_to: "{{ mariadb_replication_master }}"
+
+- name: Check replication status (slave)
+  mysql_replication:
+    mode: getslave
+  ignore_errors: true
+  register: slave
+
+- name: Start replication
+  mysql_replication:
+    mode: stopslave
+  when: >
+    slave|failed
+    or (slave.Slave_IO_Running | default('No') == 'No')
+    or (slave.Slave_SQL_Running | default('No') == 'No')
+
+- debug: msg="{{ slave }}"
+
+- name: Check replication status (master)
+  mysql_replication:
+    mode: getmaster
+  delegate_to: "{{ mariadb_replication_master }}"
+  register: master
+  when: >
+    slave|failed
+    or (slave.Slave_IO_Running | default('No') == 'No')
+    or (slave.Slave_SQL_Running | default('No') == 'No')
+
+- debug: msg="{{ master }}"
+
+- name: Configure slave
+  mysql_replication:
+    mode: changemaster
+    master_host: "{{ mariadb_replication_master }}"
+    master_user: "{{ mariadb_replication_username }}"
+    master_password: "{{ mariadb_replication_password }}"
+    master_log_file: "{{ master.File }}"
+    master_log_pos: "{{ master.Position }}"
+  ignore_errors: true
+  when: >
+    slave|failed
+    or (slave.Slave_IO_Running | default('No') == 'No')
+    or (slave.Slave_SQL_Running | default('No') == 'No')
+
+- name: Start replication
+  mysql_replication:
+    mode: startslave
+  when: >
+    slave|failed
+    or (slave.Slave_IO_Running | default('No') == 'No')
+    or (slave.Slave_SQL_Running | default('No') == 'No')

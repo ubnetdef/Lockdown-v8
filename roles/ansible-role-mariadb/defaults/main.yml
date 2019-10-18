@@ -1,23 +1,159 @@
-# roles/mariadb/defaults/main.yml
 ---
+mariadb_version: '10.3'
 
-mariadb_databases: []
-mariadb_users: []
-mariadb_root_password: ''
+mariadb_apt_mirror: 'http://ftp.hosteurope.de'
+mariadb_apt_repositories:
+  - 'deb [arch=amd64,i386,ppc64el] {{ mariadb_apt_mirror }}/mirror/mariadb.org/repo/{{ mariadb_version }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main'
+  - 'deb-src {{ mariadb_apt_mirror }}/mirror/mariadb.org/repo/{{ mariadb_version }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main'
 
-mariadb_mirror: yum.mariadb.org
-mariadb_version: '10.4'
+mariadb_apt_keyserver: 'keyserver.ubuntu.com'
+mariadb_apt_keyid: '0xF1656F24C74CD1D8'
 
-mariadb_configure_swappiness: true
-mariadb_swappiness: 0
+#mariadb_apt_packages:
+#  - software-properties-common
+#  - mariadb-server
+#  - mariadb-client
+#  - python-mysqldb
 
-# Network configuration (network.cnf)
+mariadb_default_hosts:
+  - localhost
+  - 127.0.0.1
+  - ::1
 
-mariadb_service: mariadb
-mariadb_bind_address: '127.0.0.1'
+mariadb_apt_tools_packages:
+  - mysqltuner
+  - percona-toolkit
 
-# Server configuration
-mariadb_server_cnf: {}
 
-# Custom configuration
-mariadb_custom_cnf: {}
+mariadb_admin_home: '/root'
+mariadb_admin_user: 'admin'
+
+mariadb_debug: false
+
+# This password is not secure! Please define your own password!
+mariadb_admin_password:  "{{ ansible_machine_id | hash('sha1') | truncate(24, True, '') }}"
+
+# Hosts
+mariadb_admin_hosts:
+  - 127.0.0.1
+  - ::1
+  - localhost
+
+mariadb_allowed_hosts:
+  - 127.0.0.1
+  - ::1
+  - localhost
+
+mariadb_admin_force_password_update: false
+
+mariadb_pin_repository: true
+
+# Overwrite global my.cnf on every ansible run
+mariadb_overwrite_global_mycnf: 'yes'
+
+mariadb_config_include_files: []
+#  - src: path/relative/to/playbook/file.cnf
+#  - { src: path/relative/to/playbook/anotherfile.cnf, force: yes }
+
+mariadb_enabled_on_startup: yes
+
+# Databases.
+mariadb_default_databases: []
+mariadb_host_databases: []
+mariadb_group_databases: []
+#   - name: example
+#     collation: utf8_general_ci
+#     encoding: utf8
+#     replicate: 1
+
+# Users.
+mariadb_default_users: []
+mariadb_host_users: []
+mariadb_group_users: []
+#   - name: example
+#     host: 127.0.0.1
+#     password: secret
+#     priv: *.*:USAGE
+
+# Create users with host == localhost also with host == 127.0.0.1
+mariadb_users_create_ip_alias: true
+
+mariadb_install_tools: false
+
+mariadb_download_files: []
+mariadb_import_files: []
+
+# MySQL connection settings.
+mariadb_port: "3306"
+mariadb_bind_address: '0.0.0.0'
+mariadb_datadir: /var/lib/mysql
+mariadb_pid_file: /var/run/mysqld/mysqld.pid
+
+# Slow query log settings.
+mariadb_slow_query_log_enabled: no
+mariadb_slow_query_log_file: /var/log/mysql-slow.log
+mariadb_slow_query_time: 2
+
+# Memory settings (default values optimized ~512MB RAM).
+mariadb_key_buffer_size: "256M"
+mariadb_max_allowed_packet: "128M"
+mariadb_table_open_cache: "256"
+mariadb_sort_buffer_size: "1M"
+mariadb_read_buffer_size: "1M"
+mariadb_read_rnd_buffer_size: "4M"
+mariadb_myisam_sort_buffer_size: "64M"
+mariadb_table_cache: 2000
+mariadb_thread_cache_size: "8"
+mariadb_query_cache_size: "16M"
+mariadb_max_connections: 151
+mariadb_tmp_table_size: '64M'
+mariadb_max_heap_table_size: '64M'
+mariadb_join_buffer_size: '3M'
+
+# Other settings.
+mariadb_wait_timeout: 1800
+mariadb_net_read_timeout: 120
+mariadb_skip_name_resolve: true
+mariadb_back_log: 100
+mariadb_max_connect_errors: 10000
+mariadb_open_files_limit: 20000
+mariadb_interactive_timeout: 3600
+mariadb_connect_timeout: 120
+
+# InnoDB settings.
+# Set .._buffer_pool_size up to 80% of RAM but beware of setting too high.
+mariadb_innodb_file_per_table: "1"
+mariadb_innodb_buffer_pool_size: "256M"
+# Set .._log_file_size to 25% of buffer pool size.
+mariadb_innodb_log_file_size: "64M"
+mariadb_innodb_log_buffer_size: "8M"
+mariadb_innodb_flush_log_at_trx_commit: "2"
+mariadb_innodb_lock_wait_timeout: 600
+mariadb_innodb_additional_mem_pool_size: "8M"
+
+# mysqldump settings.
+mariadb_mysqldump_max_allowed_packet: "64M"
+
+# Logging settings.
+mariadb_log: ""
+mariadb_log_error: /var/log/mysql.err
+mariadb_syslog_tag: mysql
+
+# Replication settings (replication is only enabled if master/user have values).
+mariadb_server_id: "1"
+mariadb_max_binlog_size: "100M"
+mariadb_expire_logs_days: "10"
+mariadb_replication_role: ''
+mariadb_replication_master: ''
+
+# Will be created if it does not exist
+#mariadb_replication_username: ''
+#mariadb_replication_password: ''
+
+mariadb_credentials_file: []
+
+#
+# You should never have to overwrite these:
+#
+mariadb_users: '{{ (mariadb_default_users + mariadb_host_users + mariadb_group_users) | unique }}'
+mariadb_databases: '{{ (mariadb_default_databases + mariadb_host_databases + mariadb_group_databases) | unique }}'

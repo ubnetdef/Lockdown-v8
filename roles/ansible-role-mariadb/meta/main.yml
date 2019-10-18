@@ -1,17 +1,23 @@
 ---
-galaxy_info:
-  author: Bert Van Vreckem
-  description: Manage MariaDB on a RedHat based Linux distribution.
-  license: BSD
-  min_ansible_version: 2.8
-  platforms:
-    - name: EL
-      versions:
-        - 7
-    - name: Fedora
-      versions:
-        - 30
-  galaxy_tags:
-    - database
-    - sql
 dependencies: []
+
+galaxy_info:
+  author: Tobias Schifftner
+  description: Installs mariadb on Debian/Ubuntu linux servers.
+  company: ambimax® GmbH
+  license: MIT
+  min_ansible_version: 2.5
+  platforms:
+  - name: Debian
+    versions:
+    - 8 (Jessie)
+    - 9 (Stretch)
+  - name: Ubuntu
+    versions:
+    - 16.04 (Xenial Xerus)
+    - 18.04 (Bionic Beaver)
+  galaxy_tags:
+    - debian
+    - ubuntu
+    - mariadb
+    - mysql

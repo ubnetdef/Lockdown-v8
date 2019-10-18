@@ -1,26 +1,52 @@
-# roles/mariadb/tasks/users.yml
 ---
-
-- name: Remove anonymous users
-  mysql_user:
-    name: ''
-    host_all: true
-    login_user: root
-    login_password: "{{ mariadb_root_password }}"
-    login_unix_socket: "{{ mariadb_socket }}"
-    state: absent
-  tags: mariadb
-
-- name: Create the users
+- name: 'Add/update mariadb users'
   mysql_user:
     name: "{{ item.name }}"
+    host: "{{ item.host | default('localhost') }}"
     password: "{{ item.password }}"
-    host: "{{ item.host|default('localhost') }}"
-    priv: "{{ item.priv }}"
-    append_privs: "{{ item.append_privs|default('no') }}"
-    login_user: root
-    login_password: "{{ mariadb_root_password }}"
-    login_unix_socket: "{{ mariadb_socket }}"
-    state: present
-  with_items: "{{ mariadb_users }}"
-  tags: mariadb
+    priv: "{{ item.priv | default('*.*:USAGE') }}"
+    state: "{{ item.state | default('present') }}"
+    append_privs: "{{ item.append_privs | default('no') }}"
+    login_user: '{{ _mariadb_login_user }}'
+    login_password: '{{ _mariadb_login_password | default(omit) }}'
+  no_log: mariadb_debug == false
+  when: mariadb_users|length and item.state is not defined or item.state != 'absent'
+  with_items: '{{ mariadb_users }}'
+
+# For all localhost users create 127.0.0.1 alias
+- name: 'Add/update mariadb users'
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "127.0.0.1"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv | default('*.*:USAGE') }}"
+    state: "{{ item.state | default('present') }}"
+    append_privs: "{{ item.append_privs | default('no') }}"
+    login_user: '{{ _mariadb_login_user }}'
+    login_password: '{{ _mariadb_login_password | default(omit) }}'
+  no_log: mariadb_debug == false
+  when: mariadb_users_create_ip_alias and mariadb_users|length and (item.state is not defined or item.state != 'absent') and (item.host is not defined or item.host == 'localhost')
+  with_items: '{{ mariadb_users }}'
+
+- name: Remove mariadb users
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "{{ item.host | default('localhost') }}"
+    state: absent
+    login_user: '{{ _mariadb_login_user }}'
+    login_password: '{{ _mariadb_login_password | default(omit) }}'
+  no_log: mariadb_debug == false
+  when: mariadb_users|length and item.state is defined and item.state == 'absent'
+  with_items: '{{ mariadb_users }}'
+
+# For all localhost users create 127.0.0.1 alias
+- name: Remove mariadb users
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "127.0.0.1"
+    state: absent
+    login_user: '{{ _mariadb_login_user }}'
+    login_password: '{{ _mariadb_login_password | default(omit) }}'
+  no_log: mariadb_debug == false
+  when: mariadb_users|length and (item.state is defined and item.state == 'absent') and (item.host is not defined or item.host == 'localhost') and mariadb_users_create_ip_alias
+  with_items: '{{ mariadb_users }}'

@@ -1,15 +1,33 @@
-# roles/mariadb/tasks/main.yml
 ---
 
-- name: Include distribution dependent variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-  tags: mariadb
+- include: vars.yml
+  tags: ['always']
 
-- include_tasks: install.yml
-- include_tasks: config.yml
-- include_tasks: root-password.yml
-- include_tasks: databases.yml
-- include_tasks: users.yml
+- include: install.yml
+  tags: ['mariadb-install']
+
+- include: configure.yml
+  tags: ['mariadb-configure', 'mariadb-update']
+
+- include: secure-installation.yml
+  tags: ['mariadb-secure-installation']
+
+- include: replication.yml
+  when: not _master_server and mariadb_replication_master != ''
+  tags: ['mariadb-replication', 'mariadb-update']
+
+- include: replication.yml
+  when: _master_server and mariadb_replication_master != ''
+  tags: ['mariadb-replication', 'mariadb-update']
+
+- include: databases.yml
+  when: _master_server
+  tags: ['mariadb-databases', 'mariadb-update']
+
+- include: users.yml
+  when: _master_server
+  tags: ['mariadb-users', 'mariadb-update']
+
+- include: import.yml
+  when: _master_server
+  tags: ['mariadb-import', 'mariadb-update']

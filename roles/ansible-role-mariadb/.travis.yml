@@ -1,33 +1,121 @@
-# .travis.yml Execution script for role tests on Travis-CI
 ---
-sudo: required
+services: docker
 
 env:
-  matrix:
-    - DISTRIBUTION: centos
-      VERSION: 7
-    - DISTRIBUTION: fedora
-      VERSION: 30
+#  - distro: centos7
+#  - distro: centos6
+#  - distro: fedora27
+#  - distro: ubuntu1604
+#  - distro: ubuntu1404
+#  - distro: ubuntu1204
 
-services:
-  - docker
+  - distro: debian8
+    playbook: test-mariadb10-3.yml
+    MYSQL_ROOT_LOGIN: "'-u admin -ptravis'"
+    MYSQL_VERSION: 10.3
 
-before_install:
-  # Install latest Git
-  - sudo apt-get update
-  - sudo apt-get install --only-upgrade git
-  # Allow fetching other branches than master
-  - git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-  # Fetch the branch with test code
-  - git fetch origin docker-tests
-  - git worktree add docker-tests origin/docker-tests
+  - distro: ubuntu1804
+    playbook: test-mariadb10-3.yml
+    MYSQL_ROOT_LOGIN: "'-u admin -ptravis'"
+    MYSQL_VERSION: 10.3
+
+  - distro: ubuntu1604
+    playbook: test-mariadb10-3.yml
+    MYSQL_ROOT_LOGIN: "'-u admin -ptravis'"
+    MYSQL_VERSION: 10.3
+
+
+
+  - distro: debian9
+    playbook: test-admin-with-password.yml
+    MYSQL_ROOT_LOGIN: "'-u admin -ptravis'"
+    MYSQL_VERSION: 10.3
+
+  - distro: debian9
+    playbook: test-admin-without-password.yml
+    MYSQL_ROOT_LOGIN: "'-u admin'"
+    MYSQL_VERSION: 10.3
+
+  - distro: debian9
+    playbook: test-root-with-password.yml
+    MYSQL_ROOT_LOGIN: "'-u root -ptravis'"
+    MYSQL_VERSION: 10.3
+
+  - distro: debian9
+    playbook: test-root-without-password.yml
+    MYSQL_ROOT_LOGIN: "'-u root'"
+    MYSQL_VERSION: 10.3
+
+  - distro: debian9
+    playbook: test-mariadb10-2.yml
+    MYSQL_ROOT_LOGIN: "'-u admin -ptravis'"
+    MYSQL_VERSION: 10.2
+
 
 script:
-  # Create container and apply test playbook
-  - ./docker-tests/docker-tests.sh
+  # Configure test script so we can run extra tests after playbook is run.
+  - export container_id=$(date +%s)
+  - export cleanup=false
+  - export reuse=${REUSE:-false}
+  - export DOCKER="docker exec --tty ${container_id} env TERM=xterm"
 
-  # Run functional tests on the container
-  - SUT_IP=172.17.0.2 ./docker-tests/functional-tests.sh
+  # Download test shim.
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/tschifftner/4078cf2a8429d967d5e100649ff2caa9/raw/
+  - chmod +x ${PWD}/tests/test.sh
+
+  # Prepare for upgrade test (No upgrade supported yet!)
+#  - |
+#    if [ "${playbook}" == "test-upgrade.yml" ]; then
+#      playbook=test-mariadb10-2.yml ${PWD}/tests/test.sh
+#      ${DOCKER} mysql --version | grep '10.2'
+#    fi
+
+  # Run tests.
+  - ${PWD}/tests/test.sh
+
+  # Make sure mariadb service is running
+  - ${DOCKER} systemctl --no-pager status mysql | grep "running"
+
+  # Make sure correct version is installed
+  - ${DOCKER} mysql --version | grep "${MYSQL_VERSION}"
+
+  # Check to make sure we can connect to MySQL via Unix socket.
+  - >
+    ${DOCKER} mysql ${MYSQL_ROOT_LOGIN} -e 'show databases;' | grep -q 'performance_schema'
+    && (echo 'Connecting mariadb via unix socket.' && exit 0)
+    || (echo 'Cannot connect mariadb via unix socket.' && exit 1)
+
+  # Check to make sure we can connect to MySQL via TCP.
+  - >
+    ${DOCKER} mysql ${MYSQL_ROOT_LOGIN} -h 127.0.0.1 -e 'show databases;' | grep -q 'performance_schema'
+    && (echo 'Connecting mariadb via TCP.' && exit 0)
+    || (echo 'Cannot connect mariadb via TCP.' && exit 1)
+
+  # Check travis user and database
+  - >
+    ${DOCKER} mysql -u supertravis -ptravis -e 'show databases;'
+    | grep -q 'travis_testdb'
+    && (echo 'MariaDb running normally' && exit 0)
+    || (echo 'MariaDb not running' && exit 1)
+
+  # Check normal travis user and database
+  - >
+    ${DOCKER} mysql -u normaltravis -ptravis -e 'show databases;'
+    | grep -q 'travis_testdb'
+    && (echo 'MariaDb running normally' && exit 0)
+    || (echo 'MariaDb not running' && exit 1)
+
+
+after_failure:
+  - ${DOCKER} ls -lah /var/log
+  - ${DOCKER} cat /var/log/mysql/error.log
+  - ${DOCKER} systemctl --no-pager status mysql
+  - ${DOCKER} mysql --version
+  - ${DOCKER} mysql ${MYSQL_ROOT_LOGIN} -e 'show databases;'
+  - ${DOCKER} mysql ${MYSQL_ROOT_LOGIN} -h 127.0.0.1 -e 'show databases;'
+  - ${DOCKER} mysql -u supertravis -ptravis -e 'show databases;'
+  - ${DOCKER} mysql -u normaltravis -ptravis -e 'show databases;'
 
 notifications:
+  slack: ambimax:2MlPTX9bY9aPxCPhJGxHKIT6
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
