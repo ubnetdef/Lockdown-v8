@@ -1,97 +1,93 @@
-#- hosts: localhost
-#  gather_facts: no
-#  connection: local
-#  roles:
-#     - folders
-#     - folder_permissions
-#     - pfsense_deploy_provision
-#     - template_deployment
-#
-#- hosts: AD
-#  gather_facts: no
-#  roles:
-#    - windows_server_provision_AD
-#
-#- hosts: DB
-#  become: true
-#  gather_facts: no
-#  become_method: sudo
-#  tasks:
-#    - name: install python2 on Ubuntu 18
-#      raw: apt -y install python python-pip python3-pip
-#
-#- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
-#  gather_facts: no
-#  strategy: free
-#  tasks:
-#    - name: Wait For connection up
-#      wait_for_connection:
-#        timeout: 30000
-#
-#- hosts: Linux-A
-#  gather_facts: no
-#  become: yes
-#  become_method: sudo
-#  tasks:
-#    - name: Restore original lsb file on elementary
-#      copy:
-#        src: roles/shared-files/elementary-lsb-release
-#        dest: /etc/lsb-release
-#
-#- hosts: Linux-D
-#  gather_facts: no
-#  become: yes
-#  become_method: sudo
-#  tasks:
-#    - name: Restore original lsb file on mint
-#      copy:
-#        src: roles/shared-files/mint-lsb-release
-#        dest: /etc/lsb-release
-#
-#- hosts: Linux-B
-#  become: yes
-#  become_method: sudo
-#  tasks:
-#    - name: Restore original lsb file on fedora
-#      copy:
-#        src: roles/shared-files/fedora-redhat-release
-#        dest: /etc/redhat-release
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+     - folders
+     - folder_permissions
+     - pfsense_deploy_provision
+     - template_deployment
 
-#- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
-#  roles:
-#    - local_users_Linux
+- hosts: AD
+  gather_facts: no
+  roles:
+    - windows_server_provision_AD
+
+- hosts: DB
+  become: true
+  gather_facts: no
+  become_method: sudo
+  tasks:
+    - name: install python2 on Ubuntu 18
+      raw: apt -y install python python-pip python3-pip
+
+- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
+  gather_facts: no
+  strategy: free
+  tasks:
+    - name: Wait For connection up
+      wait_for_connection:
+        timeout: 30000
+
+- hosts: Linux-A
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on elementary
+      copy:
+        src: roles/shared-files/elementary-lsb-release
+        dest: /etc/lsb-release
 
 - hosts: Linux-D
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on mint
+      copy:
+        src: roles/shared-files/mint-lsb-release
+        dest: /etc/lsb-release
+
+- hosts: Linux-B
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Restore original lsb file on fedora
+      copy:
+        src: roles/shared-files/fedora-redhat-release
+        dest: /etc/redhat-release
+
+- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   roles:
     - local_users_Linux
 
-#- hosts: Windows-A, Windows-B, FTP
-#  gather_facts: no
-#  roles:
-#    - Windows_Client_Provision
-#
-#- hosts: GIT, WEB, DB
-#  become: yes
-#  roles:
-#    - disable_firewall
-#
-#- hosts: GIT
-#  gather_facts: no
-#  become: yes
-#  roles:
-#    - gitlab
-#
-#- hosts: DB
-#  become: true
-#  roles:
-#    - ansible-role-mariadb
-#
-#- hosts: WEB
-#  become: true
-#  roles:
-#    - mediawiki
-#
-#- hosts: DB
-#  become: true
-#  roles:
-#    - ansible-docker-master
+- hosts: Windows-A, Windows-B, FTP
+  gather_facts: no
+  roles:
+    - Windows_Client_Provision
+
+- hosts: GIT, WEB, DB
+  become: yes
+  roles:
+    - disable_firewall
+
+- hosts: GIT
+  gather_facts: no
+  become: yes
+  roles:
+    - gitlab
+
+- hosts: DB
+  become: true
+  roles:
+    - ansible-role-mariadb
+
+- hosts: WEB
+  become: true
+  roles:
+    - mediawiki
+
+- hosts: DB
+  become: true
+  roles:
+    - ansible-docker-master
