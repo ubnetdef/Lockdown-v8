@@ -184,8 +184,6 @@ class Inventory(object):
                 if host in Linux_clients_A + Linux_clients_B + Linux_clients_C + Linux_clients_D + Security_Onion + GitLab + WEB + DB:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
-
-                if host in Linux_clients_A + Linux_clients_B + Linux_clients_C + Linux_clients_D + Security_Onion + GitLab + WEB + DB:
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
