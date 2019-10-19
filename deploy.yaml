@@ -12,6 +12,14 @@
   roles:
     - windows_server_provision_AD
 
+- hosts: DB
+  become: true
+  gather_facts: no
+  become_method: sudo
+  tasks:
+    - name: install python2 on Ubuntu 18
+      raw: apt -y install python python-pip python3-pip
+
 - hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   gather_facts: no
   strategy: free
@@ -48,16 +56,6 @@
       copy:
         src: roles/shared-files/fedora-redhat-release
         dest: /etc/redhat-release
-
-
-- hosts: DB
-  become: true
-  gather_facts: no
-  become_method: sudo
-  tasks:
-    - name: install python2 on Ubuntu 18
-      raw: apt -y install python python-pip python3-pip
-
 
 - hosts: Linux-A, Linux-B, Linux-C, WEB, DB, GIT
   roles:
