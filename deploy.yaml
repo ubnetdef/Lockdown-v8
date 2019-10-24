@@ -2,9 +2,9 @@
   gather_facts: no
   connection: local
   roles:
-#     - folders
-#     - folder_permissions
-#     - pfsense_deploy_provision
+     - folders
+     - folder_permissions
+     - pfsense_deploy_provision
      - template_deployment
 
 - hosts: AD
@@ -61,7 +61,7 @@
   roles:
     - local_users_Linux
 
-- hosts: FTP #, Windows-A, Windows-B,
+- hosts: Windows-A, Windows-B, FTP
   gather_facts: no
   roles:
     - Windows_Client_Provision
