@@ -53,7 +53,7 @@ class Inventory(object):
         all_vars['config_name'] = 'temp_xml_config.xml'
         all_vars['gretzky'] = '192.168.0.1'
         all_vars['dns_list'] = ['8.8.8.8', '8.8.4.4']
-        all_vars['ubit'] = ['aritrapa', 'jmromero', 'ashi']
+        #all_vars['ubit'] = Actual UBIT names spacified in Tower config
 
         all['vars'] = all_vars
         inventory['all'] = all
