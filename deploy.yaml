@@ -1,16 +1,16 @@
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  roles:
-     - folders
-     - folder_permissions
-     - pfsense_deploy_provision
-     - template_deployment
+#- hosts: localhost
+#  gather_facts: no
+#  connection: local
+#  roles:
+#     - folders
+#     - folder_permissions
+#     - pfsense_deploy_provision
+#     - template_deployment
 
-- hosts: AD
-  gather_facts: no
-  roles:
-    - windows_server_provision_AD
+#- hosts: AD
+#  gather_facts: no
+#  roles:
+#    - windows_server_provision_AD
 
 - hosts: DB
   become: true
@@ -18,7 +18,9 @@
   become_method: sudo
   tasks:
     - name: install python2 on Ubuntu 18
-      raw: apt -y install python python-pip python3-pip
+      raw: apt update -y
+    - name: install python2 on Ubuntu 18
+      raw: apt install -y python python-pip python3-pip
 
 - hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   gather_facts: no
