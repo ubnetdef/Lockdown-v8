@@ -265,7 +265,7 @@ class Inventory(object):
         # inventory['Linux-B'] = Linux_B
         inventory['Linux-C'] = Linux_C
         # inventory['Linux-D'] = Linux_D
-        inventory['Security-Onion'] = Sec_Onion
+        # inventory['Security-Onion'] = Sec_Onion
         inventory['Windows-A'] = Windows_A
         inventory['Windows-B'] = Windows_B
         inventory['WEB'] = WEB_Servers
