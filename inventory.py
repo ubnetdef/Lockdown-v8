@@ -271,7 +271,7 @@ class Inventory(object):
         inventory['WEB'] = WEB_Servers
         inventory['DB'] = DB_Servers
         inventory['FTP'] = FTP_Servers
-        inventory['GIT'] = GIT_Servers
+        # inventory['GIT'] = GIT_Servers
 
         #################################################################################################
 
