@@ -45,7 +45,7 @@ class Inventory(object):
         all_vars['datastore'] = 'THE-VAULT'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
-        all_vars['parent_folder'] = 'Lockdown-v7'
+        all_vars['parent_folder'] = 'Competition'
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
