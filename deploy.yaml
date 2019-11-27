@@ -81,6 +81,8 @@
 
 - hosts: DB
   become: true
+  pre_tasks:
+    - raw: sudo apt update -y; sudo apt install python-dev python-MySQLdb -y
   roles:
     - ansible-role-mariadb
 
