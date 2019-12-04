@@ -12,4 +12,4 @@
         validate_certs: no
       register: sub_folder_creation_result
       delegate_to: localhost
-      with_sequence: start={{start_team}} end={{total_teams}}
+      with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}
