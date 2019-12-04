@@ -17,7 +17,7 @@
           - name: "team{{ item }}-net"
           - name: "team{{ item }}-net"
       delegate_to: localhost
-      with_sequence: start={{start_team}} end={{total_teams}}
+      with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}
       register: deployment_pf
       async: 30000
       poll: 0
@@ -32,18 +32,3 @@
       until: async_poll_results.finished
       retries: 30000
 
-
-
-
-#    - name: Set the state of a virtual machine to poweron
-#      vmware_guest_powerstate:
-#        hostname: "{{ vcenter_hostname }}"
-#        username: "{{ vcenter_username }}"
-#        password: "{{ vcenter_password }}"
-#        validate_certs: no
-#        folder: "Lockdown/v6/{{ cloud_folder }}"
-#        name: "{{ 'Team%02d_Router'|format(item|int) }}"
-#        state: powered-on
-#        force: yes
-#      delegate_to: localhost
-#      with_sequence: start={{start_team}} end={{total_teams}}

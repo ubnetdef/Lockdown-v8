@@ -10,4 +10,4 @@
         role: "Lockdown"
         validate_certs: no
       delegate_to: localhost
-      with_sequence: start={{start_team}} end={{total_teams}}
+      with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}

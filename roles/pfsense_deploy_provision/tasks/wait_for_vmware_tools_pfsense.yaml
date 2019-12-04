@@ -7,4 +7,4 @@
     name: "{{ 'Team%02d_Router'|format(item|int) }}"
     folder: "{{ datacenter }}/Lockdown/{{parent_folder}}/{{ cloud_folder }}"
   delegate_to: localhost
-  with_sequence: start={{start_team}} end={{total_teams}}
+  with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}
