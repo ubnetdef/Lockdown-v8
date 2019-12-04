@@ -7,7 +7,7 @@
         principal: "{{ 'lockdown-team%01d@vsphere.local'|format(item|int) }}"
         object_name: "{{ 'Team%02d'|format(item|int) }}"
         state: present
-        role: "Lockdown"
+        role: '{{ Lockdown_user_role }}'
         validate_certs: no
       delegate_to: localhost
       with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}

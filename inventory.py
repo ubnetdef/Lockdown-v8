@@ -51,6 +51,7 @@ class Inventory(object):
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
         all_vars['total_teams'] = 15
+        all_vars['Lockdown_user_role'] = 'Lockdown'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v7'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
