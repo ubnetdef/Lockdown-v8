@@ -31,6 +31,7 @@
       until: async_poll_results.finished
       retries: 30000
 
+#TODO: OPTIONALLY OPTIMIZE USING https://docs.ansible.com/ansible/latest/modules/vmware_guest_disk_facts_module.html
 
 #    - name:  Power OFF VM
 #      vmware_guest:
