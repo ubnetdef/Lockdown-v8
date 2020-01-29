@@ -12,16 +12,6 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: DB
-  become: true
-  gather_facts: no
-  become_method: sudo
-  tasks:
-    - name: install python2 on Ubuntu 18
-      raw: apt update -y
-    - name: install python2 on Ubuntu 18
-      raw: apt install -y python python-pip python3-pip
-
 - hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
   gather_facts: no
   strategy: free
