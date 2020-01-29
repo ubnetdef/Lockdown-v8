@@ -36,15 +36,15 @@
     gitlab_package_name: "{{ gitlab_edition }}{{ gitlab_package_version_separator }}{{ gitlab_version }}"
   when: gitlab_version != ''
 
-  - name: Install Gitlab
-    package:
-      name: "{{ gitlab_package_name | default(gitlab_edition) }}"
-      state: present
-    when: not gitlab_file.stat.exists
-    register: result
-    retries: 3
-    delay: 100
-    until: result is not failed
+- name: Install Gitlab
+  package:
+    name: "{{ gitlab_package_name | default(gitlab_edition) }}"
+    state: present
+  when: not gitlab_file.stat.exists
+  register: result
+  retries: 3
+  delay: 100
+  until: result is not failed
 
 
 # Start and configure GitLab. Sometimes the first run fails, but after that,
