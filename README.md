@@ -26,7 +26,7 @@ Consider an example of deploying a 4 team environment with following machines:
  - Windows 10 Pro (VM Group 2)
  - Windows Server (VM Group 3)
  
-And Following Configurations:
+And following configurations:
  - Ubuntu is hosting a Web Server (Ex. WordPress)
  - Windows Server is hosting Active Directory
  - Windows 10 Pro is connected to the Active Directory
