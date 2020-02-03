@@ -22,9 +22,13 @@ Deployment Procedure (You might have to zoom-in😅)
 --------------
 Consider an example of deploying a 4 team environment with following machines:
  - Router
- - Ubuntu Web Server (VM Group 1)
+ - Ubuntu (VM Group 1)
  - Windows 10 Pro (VM Group 2)
- - Active Directory (VM Group 3)
+ - Windows Server (VM Group 3)
+And Following Configurations:
+ - Ubuntu is hosting a Web Server (Ex. WordPress)
+ - Windows Server is hosting Active Directory
+ - Windows 10 Pro is connected to the Active Directory
 ![Deployment Procedure](https://user-images.githubusercontent.com/35672535/73682204-e84e4c80-468d-11ea-96a0-fce0da6757c5.png)
 
 Notes
