@@ -1,6 +1,6 @@
-UB Lockdown v7
+UB Lockdown v8
 =========
-This is a UB Lockdown v7 Deployment Repo. The whole deployment and VM configuration procedure is carried out by ansible.
+This is a UB Lockdown v8 Deployment Repo. The whole deployment and VM configuration procedure is carried out by ansible.
 
 Where to start?
 =========
@@ -11,6 +11,7 @@ Requirements
 - python >=2.6
 - pyshere
 - pyVmomi
+- Ansible 2.8
 
 Role Variables
 --------------

@@ -50,13 +50,13 @@ class Inventory(object):
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
-        all_vars['total_teams'] = 15
+        all_vars['total_teams'] = 2
         all_vars['Lockdown_user_role'] = 'Lockdown'
         all_vars['afinity_enable'] = True
-        all_vars['pfsense_template'] = 'Router-v7'
+        all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'hackercoin.lockdown'
-        all_vars['netbios'] = 'CRYPTO'
+        all_vars['domain'] = 'gaming.lockdown'
+        all_vars['netbios'] = 'GAMING'
         all['vars'] = all_vars
         #####################################################################################################
 
@@ -92,50 +92,50 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "AD-Server-Windows2019-v7"
+                    hostvars[host]['template'] = "AD-Server-Windows2019-v8"
                     hostvars[host]['AD_Name'] = 'AD'
 
                 if host in Linux_clients_A:
-                    hostvars[host]['template'] = 'Desktop-Elementary-5.0-Juno-v7'
+                    hostvars[host]['template'] = 'Desktop-Elementary-5.0-Juno-v8'
                     hostvars[host]['AD_Name'] = 'Linux-A'
 
                 if host in Linux_clients_B:
-                    hostvars[host]['template'] = 'Desktop-Fedora-30-v7'
+                    hostvars[host]['template'] = 'Desktop-Fedora-30-v8'
                     hostvars[host]['AD_Name'] = 'Linux-B'
 
                 if host in Linux_clients_C:
-                    hostvars[host]['template'] = 'Desktop-CentOS-7-v7'
+                    hostvars[host]['template'] = 'Desktop-CentOS-7-v8'
                     hostvars[host]['AD_Name'] = 'Linux-C'
 
                 if host in Linux_clients_D:
-                    hostvars[host]['template'] = 'Desktop-Mint-19.2-v7'
+                    hostvars[host]['template'] = 'Desktop-Mint-19.2-v8'
                     hostvars[host]['AD_Name'] = 'Linux-D'
 
                 if host in Security_Onion:
-                    hostvars[host]['template'] = 'Security-Onion-v7'
+                    hostvars[host]['template'] = 'Security-Onion-v8'
                     hostvars[host]['AD_Name'] = 'Security-Onion'
                     hostvars[host]['skip_deployment_check'] = 'True'
 
                 if host in Windows_clients_A:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v7'
+                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows-A'
 
                 if host in Windows_clients_B:
-                    hostvars[host]['template'] = 'Desktop-Windows-7-v7'
+                    hostvars[host]['template'] = 'Desktop-Windows-7-v8'
                     hostvars[host]['AD_Name'] = 'Windows-B'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'Windows-Server-FTP-v7'
+                    hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in GitLab:
-                    hostvars[host]['template'] = 'Git-Server-Centos-7-v7'
+                    hostvars[host]['template'] = 'Git-Server-Centos-7-v8'
                     hostvars[host]['AD_Name'] = 'GitLab'
                     hostvars[host][
                         'gitlab_external_url'] = "http://gitlab.{}".format(all_vars['domain'])
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'Web-Server-CentOS-7-v7'
+                    hostvars[host]['template'] = 'Web-Server-CentOS-7-v8'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['wiki'] = {
                         'Name': 'CryptoWiki!',
@@ -150,7 +150,7 @@ class Inventory(object):
                     }
 
                 if host in DB:
-                    hostvars[host]['template'] = 'Database-Server-Ubuntu-18.04-v7'
+                    hostvars[host]['template'] = 'Database-Server-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mariadb_group_users'] = []
                     hostvars[host]['mariadb_group_users'].append({
