@@ -18,7 +18,7 @@ Role Variables
 Variables are generated using dynamic inventory, please check out inventory.py
 (Passwords and other sensitive information is passed thru a CLI, or a survey if you are using Ansible tower)
 
-Deployment Procedure (You Might have to zoom-in)
+Deployment Procedure (You might have to zoom-in😅)
 --------------
 ![Deployment Procedure](https://user-images.githubusercontent.com/35672535/73682204-e84e4c80-468d-11ea-96a0-fce0da6757c5.png)
 
