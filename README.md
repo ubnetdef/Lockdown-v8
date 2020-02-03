@@ -30,7 +30,7 @@ And following configurations:
  - Ubuntu is hosting a Web Server (Ex. WordPress)
  - Windows Server is hosting Active Directory
  - Windows 10 Pro is connected to the Active Directory
-![Deployment Procedure](https://user-images.githubusercontent.com/35672535/73682204-e84e4c80-468d-11ea-96a0-fce0da6757c5.png)
+![Deployment Procedure](https://user-images.githubusercontent.com/35672535/73683267-f9985880-468f-11ea-8cdb-0da8fb4ff5bb.png)
 
 Notes
 --------------
