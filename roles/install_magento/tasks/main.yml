@@ -32,7 +32,7 @@
       --admin-lastname=admin 
       --admin-email=admin@oldegg.com 
       --admin-user=admin
-      --admin-password=Changeme2018! 
+      --admin-password=Changeme2020! 
       --base-url="{{ magento_host }}" 
       --db-host="{{ magento_db_host }}" 
       --db-name=magento 
