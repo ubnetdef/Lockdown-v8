@@ -109,7 +109,7 @@ class Inventory(object):
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
-                    hostvars[host]['AD_Name'] = 'Windows_Core'
+                    hostvars[host]['AD_Name'] = 'WindowsCore'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
@@ -117,7 +117,7 @@ class Inventory(object):
 
                 if host in Gaming_Forum:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Gaming_Forum'
+                    hostvars[host]['AD_Name'] = 'GamingForum'
 
                 if host in WEB:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
