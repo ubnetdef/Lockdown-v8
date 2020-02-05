@@ -107,7 +107,7 @@ class Inventory(object):
                 if host in Windows_10:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows10'
-                    hostvars[host]['timeout'] = 2400
+                    hostvars[host]['timeout'] = 4800
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
