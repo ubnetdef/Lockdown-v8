@@ -1,0 +1,82 @@
+-
+  name: Install discourse on web servers
+  hosts: Servers
+  tasks:
+    - name: Install Discourse dependencies
+      shell:
+        cmd: bash <(wget -qO- https://raw.githubusercontent.com/techAPJ/install-rails/master/linux)
+        executable: /bin/bash
+      become: yes 
+
+    - name: Clone Discourse
+      shell:
+        cmd: git clone https://github.com/discourse/discourse.git ~/discourse
+      become: yes
+
+    - name: Setup Database
+      shell:
+        cmd: sudo -u postgres createuser -s "$USER"
+      become: yes
+
+    - name: Bootstrap Discourse I
+      shell:
+        cmd: source ~/.bashrc
+        executable: /bin/bash
+        chdir: ~/discourse
+      become: yes
+
+    - name: Bootstrap Discourse II
+      shell:
+        cmd: ~/.rbenv/shims/bundle install
+        chdir: ~/discourse
+      become: yes
+    
+    - name: Configure db I
+      shell:
+        cmd: ~/.rbenv/shims/bundle exec rake db:create
+        chdir: ~/discourse
+        executable: /bin/bash
+      become: yes
+
+    - name: Configure db II
+      shell:
+        cmd: ~/.rbenv/shims/bundle exec rake db:migrate
+        chdir: ~/discourse
+        executable: /bin/bash
+      become: yes
+
+    - name: Configure db III
+      shell:
+        cmd: RAILS_ENV=test ~/.rbenv/shims/bundle exec rake db:create db:migrate
+        chdir: ~/discourse
+        executable: /bin/bash
+      become: yes
+
+    - name: Start rails server
+      shell:
+        cmd: ~/.rbenv/shims/bundle exec puma -p 9000
+        chdir: ~/discourse
+        executable: /bin/bash
+      become: yes
+      async: 100000
+      poll: 0
+
+    - name: Start rails server II
+      shell: 
+        cmd: ~/.rbenv/shims/bundle exec sidekiq
+        chdir: ~/discourse
+        executable: /bin/bash
+      become: yes
+      async: 100000
+      poll: 0
+ 
+    - name: Add Admin account
+      expect:
+        command: RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create
+        responses:
+          Email: "admin.lockdown@example.com"
+          Password: "changeme123"
+          Repeat Password: "changeme123"
+          (Y/n): "y"
+        chdir: ~/discourse
+      become: yes
