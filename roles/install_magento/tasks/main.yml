@@ -30,7 +30,7 @@
       bin/magento setup:install 
       --admin-firstname=admin 
       --admin-lastname=admin 
-      --admin-email=admin@oldegg.com 
+      --admin-email=admin@gaming.lockdown
       --admin-user=admin
       --admin-password=Changeme2020! 
       --base-url="{{ magento_host }}" 
