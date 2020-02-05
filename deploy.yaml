@@ -1,50 +1,54 @@
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  roles:
-     - folders
-     - folder_permissions
-     - pfsense_deploy_provision
-     - template_deployment
+#- hosts: localhost
+#  gather_facts: no
+#  connection: local
+#  roles:
+#     - folders
+#     - folder_permissions
+#     - pfsense_deploy_provision
+#     - template_deployment
+#
+#- hosts: AD
+#  gather_facts: no
+#  roles:
+#    - windows_server_provision_AD
+#
+#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
+#  gather_facts: no
+#  strategy: free
+#  tasks:
+#    - name: Wait For connection up
+#      wait_for_connection:
+#        timeout: 30000
+#
+#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
+#  roles:
+#    - local_users_Linux
+#
+#- hosts: Windows_10, Windows_Core, FTP
+#  gather_facts: no
+#  roles:
+#    - Windows_Client_Provision
+#
+#- hosts: WEB, DB
+#  become: yes
+#  roles:
+#    - disable_firewall
 
-- hosts: AD
-  gather_facts: no
-  roles:
-    - windows_server_provision_AD
-
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
-  gather_facts: no
-  strategy: free
-  tasks:
-    - name: Wait For connection up
-      wait_for_connection:
-        timeout: 30000
-
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
-  roles:
-    - local_users_Linux
-
-- hosts: Windows_10, Windows_Core, FTP
-  gather_facts: no
-  roles:
-    - Windows_Client_Provision
-
-- hosts: WEB, DB
-  become: yes
-  roles:
-    - disable_firewall
 
 - hosts: DB
+  gather_facts: no
   become: true
-  pre_tasks:
-    - raw: sudo apt update -y; sudo apt install python-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev -y
   roles:
-    - ansible-role-mariadb
+    - ansible-role-mysql-master
+
 
 - hosts: WEB
   become: true
   roles:
-    - mediawiki
+    - install_php
+    - ansible-role-apache-master
+    - ansible-role-composer-master
+    - install_magento
 
 - hosts: DB
   become: true
