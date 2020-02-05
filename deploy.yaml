@@ -35,15 +35,16 @@
 #    - disable_firewall
 
 
-- hosts: DB
-  become: true
-  roles:
-    - ansible-role-mysql-master
+#- hosts: DB
+#  become: true
+#  roles:
+#    - ansible-role-mysql-master
 
 
 - hosts: WEB
   become: true
   roles:
+#    - geerlingguy.composer
     - install_php
     - ansible-role-apache-master
     - ansible-role-composer-master

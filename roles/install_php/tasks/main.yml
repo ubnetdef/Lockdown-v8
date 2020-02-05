@@ -1,23 +1,22 @@
 ---
-- name: Installing php apt repo
-  apt_repository:
-    repo: 'ppa:ondrej/php'
+- name: Add repositories for php
+  apt_repository: repo='ppa:ondrej/php' state=present
 
-- name: Installing php7.1
+- name: Update repositories cache and install "foo" package
   apt:
-    name: php7.1 
-
-- name: Installing php dependencies
-  apt:
-    name: "{{ item }}"
-  with_items:
-    - php7.1-xsl
-    - php7.1-intl
-    - php7.1-gd
-    - php7.1-mbstring
-    - php7.1-xml
-    - php7.1-curl
-    - php7.1-mysql
-    - php7.1-zip
-    - php7.1-soap
-    - php7.1-bcmath
+    pkg:
+      - php7.2
+      - php7.2-xsl
+      - php7.2-intl
+      - php7.2-gd
+      - php7.2-mbstring
+      - php7.2-xml
+      - php7.2-curl
+      - php7.2-mysql
+      - php7.2-zip
+      - php7.2-soap
+      - php7.2-bcmath
+      - php7.2-fpm
+      - php7.2-common
+      - php7.2-cli
+    update_cache: yes
