@@ -2,7 +2,7 @@
 - name: Add repositories for php
   apt_repository: repo='ppa:ondrej/php' state=present
 
-- name: Update repositories cache and install "foo" package
+- name: Update repositories cache and install "php" packages
   apt:
     pkg:
       - php7.2
@@ -19,4 +19,13 @@
       - php7.2-fpm
       - php7.2-common
       - php7.2-cli
+      - php7.2-bcmath
+      - php7.2-ext-curl
+      - php7.2-mcrypt
+      - php7.2-intl
+      - php7.2-openssl
+      - php7.2-soap
+      - php7.2-dom
+      - php7.2-pdo_mysql
+      - php7.2-simplexml
     update_cache: yes
