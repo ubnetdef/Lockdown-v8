@@ -93,23 +93,23 @@ class Inventory(object):
 
                 if host in Rouge_Windows:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Linux-A'
+                    hostvars[host]['AD_Name'] = 'Rouge_Windows'
 
                 if host in CentOS:
                     hostvars[host]['template'] = 'Desktop-Centos-07-v8'
-                    hostvars[host]['AD_Name'] = 'Linux-B'
+                    hostvars[host]['AD_Name'] = 'CentOS'
 
                 if host in Ubuntu:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Linux-C'
+                    hostvars[host]['AD_Name'] = 'Ubuntu'
 
                 if host in Windows_10:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
-                    hostvars[host]['AD_Name'] = 'Windows-A'
+                    hostvars[host]['AD_Name'] = 'Windows_10'
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
-                    hostvars[host]['AD_Name'] = 'Windows-B'
+                    hostvars[host]['AD_Name'] = 'Windows_Core'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
@@ -230,19 +230,22 @@ class Inventory(object):
         DB_Servers['hosts'] = DB
         FTP_Servers = {}
         FTP_Servers['hosts'] = FTP
+        GamingForum = {}
+        GamingForum['hosts'] = Gaming_Forum
 
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
         inventory['AD'] = AD
-        inventory['Linux-A'] = Linux_A
-        inventory['Linux-B'] = Linux_B
-        inventory['Linux-C'] = Linux_C
-        inventory['Windows-A'] = Windows_A
-        inventory['Windows-B'] = Windows_B
+        inventory['Rouge_Windows'] = Linux_A
+        inventory['CentOS'] = Linux_B
+        inventory['Ubuntu'] = Linux_C
+        inventory['Windows_10'] = Windows_A
+        inventory['Windows_Core'] = Windows_B
         inventory['WEB'] = WEB_Servers
         inventory['DB'] = DB_Servers
         inventory['FTP'] = FTP_Servers
+        inventory['Gaming_Forum'] = GamingForum
 
         #################################################################################################
 

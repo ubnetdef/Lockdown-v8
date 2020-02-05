@@ -12,7 +12,7 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
   gather_facts: no
   strategy: free
   tasks:
@@ -20,54 +20,19 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: Linux-A
-  gather_facts: no
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Restore original lsb file on elementary
-      copy:
-        src: roles/shared-files/elementary-lsb-release
-        dest: /etc/lsb-release
-
-- hosts: Linux-D
-  gather_facts: no
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Restore original lsb file on mint
-      copy:
-        src: roles/shared-files/mint-lsb-release
-        dest: /etc/lsb-release
-
-- hosts: Linux-B
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Restore original lsb file on fedora
-      copy:
-        src: roles/shared-files/fedora-redhat-release
-        dest: /etc/redhat-release
-
-- hosts: Linux-A, Linux-B, Linux-C, Linux-D, WEB, DB, GIT
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
   roles:
     - local_users_Linux
 
-- hosts: Windows-A, Windows-B, FTP
+- hosts: Windows_10, Windows_Core, FTP
   gather_facts: no
   roles:
     - Windows_Client_Provision
 
-- hosts: GIT, WEB, DB
+- hosts: WEB, DB
   become: yes
   roles:
     - disable_firewall
-
-- hosts: GIT
-  gather_facts: no
-  become: yes
-  roles:
-    - gitlab
 
 - hosts: DB
   become: true
@@ -85,3 +50,9 @@
   become: true
   roles:
     - ansible-docker-master
+
+
+- hosts: Gaming_Forum
+  become: true
+  roles:
+    - ansible-discourse-role
