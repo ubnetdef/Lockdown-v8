@@ -1,110 +1,105 @@
--
-  name: Install discourse on web servers
-  hosts: Servers
-  tasks:
+  - name: Download req.sh
+    get_url:
+      url: https://raw.githubusercontent.com/techAPJ/install-rails/master/linux
+      dest: /tmp/req.sh
+      mode: '0777'
+    become: yes
 
-    - name: Download req.sh
-      get_url:
-        url: https://raw.githubusercontent.com/techAPJ/install-rails/master/linux
-        dest: /tmp/req.sh
-        mode: '0777'
-      become: yes
+  - name: Install Discourse dependencies
+    shell:
+      cmd: /tmp/req.sh
+      executable: /bin/bash
+    become: yes
 
-    - name: Install Discourse dependencies
-      shell:
-        cmd: /tmp/req.sh
-        executable: /bin/bash
-      become: yes
- 
-    - git:
-        repo: 'https://github.com/discourse/discourse.git'
-        dest: ~/discourse
-      become: yes
+  - git:
+      repo: 'https://github.com/discourse/discourse.git'
+      dest: ~/discourse
+    become: yes
 
-    - name: Setup Database
-      shell:
-        cmd: sudo -u postgres createuser -s "$USER"
-      become: yes
+  - name: Setup Database
+    shell:
+      cmd: sudo -u postgres createuser -s "$USER"
+    become: yes
 
-    - name: Bootstrap Discourse I
-      shell:
-        cmd: source ~/.bashrc
-        executable: /bin/bash
-        chdir: ~/discourse
-      become: yes
+  - name: Bootstrap Discourse I
+    shell:
+      cmd: source ~/.bashrc
+      executable: /bin/bash
+      chdir: ~/discourse
+    become: yes
 
-    - name: Bootstrap Discourse II
-      shell:
-        cmd: ~/.rbenv/shims/bundle install
-        chdir: ~/discourse
-      become: yes
-    
-    - name: Configure db I
-      shell:
-        cmd: ~/.rbenv/shims/bundle exec rake db:create
-        chdir: ~/discourse
-        executable: /bin/bash
-      become: yes
+  - name: Bootstrap Discourse II
+    shell:
+      cmd: ~/.rbenv/shims/bundle install
+      chdir: ~/discourse
+    become: yes
 
-    - name: Configure db II
-      shell:
-        cmd: ~/.rbenv/shims/bundle exec rake db:migrate
-        chdir: ~/discourse
-        executable: /bin/bash
-      become: yes
+  - name: Configure db I
+    shell:
+      cmd: ~/.rbenv/shims/bundle exec rake db:create
+      chdir: ~/discourse
+      executable: /bin/bash
+    become: yes
 
-    - name: Configure db III
-      shell:
-        cmd: RAILS_ENV=test ~/.rbenv/shims/bundle exec rake db:create db:migrate
-        chdir: ~/discourse
-        executable: /bin/bash
-      become: yes
+  - name: Configure db II
+    shell:
+      cmd: ~/.rbenv/shims/bundle exec rake db:migrate
+      chdir: ~/discourse
+      executable: /bin/bash
+    become: yes
 
-    - name: Start rails server
-      shell:
-        cmd: ~/.rbenv/shims/bundle exec puma -p 9000
-        chdir: ~/discourse
-        executable: /bin/bash
-      become: yes
-      async: 100000
-      poll: 0
+  - name: Configure db III
+    shell:
+      cmd: RAILS_ENV=test ~/.rbenv/shims/bundle exec rake db:create db:migrate
+      chdir: ~/discourse
+      executable: /bin/bash
+    become: yes
 
-    - name: Start rails server II
-      shell: 
-        cmd: ~/.rbenv/shims/bundle exec sidekiq
-        chdir: ~/discourse
-        executable: /bin/bash
-      become: yes
-      async: 100000
-      poll: 0
+  - name: Start rails server
+    shell:
+      cmd: ~/.rbenv/shims/bundle exec puma -p 9000
+      chdir: ~/discourse
+      executable: /bin/bash
+    become: yes
+    async: 100000
+    poll: 0
 
-    - name: Add user-add script
-      shell:
-        cmd: echo 'RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create' > /tmp/test.sh
-        executable: /bin/bash
-        creates: /tmp/test.sh
-      become: yes
+  - name: Start rails server II
+    shell:
+      cmd: ~/.rbenv/shims/bundle exec sidekiq
+      chdir: ~/discourse
+      executable: /bin/bash
+    become: yes
+    async: 100000
+    poll: 0
 
-    - name: Add admin account
-      expect:
-        command: /bin/bash /tmp/test.sh
-        responses:
-          'Email': 'admin@gaming.lockdown'
-          'Password': 'changeme-red'
-          'Repeat password': 'changeme-red'
-          'Do you want to grant Admin privileges': 'y'
-        chdir: ~/discourse
-        echo: yes
-      become: yes
+  - name: Add user-add script
+    shell:
+      cmd: echo 'RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create' > /tmp/test.sh
+      executable: /bin/bash
+      creates: /tmp/test.sh
+    become: yes
 
-    - name: Add White team account
-      expect:
-        command: /bin/bash /tmp/test.sh
-        responses:
-          'Email': 'white-team@gaming.lockdown'
-          'Password': 'changeme-white'
-          'Repeat password': 'changeme-white'
-          'Do you want to grant Admin privileges': 'y'
-        chdir: ~/discourse
-        echo: yes
-      become: yes
+  - name: Add admin account
+    expect:
+      command: /bin/bash /tmp/test.sh
+      responses:
+        'Email': 'admin@gaming.lockdown'
+        'Password': 'changeme-red'
+        'Repeat password': 'changeme-red'
+        'Do you want to grant Admin privileges': 'y'
+      chdir: ~/discourse
+      echo: yes
+    become: yes
+
+  - name: Add White team account
+    expect:
+      command: /bin/bash /tmp/test.sh
+      responses:
+        'Email': 'white-team@gaming.lockdown'
+        'Password': 'changeme-white'
+        'Repeat password': 'changeme-white'
+        'Do you want to grant Admin privileges': 'y'
+      chdir: ~/discourse
+      echo: yes
+    become: yes
