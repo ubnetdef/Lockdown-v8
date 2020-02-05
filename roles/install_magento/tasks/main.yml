@@ -1,5 +1,19 @@
 ---
 
+- name: Add repositories
+ apt_repository: repo='ppa:ondrej/php' state=present
+
+
+- name: Update repositories cache and install "foo" package
+  apt:
+    pkg:
+      - apache2
+      - php7.2
+      - php7.2-common
+      - php7.2-cli
+      - php7.2-fpm
+    update_cache: yes
+
 - name: Clear folder
   file:
     state: absent
