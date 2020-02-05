@@ -1,7 +1,7 @@
 ---
 
 - name: Add repositories
- apt_repository: repo='ppa:ondrej/php' state=present
+  apt_repository: repo='ppa:ondrej/php' state=present
 
 
 - name: Update repositories cache and install "foo" package
