@@ -2,15 +2,23 @@
   name: Install discourse on web servers
   hosts: Servers
   tasks:
+
+    - name: Download req.sh
+      get_url:
+        url: https://raw.githubusercontent.com/techAPJ/install-rails/master/linux
+        dest: /tmp/req.sh
+        mode: '0777'
+      become: yes
+
     - name: Install Discourse dependencies
       shell:
-        cmd: bash <(wget -qO- https://raw.githubusercontent.com/techAPJ/install-rails/master/linux)
+        cmd: /tmp/req.sh
         executable: /bin/bash
-      become: yes 
-
-    - name: Clone Discourse
-      shell:
-        cmd: git clone https://github.com/discourse/discourse.git ~/discourse
+      become: yes
+ 
+    - git:
+        repo: 'https://github.com/discourse/discourse.git'
+        dest: ~/discourse
       become: yes
 
     - name: Setup Database
@@ -69,14 +77,20 @@
       become: yes
       async: 100000
       poll: 0
- 
-    - name: Add Admin account
-      expect:
-        command: RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create
-        responses:
-          Email: "admin.lockdown@example.com"
-          Password: "changeme123"
-          Repeat Password: "changeme123"
-          (Y/n): "y"
-        chdir: ~/discourse
+
+    - name: Install pexpect
+      shell: 
+        cmd: apt install python-pip -y && apt install python3-pip -y && pip install pexpect && pip3 install pexpect
+        executable: /bin/bash
       become: yes
+ 
+#    - name: Add Admin account
+#      expect:
+#        command: RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create
+#        responses:
+#          Email: "admin@gaming.lockdown"
+#          Password: "changeme123"
+#          Repeat Password: "changeme123"
+#          (Y/n): "y"
+#        chdir: ~/discourse
+#      become: yes
