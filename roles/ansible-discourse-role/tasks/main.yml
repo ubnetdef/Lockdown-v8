@@ -78,19 +78,33 @@
       async: 100000
       poll: 0
 
-    - name: Install pexpect
-      shell: 
-        cmd: apt install python-pip -y && apt install python3-pip -y && pip install pexpect && pip3 install pexpect
+    - name: Add user-add script
+      shell:
+        cmd: echo 'RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create' > /tmp/test.sh
         executable: /bin/bash
+        creates: /tmp/test.sh
       become: yes
- 
-#    - name: Add Admin account
-#      expect:
-#        command: RAILS_ENV=development ~/.rbenv/shims/bundle exec rake admin:create
-#        responses:
-#          Email: "admin@gaming.lockdown"
-#          Password: "changeme123"
-#          Repeat Password: "changeme123"
-#          (Y/n): "y"
-#        chdir: ~/discourse
-#      become: yes
+
+    - name: Add admin account
+      expect:
+        command: /bin/bash /tmp/test.sh
+        responses:
+          'Email': 'admin@gaming.lockdown'
+          'Password': 'changeme-red'
+          'Repeat password': 'changeme-red'
+          'Do you want to grant Admin privileges': 'y'
+        chdir: ~/discourse
+        echo: yes
+      become: yes
+
+    - name: Add White team account
+      expect:
+        command: /bin/bash /tmp/test.sh
+        responses:
+          'Email': 'white-team@gaming.lockdown'
+          'Password': 'changeme-white'
+          'Repeat password': 'changeme-white'
+          'Do you want to grant Admin privileges': 'y'
+        chdir: ~/discourse
+        echo: yes
+      become: yes
