@@ -14,7 +14,7 @@
       wait_for:
         port: 22
         host: "{{ host }}"
-        timeout: 520                              #fedora things
+        timeout: "{{ hostvars[host]['timeout'] }}"                              #fedora things
       when: hostvars[host]['OS'] == "Linux"
       register: SSH_Result
 
@@ -22,7 +22,7 @@
       wait_for:
         port: 5986
         host: "{{ host }}"
-        timeout: 520
+        timeout: "{{ hostvars[host]['timeout'] }}"
       when: hostvars[host]['OS'] == "Windows"
       register: WINRM_Result
   when: hostvars[host]['skip_deployment_check'] is not defined

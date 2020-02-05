@@ -82,6 +82,7 @@ class Inventory(object):
                 team_number = idx + all_vars['start_team']
                 hostvars[host] = {}
                 hostvars[host]['customization'] = {}
+                hostvars[host]['timeout'] = 300
                 network = {}
 
                 if host in Active_Directory:
@@ -106,6 +107,7 @@ class Inventory(object):
                 if host in Windows_10:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows10'
+                    hostvars[host]['timeout'] = 2400
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
