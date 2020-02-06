@@ -50,7 +50,7 @@ class Inventory(object):
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
-        all_vars['total_teams'] = 2
+        all_vars['total_teams'] = 11
         all_vars['Lockdown_user_role'] = 'Lockdown'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
@@ -239,17 +239,17 @@ class Inventory(object):
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
-        # inventory['AD'] = AD
-        # inventory['Rouge_Windows'] = Linux_A
-        # inventory['CentOS'] = Linux_B
-        # inventory['Ubuntu'] = Linux_C
-        # inventory['Windows_10'] = Windows_A
-        # inventory['Windows_Core'] = Windows_B
+        inventory['AD'] = AD
+        inventory['Rouge_Windows'] = Linux_A
+        inventory['CentOS'] = Linux_B
+        inventory['Ubuntu'] = Linux_C
+        inventory['Windows_10'] = Windows_A
+        inventory['Windows_Core'] = Windows_B
         inventory['WEB'] = WEB_Servers
         inventory['DB'] = DB_Servers
-        # inventory['GIT'] = GIT_Servers
-        # inventory['FTP'] = FTP_Servers
-        # inventory['Gaming_Forum'] = GamingForum
+        inventory['GIT'] = GIT_Servers
+        inventory['FTP'] = FTP_Servers
+        inventory['Gaming_Forum'] = GamingForum
 
         #################################################################################################
 
