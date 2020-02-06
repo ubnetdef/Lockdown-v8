@@ -131,6 +131,7 @@ class Inventory(object):
                 if host in DB:
                     hostvars[host]['template'] = 'Server-Centos-7-v8'
                     hostvars[host]['AD_Name'] = 'DATABASE'
+                    hostvars[host]['mysql_root_password'] = 'super-secure-password'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
                         'name': 'magento',
