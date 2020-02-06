@@ -1,11 +1,11 @@
-#- hosts: localhost
-#  gather_facts: no
-#  connection: local
-#  roles:
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
 #     - folders
 #     - folder_permissions
 #     - pfsense_deploy_provision
-#     - template_deployment
+     - template_deployment
 #
 #- hosts: AD
 #  gather_facts: no
@@ -29,10 +29,10 @@
 #  roles:
 #    - Windows_Client_Provision
 #
-#- hosts: WEB, DB
-#  become: yes
-#  roles:
-#    - disable_firewall
+- hosts: WEB, DB
+  become: yes
+  roles:
+    - disable_firewall
 
 
 - hosts: DB

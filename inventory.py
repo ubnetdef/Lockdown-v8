@@ -239,15 +239,15 @@ class Inventory(object):
         ################################################################################################
         inventory['all'] = all
         inventory['AD'] = AD
-        inventory['Rouge_Windows'] = Linux_A
-        inventory['CentOS'] = Linux_B
-        inventory['Ubuntu'] = Linux_C
-        inventory['Windows_10'] = Windows_A
-        inventory['Windows_Core'] = Windows_B
+        # inventory['Rouge_Windows'] = Linux_A
+        # inventory['CentOS'] = Linux_B
+        # inventory['Ubuntu'] = Linux_C
+        # inventory['Windows_10'] = Windows_A
+        # inventory['Windows_Core'] = Windows_B
         inventory['WEB'] = WEB_Servers
         inventory['DB'] = DB_Servers
-        inventory['FTP'] = FTP_Servers
-        inventory['Gaming_Forum'] = GamingForum
+        # inventory['FTP'] = FTP_Servers
+        # inventory['Gaming_Forum'] = GamingForum
 
         #################################################################################################
 
