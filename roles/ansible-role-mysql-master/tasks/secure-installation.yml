@@ -6,6 +6,9 @@
   register: mysql_root_temp_password
   when: ((mysql_install_packages | bool) or mysql_root_password_update) and ('5.7.' in mysql_cli_version.stdout)
 
+- debug:
+    msg: "{{mysql_cli_version}}  {{mysql_install_packages}}   {{mysql_root_password_update}}"
+
 - name: Copy .my.cnf file with temporary root password credentials
   template:
       src: "root-temporary-my.cnf.j2"
