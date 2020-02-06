@@ -74,6 +74,8 @@
         name:
           - python3-setuptools
           - python-setuptools
+          - python-pip
+          - python3-pip
         state: latest
         update_cache: True
 
