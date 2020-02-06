@@ -72,6 +72,7 @@
     - name: Install dependencies
       yum:
         name:
+          - epel-release
           - python3-setuptools
           - python-setuptools
           - python-pip
