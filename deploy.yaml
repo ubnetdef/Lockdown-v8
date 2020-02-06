@@ -62,9 +62,21 @@
 #  roles:
 #    - ansible-discourse-role
 
+
+
+
 - hosts: GIT
   become: yes
   tasks:
+
+    - name: Install dependencies
+      apt:
+        name:
+          - python3-setuptools
+          - python-setuptools
+        state: latest
+        update_cache: True
+
     - name: install pexpect
       pip:
         name: pexpect
