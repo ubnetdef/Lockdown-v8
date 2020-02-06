@@ -1,69 +1,76 @@
-- hosts: localhost
-  gather_facts: no
-  connection: local
-  roles:
-     - folders
-     - folder_permissions
-     - pfsense_deploy_provision
-     - template_deployment
+#- hosts: localhost
+#  gather_facts: no
+#  connection: local
+#  roles:
+#     - folders
+#     - folder_permissions
+#     - pfsense_deploy_provision
+#     - template_deployment
+##
+#- hosts: AD
+#  gather_facts: no
+#  roles:
+#    - windows_server_provision_AD
 #
-- hosts: AD
-  gather_facts: no
-  roles:
-    - windows_server_provision_AD
-
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
-  gather_facts: no
-  strategy: free
-  tasks:
-    - name: Wait For connection up
-      wait_for_connection:
-        timeout: 30000
-
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
-  roles:
-    - local_users_Linux
-
-- hosts: Windows_10, Windows_Core, FTP
-  gather_facts: no
-  roles:
-    - Windows_Client_Provision
-
-- hosts: WEB, DB, GIT
-  become: yes
-  roles:
-    - disable_firewall
-
-
-- hosts: DB
-  become: true
-  roles:
-    - ansible-role-mysql-master
-
-
-- hosts: WEB
-  become: true
-  roles:
-#    - geerlingguy.composer
-    - install_php
-    - ansible-role-apache-master
-    - ansible-role-apache-php-fpm-master
-    - ansible-role-composer-master
-    - install_magento
-
-- hosts: DB
-  become: true
-  roles:
-    - ansible-docker-master
-
-
-- hosts: Gaming_Forum
-  become: true
-  roles:
-    - ansible-discourse-role
+#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
+#  gather_facts: no
+#  strategy: free
+#  tasks:
+#    - name: Wait For connection up
+#      wait_for_connection:
+#        timeout: 30000
+#
+#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
+#  roles:
+#    - local_users_Linux
+#
+#- hosts: Windows_10, Windows_Core, FTP
+#  gather_facts: no
+#  roles:
+#    - Windows_Client_Provision
+#
+#- hosts: WEB, DB, GIT
+#  become: yes
+#  roles:
+#    - disable_firewall
+#
+#
+#- hosts: DB
+#  become: true
+#  roles:
+#    - ansible-role-mysql-master
+#
+#
+#- hosts: WEB
+#  become: true
+#  roles:
+##    - geerlingguy.composer
+#    - install_php
+#    - ansible-role-apache-master
+#    - ansible-role-apache-php-fpm-master
+#    - ansible-role-composer-master
+#    - install_magento
+#
+#- hosts: DB
+#  become: true
+#  roles:
+#    - ansible-docker-master
+#
+#
+#- hosts: Gaming_Forum
+#  become: true
+#  roles:
+#    - ansible-discourse-role
 
 - hosts: GIT
-  gather_facts: no
+  become: yes
+  tasks:
+    - name: install pexpect
+      pip:
+        name: pexpect
+      become: yes
+
+- hosts: GIT
   become: yes
   roles:
     - gitlab
