@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - geerlingguy.apache
+
 
 galaxy_info:
   author: geerlingguy
