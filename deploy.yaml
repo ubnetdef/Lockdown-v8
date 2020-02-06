@@ -12,7 +12,7 @@
 #  roles:
 #    - windows_server_provision_AD
 #
-#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
+#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
 #  gather_facts: no
 #  strategy: free
 #  tasks:
@@ -29,7 +29,7 @@
 #  roles:
 #    - Windows_Client_Provision
 #
-- hosts: WEB, DB
+- hosts: WEB, DB, GIT
   become: yes
   roles:
     - disable_firewall
@@ -60,3 +60,9 @@
   become: true
   roles:
     - ansible-discourse-role
+
+- hosts: GIT
+  gather_facts: no
+  become: yes
+  roles:
+    - gitlab
