@@ -70,8 +70,8 @@
   tasks:
 
     - name: Install dependencies
-      apt:
-        yum:
+      yum:
+        name:
           - python3-setuptools
           - python-setuptools
         state: latest
