@@ -238,7 +238,7 @@ class Inventory(object):
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
-        inventory['AD'] = AD
+        # inventory['AD'] = AD
         # inventory['Rouge_Windows'] = Linux_A
         # inventory['CentOS'] = Linux_B
         # inventory['Ubuntu'] = Linux_C
