@@ -5,6 +5,7 @@
 - name: Update repositories cache and install "php" packages
   apt:
     pkg:
+      - libapache2-mod-php7.2
       - php7.2
       - php7.2-xsl
       - php7.2-intl
