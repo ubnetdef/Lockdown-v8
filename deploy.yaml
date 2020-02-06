@@ -63,16 +63,17 @@
 #    - ansible-discourse-role
 
 
-
+- hosts: GIT
+  become: yes
+  roles:
+    - ansible-role-repo-epel-master
 
 - hosts: GIT
   become: yes
   tasks:
-
     - name: Install dependencies
       yum:
         name:
-          - epel-release
           - python3-setuptools
           - python-setuptools
           - python-pip
