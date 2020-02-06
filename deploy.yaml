@@ -71,7 +71,7 @@
 
     - name: Install dependencies
       apt:
-        name:
+        yum:
           - python3-setuptools
           - python-setuptools
         state: latest
