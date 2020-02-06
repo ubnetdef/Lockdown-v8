@@ -71,12 +71,13 @@ class Inventory(object):
         WEB = ['10.X.2.2'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         DB = ['10.X.2.3'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
 
-        cloud = WEB + DB + FTP + Gaming_Forum
+        cloud = WEB + DB + FTP + Gaming_Forum + GitLab
         for host_list in [
                 Active_Directory, Rouge_Windows, CentOS,
                 Ubuntu, Windows_10, Windows_Core,
-                WEB, DB, FTP, Gaming_Forum
+                WEB, DB, FTP, Gaming_Forum, GitLab
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -121,6 +122,12 @@ class Inventory(object):
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'GamingForum'
 
+                if host in GitLab:
+                    hostvars[host]['template'] = 'Git-Server-Centos-7-v8'
+                    hostvars[host]['AD_Name'] = 'GitLab'
+                    hostvars[host][
+                        'gitlab_external_url'] = "http://gitlab.{}".format(all_vars['domain'])
+
                 if host in WEB:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'WEB'
@@ -129,7 +136,7 @@ class Inventory(object):
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'Server-Centos-7-v8'
+                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_root_password'] = 'super-secure-password'
                     hostvars[host]['mysql_users'] = []
@@ -162,7 +169,7 @@ class Inventory(object):
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
 
-                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum:
+                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
@@ -227,6 +234,8 @@ class Inventory(object):
         FTP_Servers['hosts'] = FTP
         GamingForum = {}
         GamingForum['hosts'] = Gaming_Forum
+        GIT_Servers = {}
+        GIT_Servers['hosts'] = GitLab
 
         #TODO: Potentially include palo Alto
         ################################################################################################
@@ -239,6 +248,7 @@ class Inventory(object):
         # inventory['Windows_Core'] = Windows_B
         inventory['WEB'] = WEB_Servers
         inventory['DB'] = DB_Servers
+        # inventory['GIT'] = GIT_Servers
         # inventory['FTP'] = FTP_Servers
         # inventory['Gaming_Forum'] = GamingForum
 
