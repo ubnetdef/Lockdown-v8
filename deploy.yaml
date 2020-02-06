@@ -38,7 +38,7 @@
 - hosts: DB
   become: true
   roles:
-    - geerlingguy.mysql
+    - ansible-role-mysql-master
 
 
 - hosts: WEB
