@@ -1,46 +1,4 @@
 ---
-
-- name: Acquire temporary root pass
-  shell: >
-      awk '$0 ~ "temporary password" {print $11}' {{ mysql_log_error }}
-  register: mysql_root_temp_password
-  when: (mysql_install_packages | bool) and ('5.7.' in mysql_cli_version.stdout)
-
-- debug:
-    var: mysql_root_temp_password
-
-- name: Copy .my.cnf file with temporary root password credentials
-  template:
-      src: "root-temporary-my.cnf.j2"
-      dest: "{{ mysql_root_home }}/.my.cnf"
-      owner: root
-      group: root
-      mode: 0600
-  when: mysql_root_temp_password is not skipped
-
-- name: Test temporary root password expired
-  shell: "mysql -NBe 'SELECT NOW();'"
-  register: mysql_temp_password_test_result
-  when: mysql_root_temp_password is not skipped
-  ignore_errors: yes
-
-- debug: var=mysql_temp_password_test_result
-
-- name: Update MySQL root password for localhost root account (5.7.x).
-  shell: >
-      mysql -NBe 'ALTER USER "{{ mysql_root_username }}"@"localhost" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}";'
-      --connect-expired-password
-  when: mysql_temp_password_test_result is not skipped and 'connect-expired-password' in mysql_temp_password_test_result.stdout
-
-- name: Overwrite .my.cnf file with root password credentials.
-  template:
-    src: "root-my.cnf.j2"
-    dest: "{{ mysql_root_home }}/.my.cnf"
-    owner: root
-    group: root
-    mode: 0600
-  when: mysql_root_temp_password is not skipped
-
 - name: Ensure default user is present.
   mysql_user:
     name: "{{ mysql_user_name }}"
@@ -54,6 +12,7 @@
 - name: Copy user-my.cnf file with password credentials.
   template:
     src: "user-my.cnf.j2"
+
     dest: "{{ mysql_user_home }}/.my.cnf"
     owner: "{{ mysql_user_name }}"
     mode: 0600
@@ -68,7 +27,11 @@
   changed_when: false
 
 - name: Get list of hosts for the root user.
-  command: mysql -NBe "SELECT Host FROM mysql.user WHERE User = '{{ mysql_root_username }}' ORDER BY (Host='localhost') ASC"
+  command: mysql -NBe
+    "SELECT Host
+    FROM mysql.user
+    WHERE User = '{{ mysql_root_username }}'
+    ORDER BY (Host='localhost') ASC"
   register: mysql_root_hosts
   changed_when: false
   check_mode: false
@@ -80,7 +43,8 @@
 - name: Update MySQL root password for localhost root account (5.7.x).
   shell: >
     mysql -u root -NBe
-    'ALTER USER "{{ mysql_root_username }}"@"{{ item }}" IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}";'
+    'ALTER USER "{{ mysql_root_username }}"@"{{ item }}"
+    IDENTIFIED WITH mysql_native_password BY "{{ mysql_root_password }}";'
   with_items: "{{ mysql_root_hosts.stdout_lines|default([]) }}"
   when: >
     ((mysql_install_packages | bool) or mysql_root_password_update)
