@@ -2,7 +2,7 @@
 
 - name: Acquire temporary root pass
   shell: >
-      awk '$0 ~ "temporary password" {print $11}' {{ mysql_log_error }} | tail -1
+      awk '$0 ~ "temporary password" {print $11}' {{ mysql_log_error }}
   register: mysql_root_temp_password
   when: (mysql_install_packages | bool) and ('5.7.' in mysql_cli_version.stdout)
 
