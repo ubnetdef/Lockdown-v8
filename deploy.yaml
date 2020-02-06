@@ -46,8 +46,8 @@
   roles:
 #    - geerlingguy.composer
     - install_php
-    - ansible-role-apache-php-fpm-master
     - ansible-role-apache-master
+    - ansible-role-apache-php-fpm-master
     - ansible-role-composer-master
     - install_magento
 
