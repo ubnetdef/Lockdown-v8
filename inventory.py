@@ -133,24 +133,16 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
-                        'name':
-                        'magento',
-                        'host':
-                        '%',
-                        'password':
-                        'changeme',
-                        'priv':
-                        '*.*:ALL,GRANT'
+                        'name': 'magento',
+                        'host': '%',
+                        'password': 'changeme',
+                        'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name':
-                        'admin',
-                        'host':
-                        '%',
-                        'password':
-                        'changeme',
-                        'priv':
-                        '*.*:ALL,GRANT'
+                        'name': 'admin',
+                        'host': '%',
+                        'password': 'changeme',
+                        'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_databases'] = []
                     hostvars[host]['mysql_databases'].append({
