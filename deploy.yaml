@@ -24,7 +24,7 @@
   roles:
     - local_users_Linux
 
-- hosts: Rouge_WindowsCentOS, Ubuntu
+- hosts: Rouge_Windows
   tasks:
     - name: Misconfigured DNS
       raw: echo "nameserver 8.8.8.8" >> /etc/resolv.conf  #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
