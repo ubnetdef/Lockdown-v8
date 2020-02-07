@@ -27,7 +27,7 @@
 - hosts: Rouge_WindowsCentOS, Ubuntu
   tasks:
     - name: Misconfigured DNS
-      raw: echo "8.8.8.8" >> /etc/resolv.conf
+      raw: sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf # echo "nameserver 8.8.8.8" >> /etc/resolv.conf
   become: true
 
 #- hosts: Windows_10, Windows_Core, FTP
