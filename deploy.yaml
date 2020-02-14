@@ -24,10 +24,10 @@
   roles:
     - local_users_Linux
 #
-- hosts: Rouge_Windows, Ubuntu
+- hosts: Rouge_Windows, Ubuntu, Traveler
   tasks:
     - name: Misconfigured DNS
-      raw: echo "nameserver 8.8.8.8" >> /etc/resolv.conf  #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
+      raw: echo nameserver 8.8.8.8 >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
 - hosts: Windows_10, Windows_Core, FTP

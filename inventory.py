@@ -181,7 +181,7 @@ class Inventory(object):
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
 
-                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab:
+                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab + Traveler:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
