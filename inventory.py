@@ -70,11 +70,11 @@ class Inventory(object):
         CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        WEB = ['10.X.2.2'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        DB = ['10.X.2.3'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        Traveler = [f"192.168.253.{str(i*all_vars['IP_jump']+3)}" for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        Traveler = ["192.168.253.{}".format(str(i*all_vars['IP_jump']+3)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         PaloAlto = ['13.33.33.37'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
 
         cloud = WEB + DB + FTP + Gaming_Forum + GitLab + PaloAlto
@@ -228,7 +228,7 @@ class Inventory(object):
 
                 if host in Traveler:
                     hostvars[host]['networks'][0]['netmask'] = '255.255.255.248'
-                    hostvars[host]['networks'][0]['gateway'] = f"192.168.253.{team_number*all_vars['IP_jump']+2}"
+                    hostvars[host]['networks'][0]['gateway'] = "192.168.253.{}".format(str(team_number*all_vars['IP_jump']+2))
 
                 if host in PaloAlto:
                     hostvars[host]['networks'] = []
