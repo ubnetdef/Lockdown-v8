@@ -13,7 +13,7 @@
       vm_username: admin
       vm_password: changeme
       vm_shell: /usr/local/sbin/pfSsh.php
-      vm_shell_args: playback provision {{ Upstream_gateway_start_address | ipmath((item|int - 1)*4) }} {{ WAN_start_address | ipmath((item|int - 1)*4) }}/30 10.{{ item }}.1.1/24 10.{{ item }}.2.1/24
+      vm_shell_args: playback provision {{ Upstream_gateway_start_address | ipmath((item|int - 1)*IP_jump) }} {{ WAN_start_address | ipmath((item|int - 1)*IP_jump) }}/WAN_Subnet 10.{{ item }}.1.1/24 10.{{ item }}.2.1/24
       vm_shell_cwd: "/tmp"
     delegate_to: localhost
     with_sequence: start={{start_team}} end={{ total_teams + start_team - 1 }}

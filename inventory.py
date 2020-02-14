@@ -50,13 +50,15 @@ class Inventory(object):
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
-        all_vars['total_teams'] = 11
+        all_vars['total_teams'] = 2
         all_vars['Lockdown_user_role'] = 'Lockdown'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
         all_vars['domain'] = 'gaming.lockdown'
         all_vars['netbios'] = 'GAMING'
+        all_vars['WAN_Subnet'] = 29
+        all_vars['IP_jump'] = 8
         all['vars'] = all_vars
         #####################################################################################################
 
@@ -72,12 +74,14 @@ class Inventory(object):
         DB = ['10.X.2.3'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        Traveler = [f"192.168.253.{i*all_vars['IP_jump']+3}" for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        PaloAlto = ['ItTechnicallyDoesntMatterX'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
 
-        cloud = WEB + DB + FTP + Gaming_Forum + GitLab
+        cloud = WEB + DB + FTP + Gaming_Forum + GitLab + PaloAlto
         for host_list in [
                 Active_Directory, Rouge_Windows, CentOS,
                 Ubuntu, Windows_10, Windows_Core,
-                WEB, DB, FTP, Gaming_Forum, GitLab
+                WEB, DB, FTP, Gaming_Forum, GitLab, Traveler, PaloAlto
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -105,10 +109,19 @@ class Inventory(object):
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'Ubuntu'
 
+                if host in Traveler:
+                    hostvars[host]['template'] = 'AWX-Desktop-LUbuntu-16.04'
+                    hostvars[host]['AD_Name'] = 'Traveler'
+
+                if host in PaloAlto:
+                    hostvars[host]['template'] = 'AWX-Palo-Alto'
+                    hostvars[host]['AD_Name'] = 'PaloAlto'
+                    hostvars[host]['skip_deployment_check'] = 'True'
+
                 if host in Windows_10:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows10'
-                    hostvars[host]['timeout'] = 4800
+                    hostvars[host]['timeout'] = 600
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
@@ -213,6 +226,16 @@ class Inventory(object):
                 hostvars[host]['team_number'] = team_number
                 hostvars[host]['customization']['hostname'] = hostvars[host]['AD_Name']
 
+                if host in Traveler:
+                    hostvars[host]['networks'][0]['netmask'] = '255.255.255.248'
+                    hostvars[host]['networks'][0]['gateway'] = f"192.168.253.{team_number*all_vars['IP_jump']+2}"
+
+                if host in PaloAlto:
+                    hostvars[host]['networks'] = []
+                    for net_instance in ['13.33.33.37', '13.33.33.37', '13.33.33.37']:
+                        hostvars[host]['networks'].append(networking(net_instance))
+
+
         AD = {}
         AD['hosts'] = Active_Directory
         Linux_A = {}
@@ -235,6 +258,10 @@ class Inventory(object):
         GamingForum['hosts'] = Gaming_Forum
         GIT_Servers = {}
         GIT_Servers['hosts'] = GitLab
+        Traveler_box = {}
+        Traveler_box['hosts'] = Traveler
+        PaloAlto_box = {}
+        PaloAlto_box['hosts'] = PaloAlto
 
         #TODO: Potentially include palo Alto
         ################################################################################################
@@ -250,6 +277,8 @@ class Inventory(object):
         inventory['GIT'] = GIT_Servers
         inventory['FTP'] = FTP_Servers
         inventory['Gaming_Forum'] = GamingForum
+        inventory['Traveler'] = Traveler_box
+        inventory['PaloAlto'] = PaloAlto_box
 
         #################################################################################################
 
