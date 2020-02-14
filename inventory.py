@@ -75,7 +75,7 @@ class Inventory(object):
         Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
         Traveler = [f"192.168.253.{i*all_vars['IP_jump']+3}" for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
-        PaloAlto = ['ItTechnicallyDoesntMatterX'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
+        PaloAlto = ['13.33.33.37'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1)]
 
         cloud = WEB + DB + FTP + Gaming_Forum + GitLab + PaloAlto
         for host_list in [
