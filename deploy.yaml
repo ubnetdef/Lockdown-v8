@@ -69,6 +69,7 @@
     - name: install pexpect
       pip:
         name: pexpect
+        executable: pip3
       become: yes
 
 - hosts: Gaming_Forum
