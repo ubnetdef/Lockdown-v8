@@ -69,6 +69,10 @@
     - name: install pexpect
       pip:
         name: pexpect
+        executable: pip
+    - name: install pexpect
+      pip:
+        name: pexpect
         executable: pip3
       become: yes
 
