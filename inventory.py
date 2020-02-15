@@ -229,7 +229,7 @@ class Inventory(object):
 
                 if host in Traveler:
                     hostvars[host]['networks'][0]['netmask'] = '255.255.255.248'
-                    hostvars[host]['networks'][0]['gateway'] = "192.168.253.{}".format(str(team_number*all_vars['IP_jump']+2))
+                    hostvars[host]['networks'][0]['gateway'] = "192.168.253.{}".format(str((team_number-1)*all_vars['IP_jump']+1))
 
                 if host in PaloAlto:
                     hostvars[host]['networks'] = []
