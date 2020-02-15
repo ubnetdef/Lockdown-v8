@@ -180,7 +180,7 @@ class Inventory(object):
                 if host in Windows_10:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
-                    hostvars[host]['timeout'] = 1800
+                    hostvars[host]['timeout'] = 2400
 
                 if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab + Traveler:
                     hostvars[host]['ansible_user'] = 'sysadmin'
