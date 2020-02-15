@@ -65,6 +65,11 @@
 
 - hosts: Gaming_Forum
   become: true
+  pre_tasks:
+    - name: install pexpect
+      pip:
+        name: pexpect
+      become: yes
   roles:
     - ansible-discourse-role
 
