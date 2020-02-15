@@ -121,7 +121,6 @@ class Inventory(object):
                 if host in Windows_10:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows10'
-                    hostvars[host]['timeout'] = 600
 
                 if host in Windows_Core:
                     hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
@@ -176,10 +175,12 @@ class Inventory(object):
                     hostvars[host]['ansible_user'] = 'Administrator'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
+                    hostvars[host]['timeout'] = 600
 
                 if host in Windows_10:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
+                    hostvars[host]['timeout'] = 600
 
                 if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab + Traveler:
                     hostvars[host]['ansible_user'] = 'sysadmin'
