@@ -18,6 +18,10 @@
 - name: Install Docker's dependencies
   apt:
     name: "{{ docker__package_dependencies + docker__pip_dependencies }}"
+  retries: 25
+  delay: 20
+  register: result
+  until: result.rc == 0
 
 - name: Add Docker's public PGP key to the APT keyring
   apt_key:

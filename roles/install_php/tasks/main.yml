@@ -1,6 +1,11 @@
 ---
 - name: Add repositories for php
   apt_repository: repo='ppa:ondrej/php' state=present
+  retries: 25
+  delay: 20
+  register: result
+  until: result.rc == 0
+
 
 - name: Update repositories cache and install "php" packages
   apt:
@@ -28,3 +33,7 @@
       - php-mysql
       - php7.2-simplexml
     update_cache: yes
+  retries: 25
+  delay: 20
+  register: result
+  until: result.rc == 0
