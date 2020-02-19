@@ -3,8 +3,8 @@
   apt_repository: repo='ppa:ondrej/php' state=present
   retries: 25
   delay: 20
-  register: result
-  until: result.rc == 0
+  register: result_php_repo
+  until: result_php_repo is succeeded
 
 
 - name: Update repositories cache and install "php" packages
@@ -35,5 +35,5 @@
     update_cache: yes
   retries: 25
   delay: 20
-  register: result
-  until: result.rc == 0
+  register: result_php_apt
+  until: result_php_apt is succeeded
