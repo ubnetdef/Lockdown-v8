@@ -233,7 +233,7 @@ class Inventory(object):
 
                 if host in PaloAlto:
                     hostvars[host]['networks'] = []
-                    for net_instance in ['13.33.33.37', '13.33.33.37', '13.33.33.37']:
+                    for net_instance in ['13.33.33.37', '13.33.33.37', '13.33.33.37', '13.33.33.37']:
                         hostvars[host]['networks'].append(networking(net_instance))
 
 
