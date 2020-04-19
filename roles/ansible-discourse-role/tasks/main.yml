@@ -91,8 +91,8 @@
       command: /bin/bash /tmp/test.sh
       responses:
         'Email': 'admin@gaming.lockdown'
-        'Password': 'changeme-red'
-        'Repeat password': 'changeme-red'
+        'Password': 'changeme'
+        'Repeat password': 'changeme'
         'Do you want to grant Admin privileges': 'y'
       chdir: ~/discourse
       echo: yes
@@ -117,6 +117,19 @@
         'Email': 'blue-team@gaming.lockdown'
         'Password': 'changeme-blue'
         'Repeat password': 'changeme-blue'
+        'Do you want to grant Admin privileges': 'y'
+      chdir: ~/discourse
+      echo: yes
+    become: yes
+
+
+  - name: Add Red team account
+    expect:
+      command: /bin/bash /tmp/test.sh
+      responses:
+        'Email': 'red-team@gaming.lockdown'
+        'Password': 'changeme-red'
+        'Repeat password': 'changeme-red'
         'Do you want to grant Admin privileges': 'y'
       chdir: ~/discourse
       echo: yes
