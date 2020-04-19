@@ -1,3 +1,9 @@
+  - name: Install apache2
+    apt:
+      name: apache2
+      state: present
+    become: yes
+
   - name: Download req.sh
     get_url:
       url: https://raw.githubusercontent.com/techAPJ/install-rails/master/linux
@@ -7,7 +13,7 @@
 
   - name: Install Discourse dependencies
     shell:
-      cmd: /tmp/req.sh
+      cmd: sudo /tmp/req.sh
       executable: /bin/bash
     become: yes
 
@@ -57,7 +63,7 @@
 
   - name: Start rails server
     shell:
-      cmd: ~/.rbenv/shims/bundle exec puma -p 9000
+      cmd: ~/.rbenv/shims/bundle exec puma -p 80
       chdir: ~/discourse
       executable: /bin/bash
     become: yes
@@ -99,6 +105,18 @@
         'Email': 'white-team@gaming.lockdown'
         'Password': 'changeme-white'
         'Repeat password': 'changeme-white'
+        'Do you want to grant Admin privileges': 'y'
+      chdir: ~/discourse
+      echo: yes
+    become: yes
+
+  - name: Add Blue team account
+    expect:
+      command: /bin/bash /tmp/test.sh
+      responses:
+        'Email': 'blue-team@gaming.lockdown'
+        'Password': 'changeme-blue'
+        'Repeat password': 'changeme-blue'
         'Do you want to grant Admin privileges': 'y'
       chdir: ~/discourse
       echo: yes
