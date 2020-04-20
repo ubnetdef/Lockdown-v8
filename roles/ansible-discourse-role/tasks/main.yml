@@ -90,7 +90,7 @@
     expect:
       command: /bin/bash /tmp/test.sh
       responses:
-        'Email': 'admin@gaming.lockdown'
+        'Email': 'gaming-admin@gaming.lockdown'
         'Password': 'changeme'
         'Repeat password': 'changeme'
         'Do you want to grant Admin privileges': 'y'
