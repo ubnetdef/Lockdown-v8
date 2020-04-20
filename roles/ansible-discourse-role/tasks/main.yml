@@ -91,8 +91,8 @@
       command: /bin/bash /tmp/test.sh
       responses:
         'Email': 'gaming-admin@gaming.lockdown'
-        'Password': 'changeme'
-        'Repeat password': 'changeme'
+        'Password': 'changeme-admin'
+        'Repeat password': 'changeme-admin'
         'Do you want to grant Admin privileges': 'y'
       chdir: ~/discourse
       echo: yes
