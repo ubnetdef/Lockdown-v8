@@ -202,11 +202,11 @@ class Inventory(object):
                     hostvars[host]['OS'] = 'Windows'
 
                 if host not in Active_Directory:
-                    hostvars[host]['customization']['dns_servers'] = [Active_Directory[idx]]
-                    network['dns_servers'] = Active_Directory[idx]
+                    hostvars[host]['customization']['dns_servers'] = [[Active_Directory[idx]], all_vars['prefered_DNS']]
+                    network['dns_servers'] = [Active_Directory[idx], all_vars['prefered_DNS']]
                 else:
                     hostvars[host]['customization']['dns_servers'] = [all_vars['prefered_DNS']]
-                    network['dns_servers'] = all_vars['prefered_DNS']
+                    network['dns_servers'] = [all_vars['prefered_DNS']]
 
                 if host in cloud:
                     hostvars[host]['folder'] = 'Lockdown/{}/{}'.format(
