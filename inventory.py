@@ -202,8 +202,8 @@ class Inventory(object):
                     hostvars[host]['OS'] = 'Windows'
 
                 if host not in Active_Directory:
-                    hostvars[host]['customization']['dns_servers'] = [Active_Directory[idx]]
-                    network['dns_servers'] = Active_Directory[idx]
+                    hostvars[host]['customization']['dns_servers'] = [Active_Directory[idx], '8.8.8.8']
+                    network['dns_servers'] = [Active_Directory[idx], '8.8.8.8']
                 else:
                     hostvars[host]['customization']['dns_servers'] = [all_vars['prefered_DNS']]
                     network['dns_servers'] = all_vars['prefered_DNS']
