@@ -63,19 +63,19 @@ class Inventory(object):
         #####################################################################################################
 
         #####################################################################################################
-        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Windows_10 = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Windows_Core = ['10.X.1.50'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Rouge_Windows = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        Traveler = ["192.168.253.{}".format(str((i-1)*all_vars['IP_jump']+3)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
-        PaloAlto = ['13.33.33.X'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams'] + 1 + all_vars['start_team'])]
+        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Windows_10 = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Windows_Core = ['10.X.1.50'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Rouge_Windows = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Traveler = ["192.168.253.{}".format(str((i-1)*all_vars['IP_jump']+3)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        PaloAlto = ['13.33.33.X'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
 
         cloud = WEB + DB + FTP + Gaming_Forum + GitLab + PaloAlto
         for host_list in [
