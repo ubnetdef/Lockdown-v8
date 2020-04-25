@@ -20,7 +20,7 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
   roles:
     - local_users_Linux
 #
