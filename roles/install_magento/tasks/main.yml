@@ -14,10 +14,22 @@
     repo: https://github.com/magento/magento2.git
     dest: /var/www/html/
 
+
+- name: Change ownership to insecure
+  file:
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    recurse: yes
+    mode: '0777'
+
+
 - name: Initiate composer 
   command: composer install
   args:
     chdir: /var/www/html
+  become: yes
+  become_user: www-data
 
 - name: Change line in apache config
   replace:
