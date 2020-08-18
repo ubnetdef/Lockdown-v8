@@ -15,9 +15,9 @@
     dest: /var/www/html/
 
 
-- name: Change ownership to insecure
+- name: Change ownership in www to insecure
   file:
-    dest: /var/www/html
+    dest: /var/www
     owner: www-data
     group: www-data
     recurse: yes
