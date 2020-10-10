@@ -90,7 +90,7 @@
     expect:
       command: /bin/bash /tmp/test.sh
       responses:
-        'Email': 'gaming-admin@gaming.lockdown'
+        'Email': 'spooky-admin@spooky.skeleton'
         'Password': 'changeme-admin'
         'Repeat password': 'changeme-admin'
         'Do you want to grant Admin privileges': 'y'
@@ -102,7 +102,7 @@
     expect:
       command: /bin/bash /tmp/test.sh
       responses:
-        'Email': 'white-team@gaming.lockdown'
+        'Email': 'white-team@spooky.skeleton'
         'Password': 'changeme-white'
         'Repeat password': 'changeme-white'
         'Do you want to grant Admin privileges': 'y'
@@ -114,7 +114,7 @@
     expect:
       command: /bin/bash /tmp/test.sh
       responses:
-        'Email': 'blue-team@gaming.lockdown'
+        'Email': 'blue-team@spooky.skeleton'
         'Password': 'changeme-blue'
         'Repeat password': 'changeme-blue'
         'Do you want to grant Admin privileges': 'y'
@@ -127,7 +127,7 @@
     expect:
       command: /bin/bash /tmp/test.sh
       responses:
-        'Email': 'red-team@gaming.lockdown'
+        'Email': 'red-team@spooky.skeleton'
         'Password': 'changeme-red'
         'Repeat password': 'changeme-red'
         'Do you want to grant Admin privileges': 'y'
