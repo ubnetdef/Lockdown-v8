@@ -45,67 +45,67 @@
 #  become: true
 #  roles:
 #    - ansible-role-mysql-master
-#
-#
-- hosts: WEB
+
+
+#- hosts: WEB
+#  become: true
+#  roles:
+##    - geerlingguy.composer
+#    - install_php
+#    - ansible-role-apache-master
+#    - ansible-role-apache-php-fpm-master
+#    - ansible-role-composer-master
+#    - install_magento
+
+- hosts: DB
   become: true
   roles:
-#    - geerlingguy.composer
-    - install_php
-    - ansible-role-apache-master
-    - ansible-role-apache-php-fpm-master
-    - ansible-role-composer-master
-    - install_magento
+    - ansible-docker-master
 
-#- hosts: DB
-#  become: true
-#  roles:
-#    - ansible-docker-master
-#
-#
-#- hosts: Gaming_Forum
-#  become: true
-#  tasks:
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#        executable: pip
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#        executable: pip3
-#      become: yes
-#
-#- hosts: Gaming_Forum
-#  become: true
-#  roles:
-#    - ansible-discourse-role
-#
-#
-#- hosts: GIT
-#  become: yes
-#  roles:
-#    - ansible-role-repo-epel-master
-#
-#- hosts: GIT
-#  become: yes
-#  tasks:
-#    - name: Install dependencies
-#      yum:
-#        name:
-#          - python3-setuptools
-#          - python-setuptools
-#          - python-pip
-#          - python3-pip
-#        state: latest
-#        update_cache: True
-#
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#      become: yes
-#
-#- hosts: GIT
-#  become: yes
-#  roles:
-#    - gitlab
+
+- hosts: Gaming_Forum
+  become: true
+  tasks:
+    - name: install pexpect
+      pip:
+        name: pexpect
+        executable: pip
+    - name: install pexpect
+      pip:
+        name: pexpect
+        executable: pip3
+      become: yes
+
+- hosts: Gaming_Forum
+  become: true
+  roles:
+    - ansible-discourse-role
+
+
+- hosts: GIT
+  become: yes
+  roles:
+    - ansible-role-repo-epel-master
+
+- hosts: GIT
+  become: yes
+  tasks:
+    - name: Install dependencies
+      yum:
+        name:
+          - python3-setuptools
+          - python-setuptools
+          - python-pip
+          - python3-pip
+        state: latest
+        update_cache: True
+
+    - name: install pexpect
+      pip:
+        name: pexpect
+      become: yes
+
+- hosts: GIT
+  become: yes
+  roles:
+    - gitlab
