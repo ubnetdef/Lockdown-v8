@@ -70,11 +70,6 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Cheif
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
   - username: Jigsaw
     password: Changeme2020!
     groups:
