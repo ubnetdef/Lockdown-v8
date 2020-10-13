@@ -10,6 +10,31 @@ accounts:
     groups:
       - Domain Admins
 
+  - username: Casper
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
+  - username: Orange
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
+  - username: Haunter
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
+  - username: Gengar
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
+  - username: Candy
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
   - username: Annabelle
     password: Changeme2020!
     groups:
