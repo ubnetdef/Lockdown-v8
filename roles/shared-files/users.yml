@@ -5,12 +5,12 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Cyber
+  - username: Pumpkin
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Sans
+  - username: Annabelle
     password: Changeme2020!
     groups:
       - Domain Admins
@@ -20,22 +20,22 @@ accounts:
     groups:
       - Domain Admins
  
-  - username: Papyrus
+  - username: Freddy
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Keanu
+  - username: Jason
     password: Changeme2020!
     groups:
       - Domain Admins   
 
-  - username: Geralt
+  - username: Michael
     password: Changeme2020!
     groups:
       - Domain Admins
     
-  - username: Lancer
+  - username: Krampus
     password: Changeme2020!
     groups:
       - Domain Admins
@@ -45,22 +45,22 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Kratos
+  - username: Jigsaw
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Gordon
+  - username: Grudge
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Glados
+  - username: Chuckie
     password: Changeme2020!
     groups:
       - Domain Admins
   
-  - username: Cortana
+  - username: Clown
     password: Changeme2020!
     groups:
       - Domain Admins  
@@ -70,90 +70,73 @@ accounts:
     groups:
       - Domain Admins 
 
-  - username: Monika
+  - username: Ghostface
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Origin
+  - username: Dracula
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Megaman
+  - username: Slenderman
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Link
+  - username: Torrance
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Mario
+  - username: Leatherface
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Snake
+  - username: Edward
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Lara
+  - username: Frankenstein
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Duke
+  - username: Phantom
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Scorpion
+  - username: VanHelsing
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: SubZero
+  - username: Never
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Bowser
+  - username: Gonna
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Sonic
+  - username: Give
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Ezio
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-
-  - username: Ciri
+  - username: Youu
     password: Changeme2020!
     groups:
       - Domain Admins
 
 
-  - username: solitare
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-
-  - username: Controller
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Price
+  - username: Uppp
     password: Changeme2020!
     groups:
       - Domain Admins
