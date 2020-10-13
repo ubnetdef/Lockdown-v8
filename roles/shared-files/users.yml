@@ -25,6 +25,11 @@ accounts:
     groups:
       - Domain Admins
 
+  - username: KingBoo
+    password: Changeme2020!
+    groups:
+      - Domain Admins
+
   - username: Gengar
     password: Changeme2020!
     groups:
