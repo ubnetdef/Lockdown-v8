@@ -7,7 +7,7 @@
 
 - name: dpkg powershell
   shell:
-    cmd: dpki -i powershell_7.0.3-1.ubuntu.18.04_amd64.deb
+    cmd: dpkg -i powershell_7.0.3-1.ubuntu.18.04_amd64.deb
     executable: /bin/bash
   become: yes
 
