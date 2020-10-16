@@ -63,7 +63,7 @@
 
   - name: Start rails server
     shell:
-      cmd: ~/.rbenv/shims/bundle exec puma -p 80
+      cmd: UNICORN_BIND_ALL=true ~/.rbenv/shims/bundle exec rails server
       chdir: ~/discourse
       executable: /bin/bash
     become: yes
