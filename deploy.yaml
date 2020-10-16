@@ -1,114 +1,114 @@
-#- hosts: localhost
-#  gather_facts: no
-#  connection: local
-#  roles:
-#     - folders
-#     - folder_permissions
-#     - pfsense_deploy_provision
-#     - template_deployment
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+     - folders
+     - folder_permissions
+     - pfsense_deploy_provision
+     - template_deployment
+
+- hosts: AD
+  gather_facts: no
+  roles:
+    - windows_server_provision_AD
+
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
+  gather_facts: no
+  strategy: free
+  tasks:
+    - name: Wait For connection up
+      wait_for_connection:
+        timeout: 30000
+
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
+  roles:
+    - local_users_Linux
 #
-#- hosts: AD
-#  gather_facts: no
-#  roles:
-#    - windows_server_provision_AD
-#
-#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
-#  gather_facts: no
-#  strategy: free
-#  tasks:
-#    - name: Wait For connection up
-#      wait_for_connection:
-#        timeout: 30000
-#
-#- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
-#  roles:
-#    - local_users_Linux
-##
-#- hosts: Rouge_Windows, Ubuntu, Traveler
-#  tasks:
-#    - name: Misconfigured DNS
-#      raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
-#  become: true
-#
-#- hosts: Windows_10, Windows_Core, FTP
-#  gather_facts: no
-#  roles:
-#    - Windows_Client_Provision
-#
-#- hosts: WEB, DB, GIT
-#  become: yes
-#  roles:
-#    - disable_firewall
-#
-#
-#- hosts: DB
-#  become: true
-#  roles:
-#    - ansible-role-mysql-master
-#
-#
-#- hosts: WEB
-#  become: true
-#  roles:
-##    - geerlingguy.composer
-#    - install_php
-#    - ansible-role-apache-master
-#    - ansible-role-apache-php-fpm-master
-#    - ansible-role-composer-master
-#    - install_magento
-#
-#- hosts: DB
-#  become: true
-#  roles:
-#    - ansible-docker-master
-#
-#
-#- hosts: Gaming_Forum
-#  become: true
-#  tasks:
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#        executable: pip
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#        executable: pip3
-#      become: yes
-#
-#- hosts: Gaming_Forum
-#  become: true
-#  roles:
-#    - ansible-discourse-role
-#
-#
-#- hosts: GIT
-#  become: yes
-#  roles:
-#    - ansible-role-repo-epel-master
-#
-#- hosts: GIT
-#  become: yes
-#  tasks:
-#    - name: Install dependencies
-#      yum:
-#        name:
-#          - python3-setuptools
-#          - python-setuptools
-#          - python-pip
-#          - python3-pip
-#        state: latest
-#        update_cache: True
-#
-#    - name: install pexpect
-#      pip:
-#        name: pexpect
-#      become: yes
-#
-#- hosts: GIT
-#  become: yes
-#  roles:
-#    - gitlab
+- hosts: Rouge_Windows, Ubuntu, Traveler
+  tasks:
+    - name: Misconfigured DNS
+      raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
+  become: true
+
+- hosts: Windows_10, Windows_Core, FTP
+  gather_facts: no
+  roles:
+    - Windows_Client_Provision
+
+- hosts: WEB, DB, GIT
+  become: yes
+  roles:
+    - disable_firewall
+
+
+- hosts: DB
+  become: true
+  roles:
+    - ansible-role-mysql-master
+
+
+- hosts: WEB
+  become: true
+  roles:
+#    - geerlingguy.composer
+    - install_php
+    - ansible-role-apache-master
+    - ansible-role-apache-php-fpm-master
+    - ansible-role-composer-master
+    - install_magento
+
+- hosts: DB
+  become: true
+  roles:
+    - ansible-docker-master
+
+
+- hosts: Gaming_Forum
+  become: true
+  tasks:
+    - name: install pexpect
+      pip:
+        name: pexpect
+        executable: pip
+    - name: install pexpect
+      pip:
+        name: pexpect
+        executable: pip3
+      become: yes
+
+- hosts: Gaming_Forum
+  become: true
+  roles:
+    - ansible-discourse-role
+
+
+- hosts: GIT
+  become: yes
+  roles:
+    - ansible-role-repo-epel-master
+
+- hosts: GIT
+  become: yes
+  tasks:
+    - name: Install dependencies
+      yum:
+        name:
+          - python3-setuptools
+          - python-setuptools
+          - python-pip
+          - python3-pip
+        state: latest
+        update_cache: True
+
+    - name: install pexpect
+      pip:
+        name: pexpect
+      become: yes
+
+- hosts: GIT
+  become: yes
+  roles:
+    - gitlab
 
 
 - hosts: Rouge_Windows
