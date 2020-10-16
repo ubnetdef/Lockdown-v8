@@ -1,0 +1,32 @@
+- name: download powershell
+  shell:
+    cmd: wget https://github.com/PowerShell/PowerShell/releases/download/v7.0.3/powershell_7.0.3-1.ubuntu.18.04_amd64.deb
+    executable: /bin/bash
+  become: yes
+
+
+- name: dpkg powershell
+  shell:
+    cmd: dpki -i powershell_7.0.3-1.ubuntu.18.04_amd64.deb
+    executable: /bin/bash
+  become: yes
+
+
+- name: Fix Broken
+  shell:
+    cmd: apt --fix-broken install -y
+    executable: /bin/bash
+  become: yes
+
+
+- name: Install a dependencie
+  shell:
+    cmd: apt install liblttng-ust0 -y
+    executable: /bin/bash
+  become: yes
+
+- name: Change shell
+  shell:
+    cmd: chsh -s /usr/bin/pwsh sysadmin
+    executable: /bin/bash
+  become: yes
