@@ -5,12 +5,6 @@
   become: yes
 
 
-- name: dpkg powershell
-  shell:
-    cmd: dpkg -i powershell_7.0.3-1.ubuntu.18.04_amd64.deb
-    executable: /bin/bash
-  become: yes
-
 
 - name: Fix Broken
   shell:
@@ -22,6 +16,12 @@
 - name: Install a dependencie
   shell:
     cmd: apt install liblttng-ust0 -y
+    executable: /bin/bash
+  become: yes
+
+- name: dpkg powershell
+  shell:
+    cmd: dpkg -i powershell_7.0.3-1.ubuntu.18.04_amd64.deb
     executable: /bin/bash
   become: yes
 
