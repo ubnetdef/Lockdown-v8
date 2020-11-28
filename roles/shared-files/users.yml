@@ -10,27 +10,27 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Casper
+  - username: Winter
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Orange
+  - username: Santa
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Haunter
+  - username: Gift
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: KingBoo
+  - username: Alone
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Gengar
+  - username: Home
     password: Changeme2020!
     groups:
       - Domain Admins
@@ -40,128 +40,17 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Annabelle
+  - username: Snow
     password: Changeme2020!
     groups:
       - Domain Admins
 
-  - username: Flowey
+  - username: Family
     password: Changeme2020!
     groups:
       - Domain Admins
  
-  - username: Freddy
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Jason
-    password: Changeme2020!
-    groups:
-      - Domain Admins   
-
-  - username: Michael
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-    
-  - username: Krampus
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Jigsaw
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Grudge
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Chuckie
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-  
-  - username: Clown
-    password: Changeme2020!
-    groups:
-      - Domain Admins  
-  
-  - username: Goose
-    password: Changeme2020!
-    groups:
-      - Domain Admins 
-
-  - username: Ghostface
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Dracula
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Slenderman
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Torrance
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Leatherface
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Edward
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Frankenstein
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Phantom
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: VanHelsing
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Never
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Gonna
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Give
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-  - username: Youu
-    password: Changeme2020!
-    groups:
-      - Domain Admins
-
-
-  - username: Uppp
+  - username: Boredom
     password: Changeme2020!
     groups:
       - Domain Admins
