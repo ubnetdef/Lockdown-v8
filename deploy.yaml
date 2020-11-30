@@ -48,6 +48,14 @@
 
 
 - hosts: WEB
+  tasks:
+    - name: Remove bad composer
+      file:
+        path: /usr/local/bin/composer
+        state: absent
+  become: true
+
+- hosts: WEB
   become: true
   roles:
 #    - geerlingguy.composer
