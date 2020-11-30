@@ -4,13 +4,15 @@
     executable: /bin/bash
   become: yes
 
-
-
 - name: Fix Broken
   shell:
     cmd: apt --fix-broken install -y
     executable: /bin/bash
   become: yes
+  retries: 3
+  delay: 360
+  register: result
+  until: result.rc == 0
 
 
 - name: Install a dependencie
