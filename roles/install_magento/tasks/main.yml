@@ -43,9 +43,9 @@
       bin/magento setup:install 
       --admin-firstname=admin 
       --admin-lastname=admin 
-      --admin-email=admin@happy.holidays
+      --admin-email=admin@reallife.lockdown
       --admin-user=admin
-      --admin-password=Changeme2020! 
+      --admin-password=Changeme2021! 
       --base-url="{{ magento_host }}" 
       --db-host="{{ magento_db_host }}" 
       --db-name=magento 

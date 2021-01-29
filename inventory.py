@@ -55,8 +55,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'happy.holidays'
-        all_vars['netbios'] = 'HOLIDAY'
+        all_vars['domain'] = 'reallife.lockdown'
+        all_vars['netbios'] = 'VIRUS'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -72,16 +72,16 @@ class Inventory(object):
         FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Gaming_Forum = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        IOT = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         Traveler = ["192.168.253.{}".format(str((i-1)*all_vars['IP_jump']+3)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         PaloAlto = ['13.33.33.X'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
 
-        cloud = WEB + DB + FTP + Gaming_Forum + GitLab + PaloAlto
+        cloud = WEB + DB + FTP + IOT + GitLab + PaloAlto
         for host_list in [
                 Active_Directory, Rouge_Windows, CentOS,
                 Ubuntu, Windows_10, Windows_Core,
-                WEB, DB, FTP, Gaming_Forum, GitLab, Traveler, PaloAlto
+                WEB, DB, FTP, IOT, GitLab, Traveler, PaloAlto
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -130,9 +130,9 @@ class Inventory(object):
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
-                if host in Gaming_Forum:
+                if host in IOT:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'GamingForum'
+                    hostvars[host]['AD_Name'] = 'IoT'
 
                 if host in GitLab:
                     hostvars[host]['template'] = 'Git-Server-Centos-7-v8'
@@ -182,7 +182,7 @@ class Inventory(object):
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + Gaming_Forum + GitLab + Traveler:
+                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + IOT + GitLab + Traveler:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
@@ -255,8 +255,8 @@ class Inventory(object):
         DB_Servers['hosts'] = DB
         FTP_Servers = {}
         FTP_Servers['hosts'] = FTP
-        GamingForum = {}
-        GamingForum['hosts'] = Gaming_Forum
+        IoT = {}
+        IoT['hosts'] = IOT
         GIT_Servers = {}
         GIT_Servers['hosts'] = GitLab
         Traveler_box = {}
@@ -277,9 +277,9 @@ class Inventory(object):
         inventory['DB'] = DB_Servers
         inventory['GIT'] = GIT_Servers
         inventory['FTP'] = FTP_Servers
-        inventory['Gaming_Forum'] = GamingForum
-        inventory['Traveler'] = Traveler_box
-        inventory['PaloAlto'] = PaloAlto_box
+        inventory['IOT'] = IoT
+        #inventory['Traveler'] = Traveler_box
+        #inventory['PaloAlto'] = PaloAlto_box
 
         #################################################################################################
 

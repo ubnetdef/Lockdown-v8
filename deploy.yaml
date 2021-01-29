@@ -12,7 +12,7 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, IOT, GIT
   gather_facts: no
   strategy: free
   tasks:
@@ -20,7 +20,7 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, Gaming_Forum, GIT
+- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, IOT, GIT
   roles:
     - local_users_Linux
 #
@@ -62,23 +62,23 @@
     - ansible-docker-master
 
 
-- hosts: Gaming_Forum
-  become: true
-  tasks:
-    - name: install pexpect
-      pip:
-        name: pexpect
-        executable: pip
-    - name: install pexpect
-      pip:
-        name: pexpect
-        executable: pip3
-      become: yes
+# - hosts: IOT
+#   become: true
+#   tasks:
+#     - name: install pexpect
+#       pip:
+#         name: pexpect
+#         executable: pip
+#     - name: install pexpect
+#       pip:
+#         name: pexpect
+#         executable: pip3
+#       become: yes
 
-- hosts: Gaming_Forum
-  become: true
-  roles:
-    - ansible-discourse-role
+# - hosts: IOT
+#   become: true
+#   roles:
+#     - ansible-discourse-role
 
 
 - hosts: GIT

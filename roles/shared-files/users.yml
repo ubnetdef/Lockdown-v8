@@ -1,56 +1,56 @@
 accounts:
 
   - username: Admin
-    password: Changeme2020!
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Pumpkin
-    password: Changeme2020!
+  - username: Masks
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Winter
-    password: Changeme2020!
+  - username: Charts
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Santa
-    password: Changeme2020!
+  - username: Wannacry
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Gift
-    password: Changeme2020!
+  - username: Flu
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Alone
-    password: Changeme2020!
+  - username: Nimda
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Home
-    password: Changeme2020!
+  - username: Health
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Candy
-    password: Changeme2020!
+  - username: Medicine
+    password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Snow
-    password: Changeme2020!
+  - username: Surgery
+    password: Changeme2021!
     groups:
       - Domain Admins
 
   - username: Family
-    password: Changeme2020!
+    password: Changeme2021!
     groups:
       - Domain Admins
  
-  - username: Boredom
-    password: Changeme2020!
+  - username: Doctor
+    password: Changeme2021!
     groups:
       - Domain Admins
