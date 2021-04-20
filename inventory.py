@@ -134,6 +134,14 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
+                if host in Calendar_System:
+                    hostvars[host]['template'] = 'FinalCalDav'
+                    hostvars[host]['AD_Name'] = 'CalDav'
+
+                if host in Patient_Notes:
+                    hostvars[host]['template'] = 'FinalNotes'
+                    hostvars[host]['AD_Name'] = 'Notes'
+
                 if host in DB:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'DATABASE'
