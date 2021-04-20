@@ -13,7 +13,7 @@
 - name: Disable firewall if rhel
   service:
     name: firewalld
-    state: stopped
+    state: sto~pped
     enabled: no
   when: ansible_os_family == "RedHat"
 

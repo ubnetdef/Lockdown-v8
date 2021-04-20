@@ -7,12 +7,12 @@
      - pfsense_deploy_provision
      - template_deployment
 
-- hosts: AD
+- hosts: Active_Directory
   gather_facts: no
   roles:
     - windows_server_provision_AD
 
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, IOT, GIT
+- hosts: IT_Station, CentOS, Ubuntu, WEB, DB, IOT, Calendar_System, Patient_Notes
   gather_facts: no
   strategy: free
   tasks:
@@ -20,97 +20,37 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: Rouge_Windows, CentOS, Ubuntu, WEB, DB, IOT, GIT
+- hosts: IT_Station, CentOS, Ubuntu, WEB, DB, IOT, Calendar_System, Patient_Notes
   roles:
     - local_users_Linux
-#
-- hosts: Rouge_Windows, Ubuntu, Traveler
+
+- hosts: IT_Station, Ubuntu
   tasks:
     - name: Misconfigured DNS
       raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
-- hosts: Windows_10, Windows_Core, FTP
+- hosts: Nurse_Station_A, Nurse_Station_B, Doctor_Station, Secretary_Station, FTP
   gather_facts: no
   roles:
     - Windows_Client_Provision
 
-- hosts: WEB, DB, GIT
+- hosts: WEB, DB, Calendar_System, Patient_Notes, IOT
   become: yes
   roles:
     - disable_firewall
-
 
 - hosts: DB
   become: true
   roles:
     - ansible-role-mysql-master
 
-- hosts: WEB
-  become: true
-  roles:
-#    - geerlingguy.composer
-    - install_php
-    - ansible-role-apache-master
-    - ansible-role-apache-php-fpm-master
-    - ansible-role-composer-master
-    - install_magento
-
 - hosts: DB
   become: true
   roles:
     - ansible-docker-master
 
-
-# - hosts: IOT
-#   become: true
-#   tasks:
-#     - name: install pexpect
-#       pip:
-#         name: pexpect
-#         executable: pip
-#     - name: install pexpect
-#       pip:
-#         name: pexpect
-#         executable: pip3
-#       become: yes
-
-# - hosts: IOT
-#   become: true
-#   roles:
-#     - ansible-discourse-role
-
-
-- hosts: GIT
-  become: yes
-  roles:
-    - ansible-role-repo-epel-master
-
-- hosts: GIT
-  become: yes
-  tasks:
-    - name: Install dependencies
-      yum:
-        name:
-          - python3-setuptools
-          - python-setuptools
-          - python-pip
-          - python3-pip
-        state: latest
-        update_cache: True
-
-    - name: install pexpect
-      pip:
-        name: pexpect
-      become: yes
-
-- hosts: GIT
-  become: yes
-  roles:
-    - gitlab
-
-
-- hosts: Rouge_Windows
+- hosts: IT_Station
   become: yes
   roles:
     - powershell-ubuntu-role

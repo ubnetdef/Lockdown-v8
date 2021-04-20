@@ -49,8 +49,8 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 1
-        all_vars['total_teams'] = 12
+        all_vars['start_team'] = 14
+        all_vars['total_teams'] = 15
         all_vars['Lockdown_user_role'] = 'Lockdown'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
@@ -64,24 +64,24 @@ class Inventory(object):
 
         #####################################################################################################
         Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Windows_10 = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Windows_Core = ['10.X.1.50'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Rouge_Windows = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Nurse_Station_A = ['10.X.1.80'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Nurse_Station_B = ['10.X.1.90'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Doctor_Station = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Secretary_Station = ['10.X.1.100'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        IT_Station = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]    
         IOT = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        GitLab = ['10.X.2.5'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Traveler = ["192.168.253.{}".format(str((i-1)*all_vars['IP_jump']+3)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        PaloAlto = ['13.33.33.X'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-
-        cloud = WEB + DB + FTP + IOT + GitLab + PaloAlto
+        Calendar_System = ['10.X.2.12'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Patient_Notes = ['10.X.2.14'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        cloud = FTP + WEB + DB + IOT + Calendar_System + Patient_Notes
         for host_list in [
-                Active_Directory, Rouge_Windows, CentOS,
-                Ubuntu, Windows_10, Windows_Core,
-                WEB, DB, FTP, IOT, GitLab, Traveler, PaloAlto
+                Active_Directory, Nurse_Station_A, Nurse_Station_B, 
+                Doctor_Station, Secretary_Station, 
+                IT_Station, Ubuntu, FTP, WEB, DB, IOT, 
+                Calendar_System, Patient_Notes
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -97,54 +97,41 @@ class Inventory(object):
                     hostvars[host]['template'] = "Server-Windows-2019-v8"
                     hostvars[host]['AD_Name'] = 'AD'
 
-                if host in Rouge_Windows:
+                if host in IT_Station:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Rouge_Windows'
-
-                if host in CentOS:
-                    hostvars[host]['template'] = 'Desktop-Centos-07-v8'
-                    hostvars[host]['AD_Name'] = 'CentOS'
+                    hostvars[host]['AD_Name'] = 'IT_Station'
 
                 if host in Ubuntu:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'Ubuntu'
 
-                if host in Traveler:
-                    hostvars[host]['template'] = 'AWX-Desktop-LUbuntu-16.04'
-                    hostvars[host]['AD_Name'] = 'Traveler'
-
-                if host in PaloAlto:
-                    hostvars[host]['template'] = 'AWX-Palo-Alto'
-                    hostvars[host]['AD_Name'] = 'PaloAlto'
-                    hostvars[host]['skip_deployment_check'] = 'True'
-
-                if host in Windows_10:
+                if host in Nurse_Station_A:
                     hostvars[host]['template'] = 'Desktop-Windows-10-v8'
                     hostvars[host]['AD_Name'] = 'Windows10'
 
-                if host in Windows_Core:
-                    hostvars[host]['template'] = 'Server-Windows-Core-2019-v8'
-                    hostvars[host]['AD_Name'] = 'WindowsCore'
+                if host in Nurse_Station_B:
+                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['AD_Name'] = 'Windows10'
+
+                if host in Doctor_Station:
+                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['AD_Name'] = 'Windows10'
+
+                if host in Secretary_Station:
+                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['AD_Name'] = 'Windows10'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in IOT:
-                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
+                    hostvars[host]['template'] = 'FinalIoTSystem'
                     hostvars[host]['AD_Name'] = 'IoT'
 
-                if host in GitLab:
-                    hostvars[host]['template'] = 'Git-Server-Centos-7-v8'
-                    hostvars[host]['AD_Name'] = 'GitLab'
-                    hostvars[host][
-                        'gitlab_external_url'] = "http://gitlab.{}".format(all_vars['domain'])
-
                 if host in WEB:
-                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
+                    hostvars[host]['template'] = 'FinalHTTP'
                     hostvars[host]['AD_Name'] = 'WEB'
-                    hostvars[host]['magento_host'] = "http://10.{}.2.2/".format(team_number)
-                    hostvars[host]['magento_db_host'] = "10.{}.2.3".format(team_number)
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
@@ -152,7 +139,19 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
-                        'name': 'magento',
+                        'name': 'virus',
+                        'host': '%',
+                        'password': 'changeme',
+                        'priv': '*.*:ALL,GRANT'
+                    })
+                    hostvars[host]['mysql_users'].append({
+                        'name': 'flu',
+                        'host': '%',
+                        'password': 'changeme',
+                        'priv': '*.*:ALL,GRANT'
+                    })
+                    hostvars[host]['mysql_users'].append({
+                        'name': 'COWID',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
@@ -171,24 +170,24 @@ class Inventory(object):
                         'replicate': 0
                     })
 
-                if host in Active_Directory + FTP + Windows_Core:
+                if host in Active_Directory + FTP:
                     hostvars[host]['ansible_user'] = 'Administrator'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
                     hostvars[host]['timeout'] = 600
 
-                if host in Windows_10:
+                if host in Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in Rouge_Windows + CentOS + Ubuntu + WEB + DB + IOT + GitLab + Traveler:
+                if host in IT_Station + Ubuntu + WEB + DB + IOT + Calendar_System + Patient_Notes:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
-                if host in FTP + Windows_10 + Windows_Core:
+                if host in Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station + FTP:
                     hostvars[host]['dns_domain_name'] = hostvars[
                         Active_Directory[idx]]['domain_name']
                     hostvars[host]['domain_admin_password'] = hostvars[
@@ -196,7 +195,7 @@ class Inventory(object):
                     hostvars[host]['domain_admin_user'] = hostvars[
                         Active_Directory[idx]]['ansible_user']
 
-                if host in Active_Directory + FTP + Windows_10 + Windows_Core:
+                if host in Active_Directory + FTP + Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station + FTP:
                     hostvars[host]['ansible_connection'] = 'winrm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
                     hostvars[host]['OS'] = 'Windows'
@@ -227,59 +226,51 @@ class Inventory(object):
                 hostvars[host]['team_number'] = team_number
                 hostvars[host]['customization']['hostname'] = hostvars[host]['AD_Name']
 
-                if host in Traveler:
-                    hostvars[host]['networks'][0]['netmask'] = '255.255.255.248'
-                    hostvars[host]['networks'][0]['gateway'] = "192.168.253.{}".format(str((team_number-1)*all_vars['IP_jump']+1))
 
-                if host in PaloAlto:
-                    hostvars[host]['networks'] = []
-                    for net_instance in ['13.33.33.37', '13.33.33.37', '13.33.33.37', '13.33.33.37']:
-                        hostvars[host]['networks'].append(networking(net_instance))
-
-
-        AD = {}
-        AD['hosts'] = Active_Directory
-        Linux_A = {}
-        Linux_A['hosts'] = Rouge_Windows
-        Linux_B = {}
-        Linux_B['hosts'] = CentOS
-        Linux_C = {}
-        Linux_C['hosts'] = Ubuntu
-        Windows_A = {}
-        Windows_A['hosts'] = Windows_10
-        Windows_B = {}
-        Windows_B['hosts'] = Windows_Core
-        WEB_Servers = {}
-        WEB_Servers['hosts'] = WEB
-        DB_Servers = {}
-        DB_Servers['hosts'] = DB
-        FTP_Servers = {}
-        FTP_Servers['hosts'] = FTP
-        IoT = {}
-        IoT['hosts'] = IOT
-        GIT_Servers = {}
-        GIT_Servers['hosts'] = GitLab
-        Traveler_box = {}
-        Traveler_box['hosts'] = Traveler
-        PaloAlto_box = {}
-        PaloAlto_box['hosts'] = PaloAlto
+        Active_Directory_dict = {}
+        Nurse_Station_A_dict = {}
+        Nurse_Station_B_dict = {}
+        Doctor_Station_dict = {}
+        Secretary_Station_dict = {}
+        IT_Station_dict = {}
+        Ubuntu_dict = {}
+        FTP_dict = {}
+        WEB_dict = {}
+        DB_dict = {}
+        IOT_dict = {}
+        Calendar_System_dict = {}
+        Patient_Notes_dict = {}
+        Active_Directory_dict["hosts"] = Active_Directory
+        Nurse_Station_A_dict["hosts"] = Nurse_Station_A
+        Nurse_Station_B_dict["hosts"] = Nurse_Station_B
+        Doctor_Station_dict["hosts"] = Doctor_Station
+        Secretary_Station_dict["hosts"] = Secretary_Station
+        IT_Station_dict["hosts"] = IT_Station
+        Ubuntu_dict["hosts"] = Ubuntu
+        FTP_dict["hosts"] = FTP
+        WEB_dict["hosts"] = WEB
+        DB_dict["hosts"] = DB
+        IOT_dict["hosts"] = IOT
+        Calendar_System_dict["hosts"] = Calendar_System
+        Patient_Notes_dict["hosts"] = Patient_Notes
 
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
-        inventory['AD'] = AD
-        inventory['Rouge_Windows'] = Linux_A
-        #inventory['CentOS'] = Linux_B
-        inventory['Ubuntu'] = Linux_C
-        inventory['Windows_10'] = Windows_A
-        #inventory['Windows_Core'] = Windows_B
-        inventory['WEB'] = WEB_Servers
-        inventory['DB'] = DB_Servers
-        #inventory['GIT'] = GIT_Servers
-        inventory['FTP'] = FTP_Servers
-        inventory['IOT'] = IoT
-        #inventory['Traveler'] = Traveler_box
-        #inventory['PaloAlto'] = PaloAlto_box
+
+        inventory['Active_Directory'] = Active_Directory_dict
+        inventory['Nurse_Station_A'] = Nurse_Station_A_dict
+        inventory['Nurse_Station_B'] = Nurse_Station_B_dict
+        inventory['Doctor_Station'] = Doctor_Station_dict
+        inventory['Secretary_Station'] = Secretary_Station_dict
+        inventory['IT_Station'] = IT_Station_dict
+        inventory['Ubuntu'] = Ubuntu_dict
+        inventory['FTP'] = FTP_dict
+        inventory['WEB'] = WEB_dict
+        inventory['DB'] = DB_dict
+        inventory['IOT'] = IOT_dict
+        inventory['Calendar_System'] = Calendar_System_dict
+        inventory['Patient_Notes'] = Patient_Notes_dict
 
         #################################################################################################
 
