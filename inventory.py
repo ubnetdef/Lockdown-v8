@@ -106,19 +106,19 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'Ubuntu'
 
                 if host in Nurse_Station_A:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
                     hostvars[host]['AD_Name'] = 'Windows10'
 
                 if host in Nurse_Station_B:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
                     hostvars[host]['AD_Name'] = 'Windows10'
 
                 if host in Doctor_Station:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
                     hostvars[host]['AD_Name'] = 'Windows10'
 
                 if host in Secretary_Station:
-                    hostvars[host]['template'] = 'Desktop-Windows-10-v8'
+                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
                     hostvars[host]['AD_Name'] = 'Windows10'
 
                 if host in FTP:
