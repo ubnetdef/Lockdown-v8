@@ -271,7 +271,7 @@ class Inventory(object):
         inventory['Nurse_Station_B'] = Nurse_Station_B_dict
         inventory['Doctor_Station'] = Doctor_Station_dict
         inventory['Secretary_Station'] = Secretary_Station_dict
-        #inventory['IT_Station'] = IT_Station_dict
+        inventory['IT_Station'] = IT_Station_dict
         #inventory['Ubuntu'] = Ubuntu_dict
         #inventory['FTP'] = FTP_dict
         #inventory['WEB'] = WEB_dict
