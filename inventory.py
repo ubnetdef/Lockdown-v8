@@ -107,11 +107,11 @@ class Inventory(object):
 
                 if host in Nurse_Station_A:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Nurse_A'
+                    hostvars[host]['AD_Name'] = 'NurseA'
 
                 if host in Nurse_Station_B:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Nurse_B'
+                    hostvars[host]['AD_Name'] = 'NurseB'
 
                 if host in Doctor_Station:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
@@ -273,7 +273,7 @@ class Inventory(object):
         inventory['Secretary_Station'] = Secretary_Station_dict
         inventory['IT_Station'] = IT_Station_dict
         #inventory['Ubuntu'] = Ubuntu_dict
-        #inventory['FTP'] = FTP_dict
+        inventory['FTP'] = FTP_dict
         #inventory['WEB'] = WEB_dict
         #inventory['DB'] = DB_dict
         #inventory['IOT'] = IOT_dict
