@@ -107,19 +107,19 @@ class Inventory(object):
 
                 if host in Nurse_Station_A:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Windows10'
+                    hostvars[host]['AD_Name'] = 'Nurse_A'
 
                 if host in Nurse_Station_B:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Windows10'
+                    hostvars[host]['AD_Name'] = 'Nurse_B'
 
                 if host in Doctor_Station:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Windows10'
+                    hostvars[host]['AD_Name'] = 'Doctor'
 
                 if host in Secretary_Station:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Windows10'
+                    hostvars[host]['AD_Name'] = 'Secretary'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
