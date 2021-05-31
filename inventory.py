@@ -49,8 +49,8 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 14
-        all_vars['total_teams'] = 2
+        all_vars['start_team'] = 1
+        all_vars['total_teams'] = 5
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
@@ -266,19 +266,19 @@ class Inventory(object):
         ################################################################################################
         inventory['all'] = all
 
-        #inventory['Active_Directory'] = Active_Directory_dict
+        inventory['Active_Directory'] = Active_Directory_dict
         inventory['Nurse_Station_A'] = Nurse_Station_A_dict
         inventory['Nurse_Station_B'] = Nurse_Station_B_dict
         inventory['Doctor_Station'] = Doctor_Station_dict
         inventory['Secretary_Station'] = Secretary_Station_dict
         inventory['IT_Station'] = IT_Station_dict
-        #inventory['Ubuntu'] = Ubuntu_dict
+        inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
-        #inventory['DB'] = DB_dict
-        #inventory['IOT'] = IOT_dict
-        #inventory['Calendar_System'] = Calendar_System_dict
-        #inventory['Patient_Notes'] = Patient_Notes_dict
+        inventory['WEB'] = WEB_dict
+        inventory['DB'] = DB_dict
+        inventory['IOT'] = IOT_dict
+        inventory['Calendar_System'] = Calendar_System_dict
+        inventory['Patient_Notes'] = Patient_Notes_dict
 
         #################################################################################################
 
