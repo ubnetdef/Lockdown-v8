@@ -51,7 +51,7 @@ class Inventory(object):
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
         #todo Change number of teams
-        all_vars['total_teams'] = 5
+        all_vars['total_teams'] = 1
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
