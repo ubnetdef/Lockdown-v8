@@ -172,7 +172,7 @@ class Inventory(object):
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
                     hostvars[host]['timeout'] = 600
 
-                if host in Windows1 + Windows2:
+                if host in Windows1 + Windows2 + Windows_Forensics:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
