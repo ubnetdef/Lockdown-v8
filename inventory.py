@@ -55,8 +55,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'reallife.lockdown'
-        all_vars['netbios'] = 'VIRUS'
+        all_vars['domain'] = 'research.lockdown'
+        all_vars['netbios'] = 'QUANTUM'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -140,13 +140,13 @@ class Inventory(object):
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'flu',
+                        'name': 'parrot',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'COWID',
+                        'name': 'researchuser',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
@@ -230,7 +230,7 @@ class Inventory(object):
         IT_Station_dict = {}
         Ubuntu_dict = {}
         FTP_dict = {}
-        WEB_dict = {}
+        #WEB_dict = {}
         DB_dict = {}
         LinuxForensics_dict = {}
         Windows_Forensics_dict = {}
@@ -238,16 +238,13 @@ class Inventory(object):
         Active_Directory_dict["hosts"] = Active_Directory
         Windows1_dict["hosts"] = Windows1
         Windows2_dict["hosts"] = Windows2
-        #Doctor_Station_dict["hosts"] = Doctor_Station
-        #Secretary_Station_dict["hosts"] = Secretary_Station
         IT_Station_dict["hosts"] = IT_Station
         Ubuntu_dict["hosts"] = Ubuntu
         FTP_dict["hosts"] = FTP
-        WEB_dict["hosts"] = Workstation
+        #WEB_dict["hosts"] = Workstation
         DB_dict["hosts"] = DB
         LinuxForensics_dict["hosts"] = LinuxForensics
         Windows_Forensics_dict["hosts"] = Windows_Forensics
-        #Patient_Notes_dict["hosts"] = Patient_Notes
 
         #TODO: Potentially include palo Alto
         ################################################################################################
@@ -261,7 +258,7 @@ class Inventory(object):
         inventory['IT_Station'] = IT_Station_dict
         inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
-        inventory['WEB'] = WEB_dict
+        #inventory['WEB'] = WEB_dict
         inventory['DB'] = DB_dict
         inventory['LinuxForensics'] = LinuxForensics_dict
         inventory['Windows_Forensics'] = Windows_Forensics_dict
