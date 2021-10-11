@@ -63,25 +63,24 @@ class Inventory(object):
         #####################################################################################################
 
         #####################################################################################################
-        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Nurse_Station_A = ['10.X.1.80'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Nurse_Station_B = ['10.X.1.90'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Doctor_Station = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Secretary_Station = ['10.X.1.100'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        IT_Station = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        IT_Station = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        #IT_Station is Rogue_Linux
+        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Windows1 = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Windows2 = ['10.X.1.80'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Workstation = ['10.X.1.90'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+
         DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]    
-        IOT = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Calendar_System = ['10.X.2.12'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Patient_Notes = ['10.X.2.14'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        cloud = FTP + WEB + DB + IOT + Calendar_System + Patient_Notes
+        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        LinuxForensics = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        Windows_Forensics = ['10.X.2.12'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+        
+        cloud = FTP + DB + LinuxForensics + Windows_Forensics
         for host_list in [
-                Active_Directory, Nurse_Station_A, Nurse_Station_B, 
-                Doctor_Station, Secretary_Station, 
-                IT_Station, Ubuntu, FTP, WEB, DB, IOT, 
-                Calendar_System, Patient_Notes
+                Active_Directory, Windows1, Windows2, Workstation, 
+                IT_Station, Ubuntu, FTP, DB, LinuxForensics, 
+                Windows_Forensics
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -99,48 +98,36 @@ class Inventory(object):
 
                 if host in IT_Station:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'IT_Station'
+                    hostvars[host]['AD_Name'] = 'RogueLinux'
 
                 if host in Ubuntu:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
                     hostvars[host]['AD_Name'] = 'Ubuntu'
 
-                if host in Nurse_Station_A:
+                if host in Windows1:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'NurseA'
+                    hostvars[host]['AD_Name'] = 'Windows1'
 
-                if host in Nurse_Station_B:
+                if host in Windows2:
                     hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'NurseB'
-
-                if host in Doctor_Station:
-                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Doctor'
-
-                if host in Secretary_Station:
-                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
-                    hostvars[host]['AD_Name'] = 'Secretary'
+                    hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
-                if host in IOT:
-                    hostvars[host]['template'] = 'FinalIoTSystem'
-                    hostvars[host]['AD_Name'] = 'IoT'
+                if host in LinuxForensics:
+                    hostvars[host]['template'] = 'LinuxForensicsFinal'
+                    hostvars[host]['AD_Name'] = 'LinuxForensics'
 
-                if host in WEB:
-                    hostvars[host]['template'] = 'FinalHTTP'
+                if host in Windows_Forensics:
+                    hostvars[host]['template'] = 'WindowsForensicsFinal'
+                    hostvars[host]['AD_Name'] = 'WindowsForensics'
+
+                if host in Workstation:
+                    hostvars[host]['template'] = 'DebianBasedWeb'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
-
-                if host in Calendar_System:
-                    hostvars[host]['template'] = 'FinalCalDav'
-                    hostvars[host]['AD_Name'] = 'CalDav'
-
-                if host in Patient_Notes:
-                    hostvars[host]['template'] = 'FinalNotes'
-                    hostvars[host]['AD_Name'] = 'Notes'
 
                 if host in DB:
                     hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
@@ -184,18 +171,18 @@ class Inventory(object):
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
                     hostvars[host]['timeout'] = 600
 
-                if host in Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station:
+                if host in Windows1 + Windows2:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in IT_Station + Ubuntu + WEB + DB + IOT + Calendar_System + Patient_Notes:
+                if host in IT_Station + Ubuntu + Workstation + DB + LinuxForensics:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
-                if host in Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station + FTP:
+                if host in Windows1 + Windows2 + FTP + Windows_Forensics:
                     hostvars[host]['dns_domain_name'] = hostvars[
                         Active_Directory[idx]]['domain_name']
                     hostvars[host]['domain_admin_password'] = hostvars[
@@ -203,7 +190,7 @@ class Inventory(object):
                     hostvars[host]['domain_admin_user'] = hostvars[
                         Active_Directory[idx]]['ansible_user']
 
-                if host in Active_Directory + FTP + Nurse_Station_A + Nurse_Station_B + Doctor_Station + Secretary_Station + FTP:
+                if host in Active_Directory + FTP + Windows1 + Windows2 + Windows_Forensics:
                     hostvars[host]['ansible_connection'] = 'winrm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
                     hostvars[host]['OS'] = 'Windows'
@@ -236,8 +223,8 @@ class Inventory(object):
 
 
         Active_Directory_dict = {}
-        Nurse_Station_A_dict = {}
-        Nurse_Station_B_dict = {}
+        Windows1_dict = {}
+        Windows2_dict = {}
         Doctor_Station_dict = {}
         Secretary_Station_dict = {}
         IT_Station_dict = {}
@@ -245,30 +232,30 @@ class Inventory(object):
         FTP_dict = {}
         WEB_dict = {}
         DB_dict = {}
-        IOT_dict = {}
-        Calendar_System_dict = {}
+        LinuxForensics_dict = {}
+        Windows_Forensics_dict = {}
         Patient_Notes_dict = {}
         Active_Directory_dict["hosts"] = Active_Directory
-        Nurse_Station_A_dict["hosts"] = Nurse_Station_A
-        Nurse_Station_B_dict["hosts"] = Nurse_Station_B
-        Doctor_Station_dict["hosts"] = Doctor_Station
-        Secretary_Station_dict["hosts"] = Secretary_Station
+        Windows1_dict["hosts"] = Windows1
+        Windows2_dict["hosts"] = Windows2
+        #Doctor_Station_dict["hosts"] = Doctor_Station
+        #Secretary_Station_dict["hosts"] = Secretary_Station
         IT_Station_dict["hosts"] = IT_Station
         Ubuntu_dict["hosts"] = Ubuntu
         FTP_dict["hosts"] = FTP
-        WEB_dict["hosts"] = WEB
+        WEB_dict["hosts"] = Workstation
         DB_dict["hosts"] = DB
-        IOT_dict["hosts"] = IOT
-        Calendar_System_dict["hosts"] = Calendar_System
-        Patient_Notes_dict["hosts"] = Patient_Notes
+        LinuxForensics_dict["hosts"] = LinuxForensics
+        Windows_Forensics_dict["hosts"] = Windows_Forensics
+        #Patient_Notes_dict["hosts"] = Patient_Notes
 
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
 
         inventory['Active_Directory'] = Active_Directory_dict
-        inventory['Nurse_Station_A'] = Nurse_Station_A_dict
-        inventory['Nurse_Station_B'] = Nurse_Station_B_dict
+        inventory['Windows1'] = Windows1_dict
+        inventory['Windows2'] = Windows2_dict
         inventory['Doctor_Station'] = Doctor_Station_dict
         inventory['Secretary_Station'] = Secretary_Station_dict
         inventory['IT_Station'] = IT_Station_dict
@@ -276,8 +263,8 @@ class Inventory(object):
         inventory['FTP'] = FTP_dict
         inventory['WEB'] = WEB_dict
         inventory['DB'] = DB_dict
-        inventory['IOT'] = IOT_dict
-        inventory['Calendar_System'] = Calendar_System_dict
+        inventory['LinuxForensics'] = LinuxForensics_dict
+        inventory['Windows_Forensics'] = Windows_Forensics_dict
         inventory['Patient_Notes'] = Patient_Notes_dict
 
         #################################################################################################

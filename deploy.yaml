@@ -12,7 +12,7 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: IT_Station, CentOS, Ubuntu, WEB, DB, IOT, Calendar_System, Patient_Notes
+- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics
   gather_facts: no
   strategy: free
   tasks:
@@ -20,7 +20,7 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: IT_Station, CentOS, Ubuntu, WEB, DB, IOT, Calendar_System, Patient_Notes
+- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics
   roles:
     - local_users_Linux
 
@@ -30,12 +30,12 @@
       raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
-- hosts: Nurse_Station_A, Nurse_Station_B, Doctor_Station, Secretary_Station, FTP
+- hosts: Windows1, Windows2, Windows_Forensics, FTP
   gather_facts: no
   roles:
     - Windows_Client_Provision
 
-- hosts: WEB, DB, Calendar_System, Patient_Notes, IOT
+- hosts: Workstation, DB, LinuxForensics
   become: yes
   roles:
     - disable_firewall

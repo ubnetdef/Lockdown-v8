@@ -5,12 +5,12 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Masks
+  - username: Gordon
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Charts
+  - username: UmbrellaCorp
     password: Changeme2021!
     groups:
       - Domain Admins
@@ -20,7 +20,7 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Flu
+  - username: Ethics
     password: Changeme2021!
     groups:
       - Domain Admins
@@ -30,27 +30,27 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Health
+  - username: OmniCorp
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Medicine
+  - username: HalfLife
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Surgery
+  - username: ResEvil
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Family
+  - username: Quantum
     password: Changeme2021!
     groups:
       - Domain Admins
  
-  - username: Doctor
+  - username: WebUser
     password: Changeme2021!
     groups:
       - Domain Admins
