@@ -50,6 +50,7 @@ class Inventory(object):
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
+        #todo Change number of teams
         all_vars['total_teams'] = 5
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
@@ -225,8 +226,6 @@ class Inventory(object):
         Active_Directory_dict = {}
         Windows1_dict = {}
         Windows2_dict = {}
-        Doctor_Station_dict = {}
-        Secretary_Station_dict = {}
         IT_Station_dict = {}
         Ubuntu_dict = {}
         FTP_dict = {}
@@ -234,7 +233,6 @@ class Inventory(object):
         DB_dict = {}
         LinuxForensics_dict = {}
         Windows_Forensics_dict = {}
-        Patient_Notes_dict = {}
         Active_Directory_dict["hosts"] = Active_Directory
         Windows1_dict["hosts"] = Windows1
         Windows2_dict["hosts"] = Windows2
@@ -253,8 +251,6 @@ class Inventory(object):
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
         inventory['Windows2'] = Windows2_dict
-        inventory['Doctor_Station'] = Doctor_Station_dict
-        inventory['Secretary_Station'] = Secretary_Station_dict
         inventory['IT_Station'] = IT_Station_dict
         inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
@@ -262,7 +258,6 @@ class Inventory(object):
         inventory['DB'] = DB_dict
         inventory['LinuxForensics'] = LinuxForensics_dict
         inventory['Windows_Forensics'] = Windows_Forensics_dict
-        inventory['Patient_Notes'] = Patient_Notes_dict
 
         #################################################################################################
 
