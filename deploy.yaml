@@ -30,11 +30,6 @@
       raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
-- hosts: Windows1, Windows2, Windows_Forensics, FTP
-  gather_facts: no
-  roles:
-    - Windows_Client_Provision
-
 - hosts: Workstation, DB, LinuxForensics
   become: yes
   roles:
@@ -54,3 +49,8 @@
   become: yes
   roles:
     - powershell-ubuntu-role
+
+- hosts: Windows1, Windows2, Windows_Forensics, FTP
+  gather_facts: no
+  roles:
+    - Windows_Client_Provision
