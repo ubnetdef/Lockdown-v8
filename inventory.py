@@ -229,7 +229,7 @@ class Inventory(object):
         IT_Station_dict = {}
         Ubuntu_dict = {}
         FTP_dict = {}
-        #WEB_dict = {}
+        WEB_dict = {}
         DB_dict = {}
         LinuxForensics_dict = {}
         Windows_Forensics_dict = {}
@@ -239,7 +239,7 @@ class Inventory(object):
         IT_Station_dict["hosts"] = IT_Station
         Ubuntu_dict["hosts"] = Ubuntu
         FTP_dict["hosts"] = FTP
-        #WEB_dict["hosts"] = Workstation
+        WEB_dict["hosts"] = Workstation
         DB_dict["hosts"] = DB
         LinuxForensics_dict["hosts"] = LinuxForensics
         Windows_Forensics_dict["hosts"] = Windows_Forensics
@@ -254,7 +254,7 @@ class Inventory(object):
         inventory['IT_Station'] = IT_Station_dict
         inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
+        inventory['WEB'] = WEB_dict
         inventory['DB'] = DB_dict
         inventory['LinuxForensics'] = LinuxForensics_dict
         inventory['Windows_Forensics'] = Windows_Forensics_dict
