@@ -126,7 +126,7 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'WindowsForensics'
 
                 if host in Workstation:
-                    hostvars[host]['template'] = 'DebianBasedWeb'
+                    hostvars[host]['template'] = 'WebClient'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
