@@ -123,7 +123,7 @@ class Inventory(object):
 
                 if host in Windows_Forensics:
                     hostvars[host]['template'] = 'WindowsForensicsFinal'
-                    hostvars[host]['AD_Name'] = 'WindowsForensics'
+                    hostvars[host]['AD_Name'] = 'WinForensic'
 
                 if host in Workstation:
                     hostvars[host]['template'] = 'WebClient'
@@ -251,10 +251,10 @@ class Inventory(object):
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
         inventory['Windows2'] = Windows2_dict
-        inventory['IT_Station'] = IT_Station_dict
+        inventory['RougeLinux'] = IT_Station_dict
         inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
-        inventory['WEB'] = WEB_dict
+        inventory['Workstation'] = WEB_dict
         inventory['DB'] = DB_dict
         inventory['LinuxForensics'] = LinuxForensics_dict
         inventory['Windows_Forensics'] = Windows_Forensics_dict
