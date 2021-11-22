@@ -250,11 +250,11 @@ class Inventory(object):
 
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
-        inventory['Windows2'] = Windows2_dict
+        #inventory['Windows2'] = Windows2_dict
         inventory['RougeLinux'] = IT_Station_dict
         inventory['Ubuntu'] = Ubuntu_dict
         inventory['FTP'] = FTP_dict
-        inventory['Workstation'] = WEB_dict
+        #inventory['Workstation'] = WEB_dict
         inventory['DB'] = DB_dict
         inventory['LinuxForensics'] = LinuxForensics_dict
         inventory['Windows_Forensics'] = Windows_Forensics_dict
