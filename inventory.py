@@ -51,37 +51,47 @@ class Inventory(object):
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 1
         #todo Change number of teams
-        all_vars['total_teams'] = 15
+        all_vars['total_teams'] = 3
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'research.lockdown'
-        all_vars['netbios'] = 'QUANTUM'
+        all_vars['domain'] = 'vinny.lockdown'
+        all_vars['netbios'] = 'WINGS'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
         #####################################################################################################
 
         #####################################################################################################
-        Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        IT_Station = ['10.X.1.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        #IT_Station is Rogue_Linux
-        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Windows1 = ['10.X.1.70'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Windows2 = ['10.X.1.80'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Workstation = ['10.X.1.90'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-
-        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]    
-        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        LinuxForensics = ['10.X.2.10'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
-        Windows_Forensics = ['10.X.2.12'.replace('X', str(i))for i in range(all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
         
-        cloud = FTP + DB + LinuxForensics + Windows_Forensics
+        # LAN
+        Rouge_Windows = ['10.X.1.10'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        Windows1 = ['10.X.1.70'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        Windows2 = ['10.X.1.80'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+
+        # DMZ
+        WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        DB = ['10.X.2.3'.replace('X', str(i)) for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        IOT = ['10.X.2.10'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        
+        cloud = FTP + DB + WEB + IOT
+
         for host_list in [
-                Active_Directory, Windows1, Windows2, Workstation, 
-                IT_Station, Ubuntu, FTP, DB, LinuxForensics, 
-                Windows_Forensics
+                Active_Directory, Windows1, Windows2, WEB, 
+                RogueLinux, Ubuntu, FTP, DB, IOT
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -97,7 +107,7 @@ class Inventory(object):
                     hostvars[host]['template'] = "Server-Windows-2019-v8"
                     hostvars[host]['AD_Name'] = 'AD'
 
-                if host in IT_Station:
+                if host in RogueLinux:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
                     hostvars[host]['AD_Name'] = 'RogueLinux'
 
@@ -117,17 +127,13 @@ class Inventory(object):
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
-                if host in LinuxForensics:
-                    hostvars[host]['template'] = 'LinuxForensicsFinal'
-                    hostvars[host]['AD_Name'] = 'LinuxForensics'
+                if host in IOT:
+                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
+                    hostvars[host]['AD_Name'] = 'IOT'
 
-                if host in Windows_Forensics:
-                    hostvars[host]['template'] = 'WindowsForensicsFinal'
-                    hostvars[host]['AD_Name'] = 'WinForensic'
-
-                if host in Workstation:
+                if host in WEB:
                     hostvars[host]['template'] = 'WebClient'
-                    hostvars[host]['AD_Name'] = 'Workstation'
+                    hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
@@ -172,18 +178,18 @@ class Inventory(object):
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
                     hostvars[host]['timeout'] = 600
 
-                if host in Windows1 + Windows2 + Windows_Forensics:
+                if host in Windows1 + Windows2:
                     hostvars[host]['ansible_user'] = 'Admin'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in IT_Station + Ubuntu + Workstation + DB + LinuxForensics:
+                if host in RogueLinux + Ubuntu + WEB + DB + IOT:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
-                if host in Windows1 + Windows2 + FTP + Windows_Forensics:
+                if host in Windows1 + Windows2 + FTP:
                     hostvars[host]['dns_domain_name'] = hostvars[
                         Active_Directory[idx]]['domain_name']
                     hostvars[host]['domain_admin_password'] = hostvars[
@@ -191,7 +197,7 @@ class Inventory(object):
                     hostvars[host]['domain_admin_user'] = hostvars[
                         Active_Directory[idx]]['ansible_user']
 
-                if host in Active_Directory + FTP + Windows1 + Windows2 + Windows_Forensics:
+                if host in Active_Directory + FTP + Windows1 + Windows2:
                     hostvars[host]['ansible_connection'] = 'winrm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
                     hostvars[host]['OS'] = 'Windows'
@@ -226,24 +232,22 @@ class Inventory(object):
         Active_Directory_dict = {}
         Windows1_dict = {}
         Windows2_dict = {}
-        IT_Station_dict = {}
+        RogueLinux_dict = {}
         Ubuntu_dict = {}
         FTP_dict = {}
         WEB_dict = {}
         DB_dict = {}
-        LinuxForensics_dict = {}
-        Windows_Forensics_dict = {}
+        IOT_dict = {}
+
         Active_Directory_dict["hosts"] = Active_Directory
         Windows1_dict["hosts"] = Windows1
         Windows2_dict["hosts"] = Windows2
-        IT_Station_dict["hosts"] = IT_Station
+        RogueLinux_dict["hosts"] = RogueLinux
         Ubuntu_dict["hosts"] = Ubuntu
         FTP_dict["hosts"] = FTP
-        WEB_dict["hosts"] = Workstation
+        WEB_dict["hosts"] = WEB
         DB_dict["hosts"] = DB
-        LinuxForensics_dict["hosts"] = LinuxForensics
-        Windows_Forensics_dict["hosts"] = Windows_Forensics
-
+        IOT_dict['hosts'] = IOT
         #TODO: Potentially include palo Alto
         ################################################################################################
         inventory['all'] = all
@@ -251,13 +255,14 @@ class Inventory(object):
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
         #inventory['Windows2'] = Windows2_dict
-        inventory['RougeLinux'] = IT_Station_dict
+        inventory['RougeLinux'] = RogueLinux_dict
         inventory['Ubuntu'] = Ubuntu_dict
+        
         inventory['FTP'] = FTP_dict
-        #inventory['Workstation'] = WEB_dict
+        inventory['WEB'] = WEB_dict
         inventory['DB'] = DB_dict
-        inventory['LinuxForensics'] = LinuxForensics_dict
-        inventory['Windows_Forensics'] = Windows_Forensics_dict
+        inventory['DB'] = DB_dict
+        inventory['IOT'] = IOT_dict
 
         #################################################################################################
 
