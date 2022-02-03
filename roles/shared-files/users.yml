@@ -5,47 +5,47 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Gordon
+  - username: TheVinnyManHimself
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: UmbrellaCorp
+  - username: PizzaMan
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Wannacry
+  - username: Shreya
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Ethics
+  - username: Buytwogetone
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Nimda
+  - username: Hotslice
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: OmniCorp
+  - username: Lunchspecial
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: HalfLife
+  - username: Pizzapie
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: ResEvil
+  - username: Secretsauce
     password: Changeme2021!
     groups:
       - Domain Admins
 
-  - username: Quantum
+  - username: wingsman
     password: Changeme2021!
     groups:
       - Domain Admins
