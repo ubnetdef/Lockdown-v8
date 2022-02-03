@@ -66,7 +66,7 @@ class Inventory(object):
         #####################################################################################################
         
         # LAN
-        Rouge_Windows = ['10.X.1.10'.replace('X', str(i))for i in range(
+        RogueLinux = ['10.X.1.10'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
