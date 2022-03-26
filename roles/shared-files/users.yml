@@ -1,56 +1,56 @@
 accounts:
 
   - username: Admin
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: TheVinnyManHimself
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: PizzaMan
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Shreya
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Buytwogetone
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Hotslice
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Lunchspecial
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Pizzapie
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: Secretsauce
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
 
   - username: wingsman
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins
  
   - username: WebUser
-    password: Changeme2021!
+    password: Changeme2022!
     groups:
       - Domain Admins

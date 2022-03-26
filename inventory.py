@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'vinny.lockdown'
-        all_vars['netbios'] = 'WINGS'
+        all_vars['domain'] = 'internal.lockdown'
+        all_vars['netbios'] = 'NETDEF'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -108,8 +108,9 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'AD'
 
                 if host in RogueLinux:
-                    hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'RogueLinux'
+                    #hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
+                    hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
+                    hostvars[host]['AD_Name'] = 'Linux'
 
                 if host in Ubuntu:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
@@ -258,11 +259,11 @@ class Inventory(object):
         inventory['RougeLinux'] = RogueLinux_dict
         inventory['Ubuntu'] = Ubuntu_dict
         
-        inventory['FTP'] = FTP_dict
-        inventory['WEB'] = WEB_dict
-        inventory['DB'] = DB_dict
-        inventory['DB'] = DB_dict
-        inventory['IOT'] = IOT_dict
+        #inventory['FTP'] = FTP_dict
+        #inventory['WEB'] = WEB_dict
+        #inventory['DB'] = DB_dict
+        #inventory['DB'] = DB_dict
+        #inventory['IOT'] = IOT_dict
 
         #################################################################################################
 

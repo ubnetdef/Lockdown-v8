@@ -12,7 +12,7 @@
   roles:
     - windows_server_provision_AD
 
-- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics
+- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics, Linux, RogueLinux
   gather_facts: no
   strategy: free
   tasks:
@@ -20,17 +20,17 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics
+- hosts: IT_Station, CentOS, Ubuntu, Workstation, DB, LinuxForensics, Linux, RogueLinux
   roles:
     - local_users_Linux
 
-- hosts: IT_Station, Ubuntu
+- hosts: IT_Station, Ubuntu, Linux, RogueLinux
   tasks:
     - name: Misconfigured DNS
       raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
-- hosts: Workstation, DB, LinuxForensics
+- hosts: Workstation, DB, LinuxForensics, IT_Station, Ubuntu, Linux, RogueLinux
   become: yes
   roles:
     - disable_firewall
