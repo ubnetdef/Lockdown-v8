@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'internal.lockdown'
-        all_vars['netbios'] = 'NETDEF'
+        all_vars['domain'] = 'vinny.lockdown'
+        all_vars['netbios'] = 'WINGS'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -66,9 +66,13 @@ class Inventory(object):
         #####################################################################################################
         
         # LAN
-        RogueLinux = ['10.X.1.10'.replace('X', str(i))for i in range(
+        AliExpressWindows = ['10.X.1.10'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        Ubuntu2 = ['10.X.1.50'.replace('X', str(i))for i in range(
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
+        CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         Active_Directory = ['10.X.1.60'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
@@ -84,14 +88,13 @@ class Inventory(object):
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
-        IOT = ['10.X.2.10'.replace('X', str(i))for i in range(
+        API = ['10.X.2.10'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         
-        cloud = FTP + DB + WEB + IOT
+        cloud = FTP + DB + WEB + API
 
         for host_list in [
-                Active_Directory, Windows1, Windows2, WEB, 
-                RogueLinux, Ubuntu, FTP, DB, IOT
+                AliExpressWindows, Ubuntu, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, API
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -107,33 +110,42 @@ class Inventory(object):
                     hostvars[host]['template'] = "Server-Windows-2019-v8"
                     hostvars[host]['AD_Name'] = 'AD'
 
-                if host in RogueLinux:
+                if host in AliExpressWindows: #Formally RogueLinux, but now updated.
                     #hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Linux'
+                    hostvars[host]['template'] = 'AliExpressWindows'
+                    hostvars[host]['AD_Name'] = 'WeirdWindows'
 
                 if host in Ubuntu:
                     hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'Ubuntu'
+                    hostvars[host]['AD_Name'] = 'Ubuntu1'
+
+                if host in Ubuntu2:
+                    hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
+                    hostvars[host]['AD_Name'] = 'Ubuntu2'
+
+                #VASU PLEASE UPDATE THE DAMN CENTOS VM
+                if host in CentOS:
+                    hostvars[host]['template'] = 'Desktop-Centos-07-v8'
+                    hostvars[host]['AD_Name'] = 'CentOS'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
+                    hostvars[host]['template'] = 'Lockdown-Windows10-v12'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'Lockdown-v10-Windows-Template'
+                    hostvars[host]['template'] = 'Lockdown-Windows10-v12'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
                     hostvars[host]['template'] = 'Windows-Server-FTP-v8'
                     hostvars[host]['AD_Name'] = 'FTP'
 
-                if host in IOT:
-                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
-                    hostvars[host]['AD_Name'] = 'IOT'
+                if host in API:
+                    hostvars[host]['template'] = 'BlakeWeb-API'
+                    hostvars[host]['AD_Name'] = 'API'
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'WebClient'
+                    hostvars[host]['template'] = 'BlakeWeb-Site'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
@@ -142,19 +154,19 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
-                        'name': 'virus',
+                        'name': 'badmin',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'parrot',
+                        'name': 'wings',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'researchuser',
+                        'name': 'pizza',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
@@ -167,7 +179,7 @@ class Inventory(object):
                     })
                     hostvars[host]['mysql_databases'] = []
                     hostvars[host]['mysql_databases'].append({
-                        'name': 'magento',
+                        'name': 'data',
                         'collation': 'utf8_general_ci',
                         'encoding': 'utf8',
                         'replicate': 0
@@ -184,7 +196,7 @@ class Inventory(object):
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in RogueLinux + Ubuntu + WEB + DB + IOT:
+                if host in AliExpressWindows + Ubuntu + WEB + DB + API + CentOS:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
@@ -233,37 +245,47 @@ class Inventory(object):
         Active_Directory_dict = {}
         Windows1_dict = {}
         Windows2_dict = {}
-        RogueLinux_dict = {}
+        AliExpressWindows_dict = {}
         Ubuntu_dict = {}
+        Ubuntu2_dict = {}
+        CentOS_dict = {}
+
         FTP_dict = {}
         WEB_dict = {}
         DB_dict = {}
-        IOT_dict = {}
+        API_dict = {}
 
         Active_Directory_dict["hosts"] = Active_Directory
         Windows1_dict["hosts"] = Windows1
         Windows2_dict["hosts"] = Windows2
-        RogueLinux_dict["hosts"] = RogueLinux
+        AliExpressWindows_dict["hosts"] = AliExpressWindows
         Ubuntu_dict["hosts"] = Ubuntu
+        Ubuntu2_dict["hosts"] = Ubuntu2
+        #CentOS_dict["hosts"] = CentOS
+
         FTP_dict["hosts"] = FTP
         WEB_dict["hosts"] = WEB
         DB_dict["hosts"] = DB
-        IOT_dict['hosts'] = IOT
+        API_dict['hosts'] = API
         #TODO: Potentially include palo Alto
         ################################################################################################
+        
+        #Comment/Uncomment here to include/exclude from deployment. Limit removal from top. Recall "Chesterton's Fence"
+
         inventory['all'] = all
 
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
-        #inventory['Windows2'] = Windows2_dict
-        inventory['RougeLinux'] = RogueLinux_dict
+        inventory['Windows2'] = Windows2_dict
+        inventory['AliExpressWindows'] = AliExpressWindows_dict
         inventory['Ubuntu'] = Ubuntu_dict
-        
-        #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
-        #inventory['DB'] = DB_dict
-        #inventory['DB'] = DB_dict
-        #inventory['IOT'] = IOT_dict
+        inventory['Ubuntu2'] = Ubuntu2_dict
+        #inventory['CentOs'] = CentOS_dict
+
+        inventory['FTP'] = FTP_dict
+        inventory['WEB'] = WEB_dict
+        inventory['DB'] = DB_dict
+        inventory['WebAPI'] = API_dict
 
         #################################################################################################
 
@@ -275,6 +297,7 @@ class Inventory(object):
     # Empty inventory for testing.
     def empty_inventory(self):
         return {'_meta': {'hostvars': {}}}
+
     # Read the command line args passed to the script.
     def read_cli_args(self):
         parser = argparse.ArgumentParser()
