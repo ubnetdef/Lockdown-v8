@@ -112,7 +112,7 @@ class Inventory(object):
 
                 if host in AliExpressWindows: #Formally RogueLinux, but now updated.
                     #hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['template'] = 'AliExpressWindows'
+                    hostvars[host]['template'] = 'WindowsKnockoff-v12'
                     hostvars[host]['AD_Name'] = 'WeirdWindows'
 
                 if host in Ubuntu:
