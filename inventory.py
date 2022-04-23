@@ -274,12 +274,12 @@ class Inventory(object):
 
         inventory['all'] = all
 
-        #inventory['Active_Directory'] = Active_Directory_dict
+        inventory['Active_Directory'] = Active_Directory_dict
         #inventory['Windows1'] = Windows1_dict
         #inventory['Windows2'] = Windows2_dict
         #inventory['AliExpressWindows'] = AliExpressWindows_dict
-        inventory['Ubuntu'] = Ubuntu_dict
-        inventory['Ubuntu2'] = Ubuntu2_dict
+        #inventory['Ubuntu'] = Ubuntu_dict
+        #inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['CentOs'] = CentOS_dict
 
         #inventory['FTP'] = FTP_dict
