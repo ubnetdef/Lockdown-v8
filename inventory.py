@@ -196,6 +196,7 @@ class Inventory(object):
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
+                #DEFINE LINUX VMS HERE
                 if host in AliExpressWindows + Ubuntu + Ubuntu2 + WEB + DB + API + CentOS:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
@@ -209,7 +210,8 @@ class Inventory(object):
                         Active_Directory[idx]]['ansible_password']
                     hostvars[host]['domain_admin_user'] = hostvars[
                         Active_Directory[idx]]['ansible_user']
-
+                
+                #DEFINE WINDOWS VMS HERE
                 if host in Active_Directory + FTP + Windows1 + Windows2:
                     hostvars[host]['ansible_connection'] = 'winrm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
