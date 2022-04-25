@@ -196,7 +196,7 @@ class Inventory(object):
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['timeout'] = 600
 
-                if host in AliExpressWindows + Ubuntu + WEB + DB + API + CentOS:
+                if host in AliExpressWindows + Ubuntu + Ubuntu2 + WEB + DB + API + CentOS:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
