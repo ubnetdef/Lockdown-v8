@@ -129,11 +129,11 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'CentOS'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'Lockdown-Windows10-v12'
+                    hostvars[host]['template'] = 'v10-Win10'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'Lockdown-Windows10-v12'
+                    hostvars[host]['template'] = 'v10-Win10'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
