@@ -285,8 +285,8 @@ class Inventory(object):
         #inventory['CentOs'] = CentOS_dict
 
         #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
-        inventory['DB'] = DB_dict
+        inventory['WEB'] = WEB_dict
+        #inventory['DB'] = DB_dict
         #inventory['WebAPI'] = API_dict
 
         #################################################################################################
