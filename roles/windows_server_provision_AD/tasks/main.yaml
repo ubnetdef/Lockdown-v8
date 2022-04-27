@@ -12,14 +12,14 @@
 #    timeout: 1000
 #    sleep: 5
 
-- name: Make Sure Active Directory is running
-  win_service:
-    name: NTDS
-    start_mode: auto
-    state: Started
+#- name: Make Sure Active Directory is running
+#  win_service:
+#    name: NTDS
+#    start_mode: auto
+#    state: Started
 
-- pause:
-    minutes: 2
+#- pause:
+#    minutes: 2
 
 - name: Deploy Windows Server Users
   import_tasks: Add_users.yaml
