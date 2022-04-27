@@ -1,25 +1,25 @@
-#- name: Wait For AD connection
-#  wait_for_connection:
-#    timeout: 30000
-#    sleep: 5
+- name: Wait For AD connection
+  wait_for_connection:
+    timeout: 30000
+    sleep: 5
 
-#- name: Deploy Windows Server
-#  import_tasks: Windows_AD.yaml
+- name: Deploy Windows Server
+  import_tasks: Windows_AD.yaml
 
-#- name: Wait For AD connection
-#  wait_for_connection:
-#    delay: 120
-#    timeout: 1000
-#    sleep: 5
+- name: Wait For AD connection
+  wait_for_connection:
+    delay: 120
+    timeout: 1000
+    sleep: 5
 
-#- name: Make Sure Active Directory is running
-#  win_service:
-#    name: NTDS
-#    start_mode: auto
-#    state: Started
+- name: Make Sure Active Directory is running
+  win_service:
+    name: NTDS
+    start_mode: auto
+    state: Started
 
-#- pause:
-#    minutes: 2
+- pause:
+    minutes: 2
 
 - name: Deploy Windows Server Users
   import_tasks: Add_users.yaml
