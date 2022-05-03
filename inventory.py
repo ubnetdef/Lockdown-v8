@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'vinny.lockdown'
-        all_vars['netbios'] = 'WINGS'
+        all_vars['domain'] = 'internal.lockdown'
+        all_vars['netbios'] = 'NETDEF'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -280,13 +280,13 @@ class Inventory(object):
 
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
-        inventory['Windows2'] = Windows2_dict
+        #inventory['Windows2'] = Windows2_dict
         #inventory['AliExpressWindows'] = AliExpressWindows_dict
-        #inventory['Ubuntu'] = Ubuntu_dict
-        #inventory['Ubuntu2'] = Ubuntu2_dict
+        inventory['Ubuntu'] = Ubuntu_dict
+        inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['CentOs'] = CentOS_dict
 
-        inventory['FTP'] = FTP_dict
+        #inventory['FTP'] = FTP_dict
         #inventory['WEB'] = WEB_dict
         #inventory['DB'] = DB_dict
         #inventory['WebAPI'] = API_dict
