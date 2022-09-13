@@ -108,8 +108,8 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    #hostvars[host]['template'] = "Server-Windows-2019-v8"
-                    hostvars[host]['template'] = "AD-Sucks"
+                    hostvars[host]['template'] = "Server-Windows-2019-v8"
+                    #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
                 if host in AliExpressWindows: #Formally RogueLinux, but now updated.
