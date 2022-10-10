@@ -94,7 +94,7 @@ class Inventory(object):
         cloud = FTP + DB + WEB + DevServer
 
         for host_list in [
-                AliExpressWindows, Ubuntu, Ubuntu2, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, DevServer
+            Ubuntu1, Ubuntu2, Ubuntu2, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, DevServer
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
