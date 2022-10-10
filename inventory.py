@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'internal.lockdown'
-        all_vars['netbios'] = 'NETDEF'
+        all_vars['domain'] = 'eth0.lockdown'
+        all_vars['netbios'] = 'NFT'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -66,11 +66,11 @@ class Inventory(object):
         #####################################################################################################
         
         # LAN
-        AliExpressWindows = ['10.X.1.10'.replace('X', str(i))for i in range(
+        Ubuntu1 = ['10.X.1.10'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
-        Ubuntu = ['10.X.1.40'.replace('X', str(i))for i in range(
+        Ubuntu2 = ['10.X.1.40'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
-        Ubuntu2 = ['10.X.1.50'.replace('X', str(i))for i in range(
+        Ubuntu3 = ['10.X.1.90'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         CentOS = ['10.X.1.30'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
@@ -88,13 +88,13 @@ class Inventory(object):
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         FTP = ['10.X.2.4'.replace('X', str(i)) for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
-        API = ['10.X.2.10'.replace('X', str(i))for i in range(
+        DevServer = ['10.X.2.10'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         
-        cloud = FTP + DB + WEB + API
+        cloud = FTP + DB + WEB + DevServer
 
         for host_list in [
-                AliExpressWindows, Ubuntu, Ubuntu2, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, API
+                AliExpressWindows, Ubuntu, Ubuntu2, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, DevServer
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -108,21 +108,25 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "Server-Windows-2019-v8"
+                    hostvars[host]['template'] = "v13_ADDS_Windows"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
-                if host in AliExpressWindows: #Formally RogueLinux, but now updated.
-                    #hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
-                    hostvars[host]['template'] = 'Knockoff95-v12'
-                    hostvars[host]['AD_Name'] = 'WeirdWindows'
+                #if host in AliExpressWindows: #Formally RogueLinux, but now updated.
+                #    #hostvars[host]['template'] = 'Desktop-Ubuntu-Rouge-18.04-v8'
+                #    hostvars[host]['template'] = 'Knockoff95-v12'
+                #    hostvars[host]['AD_Name'] = 'WeirdWindows'
 
-                if host in Ubuntu:
-                    hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
+                if host in Ubuntu1:
+                    hostvars[host]['template'] = 'v13_UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu1'
 
                 if host in Ubuntu2:
-                    hostvars[host]['template'] = 'Desktop-Ubuntu-18.04-v8'
+                    hostvars[host]['template'] = 'v13_UbuntuX'
+                    hostvars[host]['AD_Name'] = 'Ubuntu2'
+
+                if host in Ubuntu3:
+                    hostvars[host]['template'] = 'v13_UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu2'
 
                 #VASU PLEASE UPDATE THE DAMN CENTOS VM
@@ -131,28 +135,28 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'CentOS'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'v10-Win10'
+                    hostvars[host]['template'] = 'v13_WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'v10-Win10'
+                    hostvars[host]['template'] = 'v13_WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'Windows-Server-FTP-v8'
+                    hostvars[host]['template'] = 'v13_Windows_FTP'
                     hostvars[host]['AD_Name'] = 'FTP'
 
-                if host in API:
-                    hostvars[host]['template'] = 'BlakeWeb-API'
-                    hostvars[host]['AD_Name'] = 'API'
+                if host in DevServer:
+                    hostvars[host]['template'] = 'v13_DevServer'
+                    hostvars[host]['AD_Name'] = 'DevServer'
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'BlakeWeb-Site'
+                    hostvars[host]['template'] = 'v13_UbuntuServer'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'Server-Ubuntu-18.04-v8'
+                    hostvars[host]['template'] = 'v13_UbuntuServer'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
@@ -162,13 +166,13 @@ class Inventory(object):
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'wings',
+                        'name': 'scam',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
                     })
                     hostvars[host]['mysql_users'].append({
-                        'name': 'pizza',
+                        'name': 'magic',
                         'host': '%',
                         'password': 'changeme',
                         'priv': '*.*:ALL,GRANT'
@@ -199,7 +203,7 @@ class Inventory(object):
                     hostvars[host]['timeout'] = 600
 
                 #DEFINE LINUX VMS HERE
-                if host in AliExpressWindows + Ubuntu + Ubuntu2 + WEB + DB + API + CentOS:
+                if host in Ubuntu1 + Ubuntu2 + Ubuntu3 + WEB + DB + DevServer + CentOS:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
@@ -249,28 +253,30 @@ class Inventory(object):
         Active_Directory_dict = {}
         Windows1_dict = {}
         Windows2_dict = {}
-        AliExpressWindows_dict = {}
-        Ubuntu_dict = {}
+        #AliExpressWindows_dict = {}
+        Ubuntu1_dict = {}
         Ubuntu2_dict = {}
+        Ubuntu3_dict = {}
         CentOS_dict = {}
 
         FTP_dict = {}
         WEB_dict = {}
         DB_dict = {}
-        API_dict = {}
+        DevServer_dict = {}
 
         Active_Directory_dict["hosts"] = Active_Directory
         Windows1_dict["hosts"] = Windows1
         Windows2_dict["hosts"] = Windows2
-        AliExpressWindows_dict["hosts"] = AliExpressWindows
-        Ubuntu_dict["hosts"] = Ubuntu
+        #AliExpressWindows_dict["hosts"] = AliExpressWindows
+        Ubuntu1_dict["hosts"] = Ubuntu1
         Ubuntu2_dict["hosts"] = Ubuntu2
-        #CentOS_dict["hosts"] = CentOS
+        Ubuntu3_dict["hosts"] = Ubuntu3
+        CentOS_dict["hosts"] = CentOS
 
         FTP_dict["hosts"] = FTP
         WEB_dict["hosts"] = WEB
         DB_dict["hosts"] = DB
-        API_dict['hosts'] = API
+        DevServer_dict['hosts'] = DevServer
         #TODO: Potentially include palo Alto
         ################################################################################################
         
@@ -280,16 +286,16 @@ class Inventory(object):
 
         inventory['Active_Directory'] = Active_Directory_dict
         inventory['Windows1'] = Windows1_dict
-        #inventory['Windows2'] = Windows2_dict
-        #inventory['AliExpressWindows'] = AliExpressWindows_dict
-        inventory['Ubuntu'] = Ubuntu_dict
+        inventory['Windows2'] = Windows2_dict
+        inventory['Ubuntu1'] = Ubuntu1_dict
         inventory['Ubuntu2'] = Ubuntu2_dict
+        inventory['Ubuntu3'] = Ubuntu3_dict
         #inventory['CentOs'] = CentOS_dict
 
-        #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
-        #inventory['DB'] = DB_dict
-        #inventory['WebAPI'] = API_dict
+        inventory['FTP'] = FTP_dict
+        inventory['WEB'] = WEB_dict
+        inventory['DB'] = DB_dict
+        inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 

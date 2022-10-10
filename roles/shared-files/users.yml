@@ -5,47 +5,47 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: TheVinnyManHimself
+  - username: Jacob
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: PizzaMan
+  - username: mrmask
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Shreya
+  - username: NfTsArECoOl
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Buytwogetone
+  - username: genericusername
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Hotslice
+  - username: Blockchain
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Lunchspecial
+  - username: Eth
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Pizzapie
+  - username: BTC
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Secretsauce
+  - username: Doge
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: wingsman
+  - username: youhaveanyidea
     password: Changeme2022!
     groups:
       - Domain Admins
