@@ -94,7 +94,7 @@ class Inventory(object):
         cloud = FTP + DB + WEB + DevServer
 
         for host_list in [
-            Ubuntu1, Ubuntu2, Ubuntu2, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, DevServer
+            Ubuntu1, Ubuntu2, Ubuntu3, CentOS, Active_Directory, Windows1, Windows2, WEB, DB, FTP, DevServer
         ]:
             for idx, host in enumerate(host_list):
                 team_number = idx + all_vars['start_team']
@@ -127,7 +127,7 @@ class Inventory(object):
 
                 if host in Ubuntu3:
                     hostvars[host]['template'] = 'v13-UbuntuX'
-                    hostvars[host]['AD_Name'] = 'Ubuntu2'
+                    hostvars[host]['AD_Name'] = 'Ubuntu3'
 
                 #VASU PLEASE UPDATE THE DAMN CENTOS VM
                 if host in CentOS:
