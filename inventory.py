@@ -108,7 +108,7 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "v13_ADDS_Windows"
+                    hostvars[host]['template'] = "v13-ADDS-Windows"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
@@ -118,15 +118,15 @@ class Inventory(object):
                 #    hostvars[host]['AD_Name'] = 'WeirdWindows'
 
                 if host in Ubuntu1:
-                    hostvars[host]['template'] = 'v13_UbuntuX'
+                    hostvars[host]['template'] = 'v13-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu1'
 
                 if host in Ubuntu2:
-                    hostvars[host]['template'] = 'v13_UbuntuX'
+                    hostvars[host]['template'] = 'v13-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu2'
 
                 if host in Ubuntu3:
-                    hostvars[host]['template'] = 'v13_UbuntuX'
+                    hostvars[host]['template'] = 'v13-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu2'
 
                 #VASU PLEASE UPDATE THE DAMN CENTOS VM
@@ -135,28 +135,28 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'CentOS'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'v13_WindowsX'
+                    hostvars[host]['template'] = 'v13-WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'v13_WindowsX'
+                    hostvars[host]['template'] = 'v13-WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'v13_Windows_FTP'
+                    hostvars[host]['template'] = 'v13-Windows-FTP'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in DevServer:
-                    hostvars[host]['template'] = 'v13_DevServer'
+                    hostvars[host]['template'] = 'v13-DevServer
                     hostvars[host]['AD_Name'] = 'DevServer'
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'v13_UbuntuServer'
+                    hostvars[host]['template'] = 'v13-UbuntuServer'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'v13_UbuntuServer'
+                    hostvars[host]['template'] = 'v13-UbuntuServer'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
