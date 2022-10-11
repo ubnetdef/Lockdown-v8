@@ -147,7 +147,7 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in DevServer:
-                    hostvars[host]['template'] = 'v13-DevServer
+                    hostvars[host]['template'] = 'v13-DevServer'
                     hostvars[host]['AD_Name'] = 'DevServer'
 
                 if host in WEB:
