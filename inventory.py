@@ -49,7 +49,7 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 9
+        all_vars['start_team'] = 14
         #todo Change number of teams
         all_vars['total_teams'] = 1
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
@@ -287,15 +287,15 @@ class Inventory(object):
         #inventory['Active_Directory'] = Active_Directory_dict
         #inventory['Windows1'] = Windows1_dict
         #inventory['Windows2'] = Windows2_dict
-        #inventory['Ubuntu1'] = Ubuntu1_dict
-        #inventory['Ubuntu2'] = Ubuntu2_dict
+        inventory['Ubuntu1'] = Ubuntu1_dict
+        inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
         #inventory['CentOs'] = CentOS_dict
 
-        #inventory['FTP'] = FTP_dict
+        inventory['FTP'] = FTP_dict
         #inventory['WEB'] = WEB_dict
         inventory['DB'] = DB_dict
-        inventory['DevServer'] = DevServer_dict
+        #inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
