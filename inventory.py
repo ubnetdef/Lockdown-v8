@@ -42,7 +42,7 @@ class Inventory(object):
         all_vars = {}
         all_vars['prefered_DNS'] = '8.8.8.8'
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'cdr-iscsi0'
+        all_vars['datastore'] = 'THE-VAULT'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
         all_vars['parent_folder'] = 'Competition'
