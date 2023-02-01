@@ -5,52 +5,52 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Jacob
+  - username: Jumpman
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: mrmask
+  - username: DonkeyKong
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: NfTsArECoOl
+  - username: DonkeyKongJR
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: genericusername
+  - username: PacMan
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Blockchain
+  - username: MrsPacMan
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Eth
+  - username: Ryu
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: BTC
+  - username: Ken
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: Doge
+  - username: Luigi
     password: Changeme2022!
     groups:
       - Domain Admins
 
-  - username: youhaveanyidea
+  - username: Qbert
     password: Changeme2022!
     groups:
       - Domain Admins
  
-  - username: WebUser
+  - username: Sonic
     password: Changeme2022!
     groups:
       - Domain Admins
