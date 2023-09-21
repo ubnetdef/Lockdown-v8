@@ -1,56 +1,56 @@
 accounts:
 
   - username: Admin
-    password: Changeme2022!
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: Jumpman
-    password: Changeme2022!
+  - username: ChatGPT
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: DonkeyKong
-    password: Changeme2022!
+  - username: ClickUp
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: DonkeyKongJR
-    password: Changeme2022!
+  - username: GrammarlyGO
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: PacMan
-    password: Changeme2022!
+  - username: CopyAI
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: MrsPacMan
-    password: Changeme2022!
+  - username: Sembly
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: Ryu
-    password: Changeme2022!
+  - username: DALLE
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: Ken
-    password: Changeme2022!
+  - username: Stockfish
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: Luigi
-    password: Changeme2022!
+  - username: Mittens
+    password: Changeme2023!
     groups:
       - Domain Admins
 
-  - username: Qbert
-    password: Changeme2022!
+  - username: Runway
+    password: Changeme2023!
     groups:
       - Domain Admins
  
-  - username: Sonic
-    password: Changeme2022!
+  - username: Pictory
+    password: Changeme2023!
     groups:
       - Domain Admins
