@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'arcade.lockdown'
-        all_vars['netbios'] = 'UBARCADE'
+        all_vars['domain'] = 'ai.lockdown'
+        all_vars['netbios'] = 'UBAI'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -292,10 +292,10 @@ class Inventory(object):
         #inventory['Ubuntu3'] = Ubuntu3_dict
         inventory['CentOs'] = CentOS_dict
 
-        #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
-        #inventory['DB'] = DB_dict
-        #inventory['DevServer'] = DevServer_dict
+        inventory['FTP'] = FTP_dict
+        inventory['WEB'] = WEB_dict
+        inventory['DB'] = DB_dict
+        inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
