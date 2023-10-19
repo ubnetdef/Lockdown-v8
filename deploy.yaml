@@ -4,7 +4,7 @@
   roles:
      - folders
      - folder_permissions
-     - pfsense_deploy_provision
+    # - pfsense_deploy_provision
      - template_deployment
 
 - hosts: Active_Directory

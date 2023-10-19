@@ -49,9 +49,9 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 1
+        all_vars['start_team'] = 4
         #todo Change number of teams
-        all_vars['total_teams'] = 15
+        all_vars['total_teams'] = 1
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
@@ -293,7 +293,7 @@ class Inventory(object):
         #inventory['CentOs'] = CentOS_dict
 
         #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
+        inventory['WEB'] = WEB_dict
         #inventory['DB'] = DB_dict
         #inventory['DevServer'] = DevServer_dict
 
