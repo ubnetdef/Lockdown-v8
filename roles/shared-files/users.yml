@@ -1,56 +1,56 @@
 accounts:
 
   - username: Admin
-    password: Changeme2023!
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: ChatGPT
-    password: Changeme2023!
+  - username: Stardew
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: ClickUp
-    password: Changeme2023!
+  - username: Undertale
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: GrammarlyGO
-    password: Changeme2023!
+  - username: HollowKnight
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: CopyAI
-    password: Changeme2023!
+  - username: Celeste
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Sembly
-    password: Changeme2023!
+  - username: Hades
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: DALLE
-    password: Changeme2023!
+  - username: Inscryption
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Stockfish
-    password: Changeme2023!
+  - username: Terraria
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Mittens
-    password: Changeme2023!
+  - username: RiskofRain
+    password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Runway
-    password: Changeme2023!
+  - username: PapersPlease
+    password: Changeme2024!
     groups:
       - Domain Admins
  
-  - username: Pictory
-    password: Changeme2023!
+  - username: HotlineMiami
+    password: Changeme2024!
     groups:
       - Domain Admins
