@@ -10,7 +10,7 @@
 - hosts: Active_Directory
   gather_facts: no
   roles:
-    #- windows_server_provision_AD
+    - windows_server_provision_AD
 
 - hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer
   gather_facts: no
