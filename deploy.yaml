@@ -12,7 +12,7 @@
   roles:
     #- windows_server_provision_AD
 
-- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer
+- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer, FTP
   gather_facts: no
   strategy: free
   tasks:
@@ -20,17 +20,17 @@
       wait_for_connection:
         timeout: 30000
 
-- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer
+- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer, FTP
   roles:
     - local_users_Linux
 
-- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer
+- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer, FTP
   tasks:
     - name: Misconfigured DNS
       raw: echo "nameserver 8.8.8.8" >> /etc/resolvconf/resolv.conf.d/head ;  resolvconf --enable-updates ; resolvconf -u #sed -i -e 's/8.8.8.8/nameserver 8.8.8.8/g' /etc/resolv.conf
   become: true
 
-- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer
+- hosts: Ubuntu1, Ubuntu2, Ubuntu3, CentOS, WEB, DB, DevServer, FTP
   become: yes
   roles:
     - disable_firewall
@@ -50,7 +50,7 @@
 #  roles:
 #    - powershell-Ubuntu2-role
 
-- hosts: Windows1, Windows2, FTP
+- hosts: Windows1, Windows2
   gather_facts: no
   roles:
-   # - Windows_Client_Provision
+    - Windows_Client_Provision
