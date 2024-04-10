@@ -143,15 +143,15 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'v13-Windows-FTP'
+                    hostvars[host]['template'] = 'v13-Linux-FTP'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in DevServer:
-                    hostvars[host]['template'] = 'v13-DevServer'
+                    hostvars[host]['template'] = 'v13-Mail'
                     hostvars[host]['AD_Name'] = 'DevServer'
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'v13-UbuntuServer'
+                    hostvars[host]['template'] = 'v13-Backup'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
@@ -191,7 +191,7 @@ class Inventory(object):
                         'replicate': 0
                     })
 
-                if host in Active_Directory + FTP:
+                if host in Active_Directory:
                     hostvars[host]['ansible_user'] = 'Administrator'
                     hostvars[host]['ansible_password'] = 'Change.me!'
                     hostvars[host]['customization']['password'] = hostvars[host]['ansible_password']
@@ -203,13 +203,13 @@ class Inventory(object):
                     hostvars[host]['timeout'] = 600
 
                 #DEFINE LINUX VMS HERE
-                if host in Ubuntu1 + Ubuntu2 + Ubuntu3 + WEB + DB + DevServer + CentOS:
+                if host in Ubuntu1 + Ubuntu2 + Ubuntu3 + WEB + DB + DevServer + CentOS + FTP:
                     hostvars[host]['ansible_user'] = 'sysadmin'
                     hostvars[host]['ansible_password'] = 'changeme'
                     hostvars[host]['ansible_become_pass'] = hostvars[host]['ansible_password']
                     hostvars[host]['OS'] = 'Linux'
 
-                if host in Windows1 + Windows2 + FTP:
+                if host in Windows1 + Windows2:
                     hostvars[host]['dns_domain_name'] = hostvars[
                         Active_Directory[idx]]['domain_name']
                     hostvars[host]['domain_admin_password'] = hostvars[
@@ -218,7 +218,7 @@ class Inventory(object):
                         Active_Directory[idx]]['ansible_user']
                 
                 #DEFINE WINDOWS VMS HERE
-                if host in Active_Directory + FTP + Windows1 + Windows2:
+                if host in Active_Directory + Windows1 + Windows2:
                     hostvars[host]['ansible_connection'] = 'winrm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
                     hostvars[host]['OS'] = 'Windows'
@@ -292,10 +292,10 @@ class Inventory(object):
         inventory['Ubuntu3'] = Ubuntu3_dict
         inventory['WebApp'] = CentOS_dict
 
-        #inventory['FTP'] = FTP_dict
-        #inventory['WEB'] = WEB_dict
+        inventory['FTP'] = FTP_dict
+        inventory['WEB'] = WEB_dict
         #inventory['DB'] = DB_dict
-        #inventory['DevServer'] = DevServer_dict
+        inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
