@@ -292,10 +292,10 @@ class Inventory(object):
         inventory['Ubuntu3'] = Ubuntu3_dict
         inventory['WebApp'] = CentOS_dict
 
-        inventory['FTP'] = FTP_dict
-        inventory['WEB'] = WEB_dict
+        inventory['UbuntuFTP'] = FTP_dict
+        inventory['BackupServer'] = WEB_dict
         #inventory['DB'] = DB_dict
-        inventory['DevServer'] = DevServer_dict
+        inventory['MailServer'] = DevServer_dict
 
         #################################################################################################
 
