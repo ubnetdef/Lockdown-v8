@@ -53,4 +53,4 @@
 - hosts: Windows1, Windows2
   gather_facts: no
   roles:
-    - Windows_Client_Provision
+    #- Windows_Client_Provision
