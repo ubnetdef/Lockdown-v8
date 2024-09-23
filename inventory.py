@@ -42,7 +42,7 @@ class Inventory(object):
         all_vars = {}
         all_vars['prefered_DNS'] = '8.8.8.8'
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'THE-VAULT'
+        all_vars['datastore'] = 'cdr-backup'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
         all_vars['parent_folder'] = 'Competition'
@@ -56,8 +56,8 @@ class Inventory(object):
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v8'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
-        all_vars['domain'] = 'dev.lockdown'
-        all_vars['netbios'] = 'UBGAME'
+        all_vars['domain'] = 'ticket.lockdown'
+        all_vars['netbios'] = 'TICKETS'
         all_vars['WAN_Subnet'] = 29
         all_vars['IP_jump'] = 8
         all['vars'] = all_vars
@@ -285,10 +285,10 @@ class Inventory(object):
         inventory['all'] = all
 
         #inventory['Active_Directory'] = Active_Directory_dict
-        #inventory['Windows1'] = Windows1_dict
-        #inventory['Windows2'] = Windows2_dict
-        #inventory['Ubuntu1'] = Ubuntu1_dict
-        #inventory['Ubuntu2'] = Ubuntu2_dict
+        inventory['Windows1'] = Windows1_dict
+        inventory['Windows2'] = Windows2_dict
+        inventory['Ubuntu1'] = Ubuntu1_dict
+        inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
         inventory['WebApp'] = CentOS_dict
 
