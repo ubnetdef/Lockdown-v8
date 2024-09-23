@@ -5,52 +5,52 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Stardew
+  - username: Sports
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Undertale
+  - username: Concert
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: HollowKnight
+  - username: Event
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Celeste
+  - username: Football
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Hades
+  - username: Hockey
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Inscryption
+  - username: Baseball
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: Terraria
+  - username: Musical
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: RiskofRain
+  - username: Comedy
     password: Changeme2024!
     groups:
       - Domain Admins
 
-  - username: PapersPlease
+  - username: Vacation
     password: Changeme2024!
     groups:
       - Domain Admins
  
-  - username: HotlineMiami
+  - username: Hotel
     password: Changeme2024!
     groups:
       - Domain Admins
