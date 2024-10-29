@@ -35,10 +35,10 @@ class Inventory(object):
         all = {}
         all_vars = {}
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'THE-VAULT'
+        all_vars['datastore'] = 'cdr-backup'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
-        all_vars['template'] = 'student_machine'
+        all_vars['template'] = 'student_machine_NEW'
         all_vars['vm_name'] = 'student_vm'
         all_vars['vmnet'] = 'generic-net'
         all_vars['ip'] = '10.42.28.101'
