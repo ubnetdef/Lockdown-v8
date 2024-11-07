@@ -284,18 +284,18 @@ class Inventory(object):
 
         inventory['all'] = all
 
-        #inventory['Active_Directory'] = Active_Directory_dict
-        #inventory['Windows1'] = Windows1_dict
-        #inventory['Windows2'] = Windows2_dict
-        #inventory['Ubuntu1'] = Ubuntu1_dict
-        #inventory['Ubuntu2'] = Ubuntu2_dict
+        inventory['Active_Directory'] = Active_Directory_dict
+        inventory['Windows1'] = Windows1_dict
+        inventory['Windows2'] = Windows2_dict
+        inventory['Ubuntu1'] = Ubuntu1_dict
+        inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
-        #inventory['WebApp'] = CentOS_dict
+        inventory['WebApp'] = CentOS_dict
 
-        inventory['UbuntuFTP'] = FTP_dict
-        inventory['BackupServer'] = WEB_dict
+        #inventory['UbuntuFTP'] = FTP_dict
+        #inventory['BackupServer'] = WEB_dict
         #inventory['DB'] = DB_dict
-        inventory['MailServer'] = DevServer_dict
+        #inventory['MailServer'] = DevServer_dict
 
         #################################################################################################
 
