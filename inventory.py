@@ -49,12 +49,12 @@ class Inventory(object):
         all_vars['WAN_start_address'] = '192.168.253.2'
         all_vars['pfsense_dns'] = all_vars['prefered_DNS']
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
-        all_vars['start_team'] = 1
+        all_vars['start_team'] = 14
         #todo Change number of teams
-        all_vars['total_teams'] = 13
+        all_vars['total_teams'] = 2
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
-        all_vars['pfsense_template'] = 'Router-v8'
+        all_vars['pfsense_template'] = 'Router-v18'
         all_vars['cloud_folder'] = '{}_Cloud'.format(all_vars['parent_folder'])
         all_vars['domain'] = 'ticket.lockdown'
         all_vars['netbios'] = 'TICKETS'
@@ -108,7 +108,7 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "v13-ADDS-Windows"
+                    hostvars[host]['template'] = "v18-ADDS-Windows"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
@@ -118,45 +118,45 @@ class Inventory(object):
                 #    hostvars[host]['AD_Name'] = 'WeirdWindows'
 
                 if host in Ubuntu1:
-                    hostvars[host]['template'] = 'v13-UbuntuX'
+                    hostvars[host]['template'] = 'v18-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu1'
 
                 if host in Ubuntu2:
-                    hostvars[host]['template'] = 'v13-UbuntuX'
+                    hostvars[host]['template'] = 'v18-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu2'
 
                 if host in Ubuntu3:
-                    hostvars[host]['template'] = 'v13-UbuntuX'
+                    hostvars[host]['template'] = 'v18-UbuntuX'
                     hostvars[host]['AD_Name'] = 'Ubuntu3'
 
                 #VASU PLEASE UPDATE THE DAMN CENTOS VM
                 if host in CentOS:
-                    hostvars[host]['template'] = 'v13-WebApp'
+                    hostvars[host]['template'] = 'v18-WebApp'
                     hostvars[host]['AD_Name'] = 'Winux'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'v13-WindowsX'
+                    hostvars[host]['template'] = 'v18-WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'v13-WindowsX'
+                    hostvars[host]['template'] = 'v18-WindowsX'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
-                    hostvars[host]['template'] = 'v13-Linux-FTP'
+                    hostvars[host]['template'] = 'v18-Linux-FTP'
                     hostvars[host]['AD_Name'] = 'FTP'
 
                 if host in DevServer:
-                    hostvars[host]['template'] = 'v13-DevServer'
+                    hostvars[host]['template'] = 'v18-DevServer'
                     hostvars[host]['AD_Name'] = 'DevServer'
 
                 if host in WEB:
-                    hostvars[host]['template'] = 'v13-Backup'
+                    hostvars[host]['template'] = 'v18-Backup'
                     hostvars[host]['AD_Name'] = 'WEB'
                     hostvars[host]['apache_mods_enabled'] = ['rewrite.load']
 
                 if host in DB:
-                    hostvars[host]['template'] = 'v13-UbuntuServer'
+                    hostvars[host]['template'] = 'v18-UbuntuServer'
                     hostvars[host]['AD_Name'] = 'DATABASE'
                     hostvars[host]['mysql_users'] = []
                     hostvars[host]['mysql_users'].append({
@@ -295,7 +295,7 @@ class Inventory(object):
         inventory['UbuntuFTP'] = FTP_dict
         inventory['BackupServer'] = WEB_dict
         #inventory['DB'] = DB_dict
-        inventory['MailServer'] = DevServer_dict
+        inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
