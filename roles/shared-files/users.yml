@@ -5,52 +5,52 @@ accounts:
     groups:
       - Domain Admins
 
-  - username: Sports
-    password: Changeme2024!
+  - username: Meta
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Concert
-    password: Changeme2024!
+  - username: Twitter
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Event
-    password: Changeme2024!
+  - username: Instagram
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Football
-    password: Changeme2024!
+  - username: Facebook
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Hockey
-    password: Changeme2024!
+  - username: Myspace
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Baseball
-    password: Changeme2024!
+  - username: TikTok
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Musical
-    password: Changeme2024!
+  - username: Musicaly
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Comedy
-    password: Changeme2024!
+  - username: Discord
+    password: Changeme2025!
     groups:
       - Domain Admins
 
-  - username: Vacation
-    password: Changeme2024!
+  - username: DuoLingo
+    password: Changeme2025!
     groups:
       - Domain Admins
  
-  - username: Hotel
-    password: Changeme2024!
+  - username: Mattermost
+    password: Changeme2025!
     groups:
       - Domain Admins
