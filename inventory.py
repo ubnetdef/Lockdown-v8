@@ -290,12 +290,12 @@ class Inventory(object):
         inventory['Ubuntu1'] = Ubuntu1_dict
         inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
-        inventory['WebApp'] = CentOS_dict
+        #inventory['WebApp'] = CentOS_dict
 
         inventory['UbuntuFTP'] = FTP_dict
         inventory['BackupServer'] = WEB_dict
         #inventory['DB'] = DB_dict
-        inventory['DevServer'] = DevServer_dict
+        #inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
