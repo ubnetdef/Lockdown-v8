@@ -51,7 +51,7 @@ class Inventory(object):
         all_vars['Upstream_gateway_start_address'] = '192.168.253.1'
         all_vars['start_team'] = 14
         #todo Change number of teams
-        all_vars['total_teams'] = 2
+        all_vars['total_teams'] = 1
         all_vars['Lockdown_user_role'] = 'Lockdown blue team'
         all_vars['afinity_enable'] = True
         all_vars['pfsense_template'] = 'Router-v18'
@@ -108,7 +108,7 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "v18-ADDS-Windows"
+                    hostvars[host]['template'] = "NewADTemplate"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
