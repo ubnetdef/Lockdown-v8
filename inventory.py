@@ -79,7 +79,7 @@ class Inventory(object):
         Windows1 = ['10.X.1.70'.replace('X', str(i))for i in range(
             all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
         Windows2 = ['10.X.1.80'.replace('X', str(i))for i in range(
-            all_vars['start_team'], all_vars['total_teams']  + all_vars['start_team'])]
+            all_vars['start_team'], all_vars['total_teams'] + all_vars['start_team'])]
 
         # DMZ
         WEB = ['10.X.2.2'.replace('X', str(i)) for i in range(
