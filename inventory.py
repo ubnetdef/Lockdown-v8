@@ -108,7 +108,7 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "NewADTemplate"
+                    hostvars[host]['template'] = "v18-ADDS-Windows"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
@@ -285,8 +285,8 @@ class Inventory(object):
         inventory['all'] = all
 
         inventory['Active_Directory'] = Active_Directory_dict
-        #inventory['Windows1'] = Windows1_dict
-        #inventory['Windows2'] = Windows2_dict
+        inventory['Windows1'] = Windows1_dict
+        inventory['Windows2'] = Windows2_dict
         #inventory['Ubuntu1'] = Ubuntu1_dict
         #inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
