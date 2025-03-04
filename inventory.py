@@ -42,7 +42,7 @@ class Inventory(object):
         all_vars = {}
         all_vars['prefered_DNS'] = '8.8.8.8'
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'cdr-backup'
+        all_vars['datastore'] = 'cdr-iscsi2'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
         all_vars['parent_folder'] = 'Competition'
@@ -108,7 +108,7 @@ class Inventory(object):
                     hostvars[host]['domain_name'] = all_vars['domain']
                     hostvars[host]['netbios_name'] = all_vars['netbios']
                     hostvars[host]['ad_backuppass'] = 'Change.me!'
-                    hostvars[host]['template'] = "v18-ADDS-Windows"
+                    hostvars[host]['template'] = "v18-ADDS-New"
                     #hostvars[host]['template'] = "AD-Sucks"
                     hostvars[host]['AD_Name'] = 'AD'
 
