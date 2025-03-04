@@ -1,6 +1,7 @@
 - name: Wait For AD connection
   wait_for_connection:
-    timeout: 30000
+  #Original value was 30000, decreasing to get error faster.
+    timeout: 300
     sleep: 5
 
 - name: Deploy Windows Server
