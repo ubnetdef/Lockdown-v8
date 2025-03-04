@@ -220,7 +220,9 @@ class Inventory(object):
                 #DEFINE WINDOWS VMS HERE
                 if host in Active_Directory + Windows1 + Windows2:
                     hostvars[host]['ansible_connection'] = 'winrm'
+                    hostvars[host]['ansible_winrm_transport'] = 'ntlm'
                     hostvars[host]['ansible_winrm_server_cert_validation'] = 'ignore'
+                    hostvars[host]['ansible_port'] = 5985
                     hostvars[host]['OS'] = 'Windows'
 
                 if host not in Active_Directory:
