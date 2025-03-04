@@ -135,11 +135,11 @@ class Inventory(object):
                     hostvars[host]['AD_Name'] = 'Winux'
 
                 if host in Windows1:
-                    hostvars[host]['template'] = 'v18-WindowsX'
+                    hostvars[host]['template'] = 'V18-WindowsX-New'
                     hostvars[host]['AD_Name'] = 'Windows1'
 
                 if host in Windows2:
-                    hostvars[host]['template'] = 'v18-WindowsX'
+                    hostvars[host]['template'] = 'V18-WindowsX-New'
                     hostvars[host]['AD_Name'] = 'Windows2'
 
                 if host in FTP:
