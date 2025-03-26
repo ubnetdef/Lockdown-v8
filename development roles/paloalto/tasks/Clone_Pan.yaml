@@ -19,15 +19,15 @@
       async: 30000
       poll: 0
 
-    - name: Check sync status
-      async_status:
-        jid: "{{ deployment_pan_item.ansible_job_id }}"
-      loop: "{{ deployment_pan.results }}"
-      loop_control:
-        loop_var: "deployment_pan_item"
-      register: async_poll_results
-      until: async_poll_results.finished
-      retries: 30000
+#    - name: Check sync status
+#      async_status:
+#        jid: "{{ deployment_pan_item.ansible_job_id }}"
+#      loop: "{{ deployment_pan.results }}"
+#      loop_control:
+#        loop_var: "deployment_pan_item"
+#      register: async_poll_results
+#      until: async_poll_results.finished
+#      retries: 30000
 
 
 
