@@ -4,7 +4,7 @@
         hostname: '{{ vcenter_hostname }}'
         username: '{{ vcenter_username }}'
         password: '{{ vcenter_password }}'
-        principal: 'ad\{{ item }}'
+        principal: '{{ item }}@vsphere.local'
         object_name: "{{ idx + 1 }}: PA - {{ item }}"
         state: present
         role: "SysSec"
