@@ -152,7 +152,7 @@
     - name: Check sync status
       async_status:
         jid: "{{ default_route_item.ansible_job_id }}"
-      loop: "{{ default_route.results }}"
+     loop: "{{ default_route.results }}"
      loop_control:
         loop_var: "default_route_item"
      register: async_poll_results
