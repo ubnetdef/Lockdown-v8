@@ -20,14 +20,14 @@
             start_connected: True
       delegate_to: localhost
 
-    - name: wait for reboot
-      panos_check:
-        ip_address: "{{ pan_default_ip }}"
-        password: "{{ pan_password }}"
-      register: result
-      until: not result|failed
-      retries: 30
-      delay: 10
+#    - name: wait for reboot
+#      panos_check:
+#        ip_address: "{{ pan_default_ip }}"
+#        password: "{{ pan_password }}"
+#      register: result
+#      until: not result|failed
+#      retries: 30
+#      delay: 10
 
     - name: Generate a cew config
       panos_management_ip_changer:
