@@ -15,15 +15,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#        jid: "{{ https_item.ansible_job_id }}"
-#      loop: "{{ https.results }}"
-#      loop_control:
-#        loop_var: "https_item"
-#      register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ https_item.ansible_job_id }}"
+      loop: "{{ https.results }}"
+      loop_control:
+        loop_var: "https_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
 
     - name: create outside zone on a firewall
@@ -41,15 +41,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#        jid: "{{ outside_zone_item.ansible_job_id }}"
-#      loop: "{{ outside_zone.results }}"
-#      loop_control:
-#        loop_var: "outside_zone_item"
-#      register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ outside_zone_item.ansible_job_id }}"
+      loop: "{{ outside_zone.results }}"
+      loop_control:
+        loop_var: "outside_zone_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: ethernet1/1 as static in zone outside
       panos_interface:
@@ -69,15 +69,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#        jid: "{{ eht1_item.ansible_job_id }}"
-#      loop: "{{ eht1.results }}"
-#      loop_control:
-#        loop_var: "eht1_item"
-#      register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ eht1_item.ansible_job_id }}"
+      loop: "{{ eht1.results }}"
+      loop_control:
+        loop_var: "eht1_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: create inside zone on a firewall
       panos_zone:
@@ -94,15 +94,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#        jid: "{{ in_zone_item.ansible_job_id }}"
-#      loop: "{{ in_zone.results }}"
-#      loop_control:
-#        loop_var: "in_zone_item"
-#      register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ in_zone_item.ansible_job_id }}"
+      loop: "{{ in_zone.results }}"
+      loop_control:
+        loop_var: "in_zone_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: ethernet1/2 as static in zone outside
       panos_interface:
@@ -123,15 +123,15 @@
       async: 30000
       poll: 0
 
- #   - name: Check sync status
- #     async_status:
- #       jid: "{{ eht2_item.ansible_job_id }}"
- #     loop: "{{ eht2.results }}"
- #     loop_control:
- #       loop_var: "eht2_item"
- #     register: async_poll_results
- #     until: async_poll_results.finished
- #    retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ eht2_item.ansible_job_id }}"
+      loop: "{{ eht2.results }}"
+      loop_control:
+        loop_var: "eht2_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+     retries: 3000
 
     - name: Create Default route
       panos_static_route:
@@ -149,15 +149,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#        jid: "{{ default_route_item.ansible_job_id }}"
-#      loop: "{{ default_route.results }}"
-#     loop_control:
-#        loop_var: "default_route_item"
-#     register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ default_route_item.ansible_job_id }}"
+      loop: "{{ default_route.results }}"
+     loop_control:
+        loop_var: "default_route_item"
+     register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: commit candidate config on firewall
       panos_commit:
@@ -171,15 +171,15 @@
       async: 30000
       poll: 0
 
-#    - name: Check sync status
-#      async_status:
-#       jid: "{{ config_item.ansible_job_id }}"
-#      loop: "{{ config.results }}"
-#      loop_control:
-#        loop_var: "config_item"
-#      register: async_poll_results
-#      until: async_poll_results.finished
-#      retries: 3000
+    - name: Check sync status
+      async_status:
+       jid: "{{ config_item.ansible_job_id }}"
+      loop: "{{ config.results }}"
+      loop_control:
+        loop_var: "config_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: Create NAT rule for inside-to-outside
       panos_nat_rule:
@@ -201,15 +201,15 @@
       async: 30000
       poll: 0
 
-  #  - name: Check sync status
-  #    async_status:
-  #      jid: "{{ in_out_item.ansible_job_id }}"
-  #    loop: "{{ in_out.results }}"
-  #    loop_control:
-  #      loop_var: "in_out_item"
-  #    register: async_poll_results
-  #    until: async_poll_results.finished
-  #    retries: 3000
+    - name: Check sync status
+      async_status:
+        jid: "{{ in_out_item.ansible_job_id }}"
+      loop: "{{ in_out.results }}"
+      loop_control:
+        loop_var: "in_out_item"
+      register: async_poll_results
+      until: async_poll_results.finished
+      retries: 3000
 
     - name: Allow All Rule
       panos_security_rule:
