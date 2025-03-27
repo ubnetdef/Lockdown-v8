@@ -5,7 +5,7 @@
     #- include: tasks/Create_folders.yaml
     - include: tasks/Clone_Linux.yaml #IN THE FUTURE UTILIZE NESTED CHECKER
     #- include: tasks/Clone_Pan.yaml
-    - include: tasks/Configure_Management_Pan.yaml
+    #- include: tasks/Configure_Management_Pan.yaml
       loop: "{{ ubit }}"
       loop_control:
         index_var: idx
