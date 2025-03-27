@@ -149,13 +149,23 @@
       async: 30000
       poll: 0
 
+#    - name: Check sync status
+#      async_status:
+#        jid: "{{ default_route_item.ansible_job_id }}"
+#     loop: "{{ default_route.results }}"
+#     loop_control:
+#        loop_var: "default_route_item"
+#     register: async_poll_results
+#      until: async_poll_results.finished
+#      retries: 3000
+
     - name: Check sync status
       async_status:
         jid: "{{ default_route_item.ansible_job_id }}"
-     loop: "{{ default_route.results }}"
-     loop_control:
+      loop: "{{ default_route.results }}"
+      loop_control:
         loop_var: "default_route_item"
-     register: async_poll_results
+      register: async_poll_results
       until: async_poll_results.finished
       retries: 3000
 
