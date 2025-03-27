@@ -131,7 +131,7 @@
         loop_var: "eht2_item"
       register: async_poll_results
       until: async_poll_results.finished
-     retries: 3000
+      retries: 3000
 
     - name: Create Default route
       panos_static_route:
