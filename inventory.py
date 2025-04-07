@@ -42,7 +42,7 @@ class Inventory(object):
         all_vars = {}
         all_vars['prefered_DNS'] = '8.8.8.8'
         all_vars['vcenter_hostname'] = 'cdr-vcenter.cse.buffalo.edu'
-        all_vars['datastore'] = 'cdr-backup'
+        all_vars['datastore'] = 'cdr-iscsi2'
         all_vars['datacenter'] = 'UBNetDef'
         all_vars['cluster'] = 'MAIN'
         all_vars['parent_folder'] = 'Competition'
@@ -286,18 +286,18 @@ class Inventory(object):
 
         inventory['all'] = all
 
-        inventory['Active_Directory'] = Active_Directory_dict
-        inventory['Windows1'] = Windows1_dict
-        inventory['Windows2'] = Windows2_dict
-        inventory['Ubuntu1'] = Ubuntu1_dict
-        inventory['Ubuntu2'] = Ubuntu2_dict
+        #inventory['Active_Directory'] = Active_Directory_dict
+        #inventory['Windows1'] = Windows1_dict
+        #inventory['Windows2'] = Windows2_dict
+        #inventory['Ubuntu1'] = Ubuntu1_dict
+        #inventory['Ubuntu2'] = Ubuntu2_dict
         #inventory['Ubuntu3'] = Ubuntu3_dict
-        inventory['WebApp'] = CentOS_dict
+        #inventory['WebApp'] = CentOS_dict
 
-        inventory['UbuntuFTP'] = FTP_dict
-        inventory['BackupServer'] = WEB_dict
+        #inventory['UbuntuFTP'] = FTP_dict
+        #inventory['BackupServer'] = WEB_dict
         #inventory['DB'] = DB_dict
-        inventory['DevServer'] = DevServer_dict
+        #inventory['DevServer'] = DevServer_dict
 
         #################################################################################################
 
