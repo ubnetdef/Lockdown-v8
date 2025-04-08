@@ -1,6 +1,6 @@
   - name: Wait For Windows Clients connection
     wait_for_connection:
-      timeout: 30000
+      timeout: 1800
       sleep: 5
 
   - win_ping:
